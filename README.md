@@ -2,6 +2,8 @@
 
 ### Pedro K. Galindo Vera
 
+https://jocoacoustics.github.io/sonidero_fractal/
+
 **Sonidero Fractal** es una experiencia web autocontenida para explorar fractales del plano complejo y convertir una región de su dinámica en una onda sonora. La reconstrucción acústica parte de una magnitud derivada de la geometría visual y de una fase inicial obtenida de la propia órbita compleja del fractal; después utiliza **Griffin–Lim** para aproximar una STFT realizable.
 
 La v25 es una versión de **estabilización y control**. Mantiene el motor matemático con fase fractal + Griffin–Lim, restaura el **rango de energía directamente en el Paso 3**, conserva el cajón de selección en escritorio y adopta en móvil un lenguaje gestual tipo mapa: un dedo desplaza, pellizcar acerca/aleja y doble toque amplía. También corrige la cobertura STFT/ISTFT del final del audio, añade controles explícitos contra WAV silencioso y cambia la reproducción interactiva a **Web Audio** para sincronizar el cursor con un reloj de audio continuo.
