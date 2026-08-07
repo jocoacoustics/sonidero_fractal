@@ -1,6 +1,8 @@
 # Sonidero Fractal v15
 ### por Pedro K. Galindo Vera
 
+https://jocoacoustics.github.io/sonidero_fractal/
+
 **Sonidero Fractal** es una experiencia web interactiva para **explorar fractales del plano complejo**, seleccionar una región, convertirla en sonido y visualizar el espectrograma resultante.
 
 La aplicación está diseñada como **una sola experiencia responsive**:
