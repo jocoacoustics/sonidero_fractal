@@ -1,32 +1,44 @@
-# Sonidero Fractal v25
+# Sonidero Fractal v27
+
+
+## Cambios principales de v27
+
+- Exploración fractal con **overscan local 2×**: durante pan, pinch y rotación se mantiene una capa coarse de la misma región y orientación, evitando fondos negros y saltos visuales mientras llega el refinamiento.
+- Se corrigió el **sentido de la rotación táctil** para que siga el giro natural de los dedos.
+- El fractal se dibuja en modo *cover* preservando proporciones, para aprovechar toda el área disponible sin franjas negras laterales.
+- En el Paso 3, la barra de frecuencias es **siempre logarítmica**; Lineal/Log/Mel ya no aparecen como modos del selector. La escala visual del espectrograma sigue siendo **Lineal por defecto** y puede cambiarse a Log o Mel desde el Laboratorio.
+- Los presets **Voz, Aves, Insectos, Murciélagos y Banda completa** configuran ahora un conjunto completo: banda, rango de energía, duración y máximo de iteraciones Griffin–Lim.
+- Rediseño de sliders: la pista completa queda más discreta y el intervalo activo se marca con una banda más gruesa, sin contorno blanco entre los handles.
+- Griffin–Lim conserva 64 iteraciones máximas por defecto y permite 4, 8, 16, 32, 64, 128 o 256, con parada anticipada por convergencia.
+- La pantalla de transformación elimina texto redundante y agranda la comparación **Objetivo → sonido realizable**.
+- Se elimina el mensaje flotante sobre el espectrograma; las instrucciones y estados pasan a la barra inferior, dejando el gráfico limpio.
 
 ### Pedro K. Galindo Vera
 
-https://jocoacoustics.github.io/sonidero_fractal/
+**Sonidero Fractal** es una experiencia web autocontenida para explorar fractales del plano complejo y convertir una región —incluida su orientación— en sonido. La aplicación construye una magnitud espectral a partir de la geometría visual del fractal, toma una fase inicial de su propia dinámica compleja y utiliza **Griffin–Lim** para buscar una STFT realizable cercana. El WAV resultante se vuelve a analizar para mostrar el **espectrograma del sonido realmente generado**.
 
-**Sonidero Fractal** es una experiencia web autocontenida para explorar fractales del plano complejo y convertir una región de su dinámica en una onda sonora. La reconstrucción acústica parte de una magnitud derivada de la geometría visual y de una fase inicial obtenida de la propia órbita compleja del fractal; después utiliza **Griffin–Lim** para aproximar una STFT realizable.
+La v27 reorganiza la experiencia alrededor de una idea simple: **el fractal es un mundo navegable, no una miniatura dentro de un panel**. El Paso 2 es mucho más inmersivo, la navegación móvil adopta pan + pinch + rotación tipo mapa, desaparece el minimapa permanente y una capa fractal de baja resolución evita fondos negros mientras se recalcula la vista fina.
 
-La v25 es una versión de **estabilización y control**. Mantiene el motor matemático con fase fractal + Griffin–Lim, restaura el **rango de energía directamente en el Paso 3**, conserva el cajón de selección en escritorio y adopta en móvil un lenguaje gestual tipo mapa: un dedo desplaza, pellizcar acerca/aleja y doble toque amplía. También corrige la cobertura STFT/ISTFT del final del audio, añade controles explícitos contra WAV silencioso y cambia la reproducción interactiva a **Web Audio** para sincronizar el cursor con un reloj de audio continuo.
-
-La aplicación sigue distribuida como **un único archivo HTML**.
+La aplicación sigue distribuida como **un único archivo HTML** y no requiere servidor.
 
 ---
 
 ## Inicio rápido
 
-1. Abre `sonidero_fractal_pedro_k_galindo_vera_v25.html` en un navegador moderno.
-2. Toca o haz clic en un fractal.
-3. Explora, acerca y selecciona una región.
-4. En **Paso 3 · Dale una voz** configura:
-   - frecuencia mínima y máxima;
-   - escala **Lineal / Logarítmica / Mel**;
-   - duración;
-   - máximo de iteraciones Griffin–Lim;
-   - rango de energía **Fondo → Picos**.
-5. Pulsa **Generar sonido**.
-6. Durante la espera observa las ecuaciones y la convergencia espectral.
-7. Reproduce el WAV. En escritorio, arrastra un **recuadro** sobre el espectrograma; en móvil, usa **un dedo para mover, pellizcar para zoom y doble toque para acercar**. Cada nueva ventana visible puede recalcularse con más detalle desde el mismo audio.
-8. Abre ⚙ **Laboratorio** para volver a editar duración, banda, escala, Griffin–Lim, energía, detalle acústico y visualización.
+1. Abre `sonidero_fractal_pedro_k_galindo_vera_v27.html` en un navegador moderno.
+2. Toca o haz clic en Mandelbrot, Julia, Burning Ship, Tricorn, Multibrot o Newton.
+3. Explora el fractal.
+   - **PC:** arrastra un recuadro para acercarte; Espacio + arrastrar mueve; rueda hace zoom; `Alt + rueda` rota.
+   - **Móvil:** un dedo mueve, dos dedos pellizcan para zoom y giran para rotar; doble toque acerca.
+4. Pulsa **Usar esta región →**.
+5. En el Paso 3 configura presets, rango de frecuencias, energía, duración y refinamiento Griffin–Lim.
+6. Pulsa **Generar sonido →**.
+7. Durante la reconstrucción observa la matemática, la iteración, el error espectral y la convergencia **Objetivo → realizable actual**.
+8. Reproduce o descarga el WAV.
+9. En el espectrograma final:
+   - PC: arrastra una caja para ampliar una ventana tiempo × frecuencia.
+   - móvil: mueve y pellizca como un mapa.
+10. ⚙ **Laboratorio** permite volver a editar la escucha y cambiar la escala **visual** del espectrograma.
 
 ---
 
@@ -35,7 +47,7 @@ La aplicación sigue distribuida como **un único archivo HTML**.
 ```text
 Dinámica fractal compleja
         ↓
-Región seleccionada
+Región + orientación elegidas
         ↓
 Magnitud objetivo MF(t,f)
         +
@@ -53,95 +65,177 @@ WAV x[n]
         ↓
 STFT del WAV
         ↓
-Espectrograma mostrado
+Espectrograma real mostrado
 ```
 
-El espectrograma final **no es una copia del fractal**. Se calcula nuevamente desde el WAV generado y representa la distribución tiempo–frecuencia que realmente consiguió la onda.
+La aplicación distingue deliberadamente tres objetos:
+
+- **Fractal fuente:** geometría y dinámica del plano complejo.
+- **Campo tiempo–frecuencia objetivo:** la magnitud visual más una fase inicial compleja.
+- **Espectrograma final:** representación calculada nuevamente desde el WAV que realmente se escucha.
+
+Por tanto, el espectrograma final no es una copia decorativa del fractal.
 
 ---
 
-# Cambios de v25
+# Novedades de v27
 
-## 1. Las escalas Lineal, Logarítmica y Mel vuelven al Paso 3
+## 1. Paso 2 inmersivo
 
-Las tres opciones ya no son solamente una forma diferente de mover el selector: también modifican **cómo las filas del fractal se asignan a frecuencias durante la síntesis**.
+Se elimina el panel lateral y el minimapa permanente. El canvas fractal ocupa la mayor superficie disponible y todos los controles quedan **debajo** del mundo fractal.
 
-### Lineal
+El mapa no contiene botones flotantes. La única superposición posible es el recuadro temporal de selección en escritorio mientras el usuario lo está dibujando.
 
-La posición vertical se distribuye uniformemente en Hz:
+Los controles inferiores incluyen:
 
-```text
-p(f) = (f - fmin) / (fmax - fmin)
-```
+- lugar destacado;
+- potencia `n` para Multibrot;
+- historial Anterior / Siguiente;
+- Acercar / Alejar en escritorio;
+- Vista completa;
+- Reorientar cuando la cámara está girada;
+- detalle fractal bajo un bloque desplegable;
+- Atrás / Usar esta región.
 
-### Logarítmica
-
-La geometría se distribuye uniformemente en log-frecuencia:
-
-```text
-p(f) = [ln(f) - ln(fmin)] / [ln(fmax) - ln(fmin)]
-```
-
-Para bandas que incluyen 0 Hz, la interfaz utiliza una transformación logarítmica desplazada para que el control siga siendo finito.
-
-### Mel
-
-Se emplea la escala perceptual:
-
-```text
-mel(f) = 2595 log10(1 + f/700)
-```
-
-seguida de una interpolación uniforme en el espacio Mel.
-
-Por tanto, una misma región fractal puede producir tres sonificaciones distintas sin cambiar su geometría fuente.
-
-La opción predeterminada en v25 es **Logarítmica**.
+En móvil los botones de zoom se ocultan porque el gesto pinch es la interacción principal.
 
 ---
 
-## 2. Paso 3 vuelve a tener controles útiles
+## 2. Cámara del plano complejo con rotación real
 
-El Paso 3 mantiene fuera de la vista principal parámetros puramente técnicos, pero conserva todas las decisiones perceptivas que cambian la experiencia:
+La cámara ya no se describe solo por centro y escala:
 
-- banda mínima y máxima;
-- presets Voz, Aves, Insectos, Murciélagos y Banda completa;
-- Lineal / Logarítmica / Mel;
-- duración de 1 a 30 s mediante barra;
-- máximo de iteraciones Griffin–Lim de 4 a 64 mediante barra;
-- **rango de energía Fondo → Picos** mediante control doble en dB.
+```text
+(cx, cy, escala, θ)
+```
 
-El número indicado es un **máximo**. Griffin–Lim conserva el criterio de parada temprana: si la mejora relativa del error espectral se estabiliza durante varias iteraciones, el motor puede terminar antes.
+Para cada píxel se aplica una transformación rotada antes de evaluar el fractal. Esquemáticamente:
+
+```text
+[x]   [cx]       [ cosθ  -sinθ ] [u]
+[y] = [cy] + s · [ sinθ   cosθ ] [v]
+```
+
+La rotación no es un giro cosmético de una imagen ya calculada: el Worker vuelve a evaluar el plano complejo desde esa orientación.
+
+Esto importa acústicamente porque Sonidero conserva la convención:
+
+```text
+horizontal → tiempo
+vertical   → frecuencia
+```
+
+Rotar una estructura fractal cambia cómo esa estructura se distribuye en tiempo y frecuencia y, por tanto, puede cambiar el sonido.
+
+**Vista completa** restaura centro, escala y `θ = 0`. Cuando `θ ≠ 0`, aparece debajo del mapa el botón **Reorientar** con el ángulo actual.
 
 ---
 
-## 3. El Laboratorio recupera control acústico
+## 3. Navegación móvil tipo mapa
 
-### Detalle acústico
-
-Un control de cinco niveles permite escoger:
+En el fractal:
 
 ```text
-Automático · Rápida · Balanceada · Alta · Máxima
+1 dedo       → desplazar
+pinch        → acercar / alejar
+giro 2 dedos → rotar
+doble toque  → acercar alrededor del punto
 ```
 
-`Automático` deja que el motor determine el tamaño FFT según duración, banda y tamaño del fractal.
+El centro del gesto se conserva como ancla en el plano complejo, de manera que el punto bajo los dedos permanece estable mientras cambia escala y orientación.
 
-Los niveles manuales aumentan progresivamente la densidad frecuencial de la representación STFT. El `hop` continúa en aproximadamente:
+En escritorio se conserva la selección precisa mediante recuadro y se añade:
 
 ```text
-H = NFFT / 2
+Alt + rueda → rotar
 ```
 
-para mantener un solapamiento cercano al **50 %**.
+El espectrograma móvil usa pan + pinch + doble toque, pero **no permite rotación**, porque sus ejes tienen significado físico:
 
-La **frecuencia de muestreo no se deja libremente por debajo de lo permitido**: sigue seleccionándose de forma automática para respetar Nyquist según la frecuencia máxima solicitada.
+```text
+x = tiempo
+y = frecuencia
+```
 
-### Rango de energía objetivo
+---
 
-Vuelve el control doble **Fondo → Picos** en dB. Esos valores definen el rango utilizado al transformar la intensidad fractal en magnitud espectral antes de Griffin–Lim.
+## 4. Fondo fractal multirresolución: nunca negro al navegar
 
-Los valores por defecto continúan siendo aproximadamente:
+La v27 reemplaza la función visual del minimapa por una capa interna de contexto.
+
+El explorador mantiene simultáneamente:
+
+```text
+capa coarse, amplia y de baja resolución
+                +
+vista actual de alta resolución
+```
+
+Mientras el usuario mueve, pellizca o rota, la vista fina se transforma inmediatamente y la capa amplia queda detrás para cubrir zonas todavía no refinadas. Al terminar el gesto, el Worker calcula la nueva cámara y sustituye progresivamente la aproximación por el render correcto.
+
+La idea perceptiva es:
+
+```text
+coarse disponible
+      ↓
+preview de la nueva cámara
+      ↓
+refinamiento de alta resolución
+```
+
+Así las regiones recién expuestas no deben aparecer como un fondo negro mientras llega el cálculo nuevo.
+
+---
+
+# Paso 3 · Dale una voz
+
+La jerarquía se reorganizó para que los controles sigan el orden mental del usuario.
+
+## 1. Presets y rango de frecuencias
+
+Los presets aparecen primero:
+
+```text
+Voz · Aves · Insectos · Murciélagos · Banda completa
+```
+
+Después se muestra la barra doble y, debajo, `fmin` y `fmax` en una sola fila.
+
+### Lineal / Logarítmica / Mel: solo controlan la barra
+
+Esta distinción es importante en v27.
+
+Los botones:
+
+```text
+Lineal · Logarítmica · Mel
+```
+
+**no cambian la sonificación**. Solamente modifican la relación entre la posición del deslizador y los Hz para hacer más cómoda la selección de una banda muy amplia.
+
+Por ejemplo, la forma logarítmica permite manipular con mayor precisión frecuencias graves sin dedicar casi toda la barra a las frecuencias altas.
+
+Una vez seleccionada la banda, el motor recibe solamente:
+
+```text
+fmin
+fmax
+```
+
+La asignación vertical fractal → frecuencia usada por el motor acústico es **lineal**.
+
+---
+
+## 2. Rango de energía
+
+El control doble **Fondo ↔ Picos** permanece visible en el Paso 3 porque sí modifica la magnitud objetivo:
+
+```text
+D(t,f) ∈ [Dfondo, Dpicos]
+M(t,f) = 10^(D(t,f)/20)
+```
+
+El rango disponible se amplía hasta aproximadamente `-140 dB` para permitir experimentación, manteniendo como valores iniciales:
 
 ```text
 Fondo = -72 dB
@@ -150,195 +244,169 @@ Picos = -6 dB
 
 ---
 
-## 4. Navegación del espectrograma: escritorio y móvil usan el gesto adecuado
+## 3. Duración
 
-Las antiguas barras azules de navegación siguen eliminadas.
-
-### Escritorio
-
-El comportamiento conserva la selección precisa con mouse:
+La duración principal puede ajustarse entre:
 
 ```text
-arrastrar un recuadro
-        ↓
-seleccionar tiempo × frecuencia
-        ↓
-ampliar
-        ↓
-recalcular STFT de la ventana visible
+1 s … 60 s
 ```
 
-Además:
-
-- rueda: zoom temporal;
-- Shift + rueda: zoom frecuencial;
-- Espacio + arrastrar: mover;
-- T− / T+;
-- F− / F+;
-- Ver todo.
-
-### Móvil
-
-La pantalla táctil ya no intenta fingir que un dedo es un mouse. Usa el patrón de interacción de un mapa:
-
-```text
-1 dedo      → mover
-pellizcar   → acercar / alejar en tiempo y frecuencia
-doble toque → acercar alrededor de ese punto
-```
-
-Al terminar el gesto, Sonidero conserva la ventana visible y solicita una STFT de mayor detalle del **mismo WAV**. El gesto es inmediato desde la matriz en caché; el refinamiento real ocurre después.
-
-El explorador fractal usa el mismo lenguaje gestual en móvil. En escritorio conserva el cajón de selección.
+La duración inicial es `10 s`.
 
 ---
 
-## 5. Reconstrucción Griffin–Lim
+## 4. Refinamiento Griffin–Lim
 
-La condición inicial es:
+La barra deja de ser lineal y usa potencias de dos:
 
 ```text
-XF(t,f) = MF(t,f) exp(i φF(t,f))
+4 · 8 · 16 · 32 · 64 · 128 · 256
 ```
 
-con:
+El valor predeterminado es:
+
+```text
+64 iteraciones máximas
+```
+
+El valor seleccionado es un **máximo**, no una obligación. El motor mantiene parada temprana cuando la mejora relativa del error se estabiliza.
+
+Esto permite desde pruebas rápidas hasta reconstrucciones experimentales mucho más intensivas sin llenar la interfaz de números arbitrarios.
+
+---
+
+# Griffin–Lim y convergencia visible
+
+La condición inicial utiliza la fase fractal:
 
 ```text
 φF(t,f) = arg(zórbita)
+XF = MF exp(i φF)
 ```
 
-Griffin–Lim itera:
+Después Griffin–Lim alterna:
 
 ```text
 X(j)
-  → ISTFT
-  → x(j)
-  → STFT
-  → fase realizable
-  → reimponer MF
-  → X(j+1)
+  ↓ ISTFT
+x(j)
+  ↓ STFT
+fase de una STFT realizable
+  ↓
+reimponer MF
+  ↓
+X(j+1)
 ```
 
-esquemáticamente:
+Durante el cálculo la aplicación muestra:
 
-```text
-X(j+1) = MF · exp[i · arg(STFT(ISTFT(X(j))))]
-```
+- iteración actual / máximo;
+- error espectral;
+- mejor error encontrado;
+- mejora respecto de la primera iteración;
+- miniatura de la magnitud objetivo;
+- miniatura del espectro realizable actual;
+- ecuación correspondiente a la etapa.
 
-Durante la espera se muestran la iteración, el error, la mejora y miniaturas de:
-
-```text
-magnitud objetivo → espectro realizable actual
-```
-
-El error usado es una convergencia espectral relativa:
-
-```text
-E = || MF - |STFT(x)| ||F / || MF ||F
-```
-
-`E = 0` correspondería a coincidencia perfecta de magnitudes.
+La espera forma parte de la experiencia matemática en vez de ser una barra de carga opaca.
 
 ---
 
-## 6. Audio: cobertura completa, taper corto y control contra silencio
+# Espectrograma final: Lineal por defecto
 
-La v25 corrige la cobertura temporal de la reconstrucción. El número de frames ya no se calcula truncando con `floor`; se usa cobertura por exceso para garantizar que el último frame alcance el final solicitado:
+El espectrograma final siempre comienza visualmente en **escala Lineal**, independientemente de si el usuario usó Lineal, Log o Mel para mover la barra de frecuencias del Paso 3.
+
+Desde ⚙ **Laboratorio** se puede cambiar la escala visual a:
 
 ```text
-frames = ceil((Naudio - NFFT) / hop) + 1
+Lineal · Logarítmica · Mel
 ```
 
-La ISTFT hace overlap-add y después recorta exactamente a la duración pedida.
+Ese cambio es únicamente una transformación de la visualización del **mismo espectrograma**. No genera otro WAV.
 
-Antes de exportar se aplica:
+La v27 actualiza conjuntamente:
 
-1. eliminación de DC;
-2. taper de coseno de aproximadamente **8 ms** en los extremos;
-3. primera y última muestra exactamente a cero;
-4. normalización lineal de RMS y pico.
+1. el muestreo vertical del raster del espectrograma;
+2. la posición de las frecuencias;
+3. las etiquetas y ticks del eje Y;
+4. el comportamiento del zoom y pan frecuencial.
 
-Además, el motor calcula RMS, pico, muestras no finitas y cantidad de muestras no nulas. Si detecta un resultado silencioso o inválido, **no declara la generación como terminada ni ofrece un WAV falso**.
+Por tanto, Log o Mel ya no deforman la imagen dejando un eje lineal incorrecto.
 
 ---
 
-## 7. Reproducción Web Audio y cursor continuo
+# Laboratorio
 
-La reproducción interactiva ya no usa el elemento `<audio>` como reloj principal. Sonidero reproduce directamente el `Float32Array` sintetizado mediante:
+⚙ permite recuperar control después de la generación sin recargar la interfaz principal.
 
-```text
-Float32Array
-   ↓
-AudioBuffer
-   ↓
-AudioBufferSourceNode
-   ↓
-GainNode
-   ↓
-salida de audio
-```
-
-El cursor se calcula desde `AudioContext.currentTime`, por lo que el movimiento visual y el audio comparten el mismo reloj. Pausa, búsqueda y reanudación mantienen un `offset` explícito.
-
-El archivo WAV sigue generándose por separado como PCM de 16 bits para descarga. Si una frecuencia de muestreo ultrasónica excede lo que el dispositivo puede reproducir, la preescucha puede remuestrearse al límite aceptado por Web Audio; el WAV exportado conserva su frecuencia de muestreo original.
-
----
-
-## 8. Laboratorio: volver a editar la escucha
-
-La rueda ⚙ permite modificar después de la primera generación:
+Incluye:
 
 - duración;
+- Griffin–Lim hasta 256;
 - frecuencia mínima y máxima;
-- escala Lineal / Log / Mel;
-- máximo de iteraciones Griffin–Lim;
-- rango de energía Fondo → Picos;
+- rango de energía;
 - detalle acústico;
-- controles de visualización del espectrograma.
+- escala **visual** del espectrograma;
+- diagnósticos de sample rate, FFT, hop, solapamiento, error y resolución tiempo–frecuencia.
 
-Los cambios acústicos se aplican mediante **Regenerar audio**. Los controles puramente visuales solo recolorean la matriz espectral en caché.
+El motor mantiene sample rate automático para proteger Nyquist.
+
+La configuración acústica básica usa aproximadamente:
+
+```text
+H = NFFT / 2
+```
+
+es decir, 50 % de solapamiento.
 
 ---
 
-# FFT, STFT, espectrograma e ISTFT
+# Integridad del audio
 
-La **FFT** transforma un bloque temporal en coeficientes frecuenciales.
-
-La **STFT** aplica FFT sucesivas a ventanas desplazadas de una señal:
+Antes de aceptar una generación, el Worker comprueba:
 
 ```text
-x[n] → ventanas → FFT → X(m,k)
+muestras finitas
+RMS
+pico
+número de muestras no nulas
 ```
 
-`X(m,k)` es compleja:
+Un resultado silencioso o con `NaN/∞` se considera un error y no llega a la pantalla final como si fuera un WAV válido.
+
+La reconstrucción utiliza:
+
+- cobertura temporal completa mediante `ceil` en el número de frames;
+- Hann;
+- overlap-add normalizado;
+- eliminación de DC;
+- taper corto en los extremos;
+- normalización lineal de RMS/pico.
+
+No se aplica `tanh` final, para evitar una distorsión espectral innecesaria después de Griffin–Lim.
+
+La reproducción interactiva usa **Web Audio / AudioBuffer** y el cursor sigue `AudioContext.currentTime`. El WAV descargado continúa siendo PCM de 16 bits.
+
+---
+
+# Zoom espectral real
+
+Al ampliar el espectrograma no se vuelve a ejecutar Griffin–Lim ni se crea un nuevo sonido.
+
+El audio ya existe:
 
 ```text
-X(m,k) = |X(m,k)| exp(i φ(m,k))
+WAV x[n]
+   ↓
+seleccionar ventana visible
+   ↓
+STFT adaptativa de esa ventana
+   ↓
+espectrograma refinado
 ```
 
-El **espectrograma** es una representación real obtenida normalmente de la magnitud o potencia de esa STFT:
-
-```text
-S(m,k) = |X(m,k)|²
-```
-
-o en dB:
-
-```text
-SdB(m,k) = 20 log10 |X(m,k)|
-```
-
-La **ISTFT** aplica IFFT a cada frame y recompone la señal mediante ventana y overlap-add.
-
-Si se conserva la STFT compleja completa, el recorrido:
-
-```text
-x → STFT → ISTFT → x̂
-```
-
-es prácticamente reversible hasta precisión numérica.
-
-El problema de Sonidero es distinto: el fractal propone un campo tiempo–frecuencia que no necesariamente pertenece al conjunto de STFT consistentes. Griffin–Lim aproxima una señal temporal cuya magnitud espectral se acerque al objetivo.
+La matriz base sigue visible mientras se calcula el detalle nuevo.
 
 ---
 
@@ -348,64 +416,106 @@ El problema de Sonidero es distinto: el fractal propone un campo tiempo–frecue
 - Julia
 - Burning Ship
 - Tricorn / Mandelbar
-- Multibrot con potencia `n` ajustable de 2 a 8
+- Multibrot, con potencia `n = 2 … 8`
 - Newton para `z³ − 1`
 
-El minimapa del Paso 2 representa siempre la vista completa del fractal seleccionado y el rectángulo indica la región actual.
+Cada uno conserva regiones destacadas para comenzar a explorar.
 
 ---
 
 # Arquitectura
 
-Todo permanece dentro del HTML:
-
-- HTML y CSS responsivos;
-- JavaScript vanilla;
-- Canvas 2D;
-- Web Workers creados desde `Blob`;
-- worker de render fractal;
-- worker DSP / Griffin–Lim;
-- worker independiente para refinamiento espectral;
-- caché de fractales e historial de vistas;
-- caché de ventanas espectrales refinadas;
-- WAV PCM mono de 16 bits generado localmente.
-
-No se envían imágenes ni audios a un servidor.
-
----
-
-# Publicación rápida en GitHub Pages
-
-1. Crea un repositorio.
-2. Copia el HTML al repositorio.
-3. Puedes renombrarlo a `index.html`.
-4. Añade este `README.md`.
-5. En GitHub abre **Settings → Pages**.
-6. Publica desde la rama principal.
-
----
-
-# Validación realizada para v25
-
-Se comprobó:
-
-- sintaxis del JavaScript principal con Node;
-- sintaxis independiente de ambos Web Workers;
-- IDs HTML sin duplicados;
-- todas las referencias internas `$('<id>')` apuntan a elementos existentes;
-- ejecución reducida del worker DSP con escala logarítmica, Griffin–Lim y reconstrucción completa;
-- en esa prueba el WAV terminó con primera y última muestra exactamente en `0` después del acondicionamiento de fronteras.
-
-El Chromium headless disponible en el entorno no llegó a completar una prueba visual automatizada por limitaciones del proceso gráfico/DBus. Por ello los gestos táctiles deben validarse finalmente en un teléfono real.
-
----
-
-## Autor
-
-**Pedro K. Galindo Vera**
-
-Firma de la experiencia:
+Todo vive en un único HTML:
 
 ```text
-⟨𝐏, ε, ∂, r, Ω⟩ ⊗ ⟨Γ, α, ℒ, ι, ℕ, ∂, ∘⟩ ⊗ ⟨𝒱, ε, ℝ, 𝒜⟩
+UI principal
+├── Wizard de cuatro pasos
+├── Canvas fractal
+├── Canvas coarse de contexto
+├── Canvas espectrograma
+├── Web Audio
+└── Laboratorio
+
+Workers Blob
+├── Worker fractal
+│   ├── render progresivo
+│   ├── cámara rotada
+│   └── capa coarse
+│
+└── Worker DSP
+    ├── magnitud objetivo
+    ├── fase fractal
+    ├── Griffin–Lim
+    ├── ISTFT
+    ├── validación de audio
+    ├── STFT final
+    └── STFT refinada por viewport
 ```
+
+No se envían datos a un servidor.
+
+---
+
+# Publicación en GitHub Pages
+
+La opción mínima es renombrar el HTML a `index.html` y subirlo al repositorio junto con este README.
+
+Estructura:
+
+```text
+/
+├── index.html
+└── README.md
+```
+
+En GitHub:
+
+```text
+Settings
+→ Pages
+→ Deploy from a branch
+→ main / root
+```
+
+La aplicación no necesita build, Node, Python ni backend para ejecutarse.
+
+---
+
+# Validación de v27
+
+Para esta entrega se verificó:
+
+- sintaxis del JavaScript principal mediante Node;
+- sintaxis independiente de los dos Workers;
+- IDs HTML únicos;
+- ausencia de referencias `$('<id>')` hacia elementos inexistentes;
+- ejecución aislada del Worker fractal con una cámara rotada;
+- ejecución aislada del Worker DSP con `viewRotation`, STFT/ISTFT y Griffin–Lim;
+- en la prueba DSP se produjo una señal no silenciosa con RMS ≈ `0.1995`, pico ≈ `0.4398` y error espectral ≈ `0.2038` tras 4 iteraciones de prueba.
+
+Los gestos multitáctiles deben validarse además en hardware móvil real, porque su sensación depende del navegador, densidad de pantalla y frecuencia de eventos táctiles.
+
+---
+
+# Próxima gran etapa
+
+La próxima expansión conceptual prevista es una sección autocontenida de divulgación matemática que explique desde cero:
+
+```text
+onda
+→ números complejos
+→ Fourier
+→ FFT
+→ ventanas
+→ STFT
+→ magnitud y fase
+→ espectrograma
+→ ISTFT
+→ consistencia
+→ problemas inversos
+→ Griffin–Lim
+→ dinámica fractal
+→ Sonidero Fractal
+```
+
+La intención es que una persona pueda llegar sin conocer análisis de Fourier y terminar entendiendo por qué un fractal puede convertirse en sonido y por qué el espectrograma final no tiene que ser idéntico a la imagen fuente.
