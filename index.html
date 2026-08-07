@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sonidero Fractal · Pedro K. Galindo Vera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06101a;--panel:#0b1927;--panel2:#10243a;--line:#29455f;--text:#eef8ff;--muted:#9cb4ca;
+  --accent:#61dcff;--accent2:#5593ff;--gold:#ffd85e;--danger:#ff7979;
+  --lowPct:0%;--highPct:21%;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,system-ui,Segoe UI,sans-serif;background:radial-gradient(circle at 14% -10%,#264e78 0,#102741 30%,#06101a 67%);color:var(--text)}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(circle at 76% 14%,#8338ec33 0,transparent 27%),radial-gradient(circle at 26% 82%,#00d4ff22 0,transparent 30%);mix-blend-mode:screen}h1,h2,h3,.brand b,.wizardBrand b,.choice b{font-family:"Space Grotesk",Inter,system-ui,sans-serif}
+button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04131d}button.secondary{background:#172c41;color:var(--text);border:1px solid #365775}button.ghost{background:transparent;color:var(--text);border:1px solid #365775}button:disabled{opacity:.42;cursor:not-allowed}.hidden{display:none!important}
+
+/* Aplicación final */
+.topbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:#07131fdd;backdrop-filter:blur(12px);position:relative;z-index:20}.brand b{font-size:1.08rem}.brand small{display:block;color:var(--muted);margin-top:2px}.topActions{display:flex;gap:8px}.iconBtn{width:44px;height:44px;padding:0;border-radius:50%;font-size:1.15rem}.appShell{height:calc(100dvh - 66px);padding:12px;display:flex}.workspace{min-height:0;flex:1;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:19px;overflow:hidden;background:#08131f;box-shadow:0 26px 90px #0008}.viewHead{height:47px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid var(--line);gap:10px}.tabs{display:flex;gap:8px}.tab{background:#162b41;color:#eaf7ff;padding:8px 13px}.tab.active{outline:2px solid var(--accent)}.viewTools{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.78rem}.visualStack{min-height:0;flex:1;display:flex;flex-direction:column}.canvasWrap{position:relative;min-height:0;flex:1;background:#02070c;overflow:hidden;touch-action:none}.canvasWrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.badge{position:absolute;left:12px;top:12px;z-index:5;background:#071522dc;border:1px solid #3c5d79;border-radius:999px;padding:7px 11px;font-size:.74rem}.player{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:11px;padding:10px 14px;border-top:1px solid var(--line);background:#0c1b2a}.playBtn{width:46px;height:46px;border-radius:50%;padding:0}.seekWrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}.seek,.volume{width:100%;accent-color:var(--accent)}.volume{width:100px}.timeRead{font-variant-numeric:tabular-nums;font-size:.8rem;color:#dcedfb}.download{display:none;background:#223d57;color:white;text-decoration:none;border-radius:10px;padding:10px 13px}.statusBar{display:flex;align-items:center;gap:12px;padding:8px 13px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}.meter{height:7px;flex:1;background:#050d15;border-radius:999px;overflow:hidden}.meter>div{height:100%;width:0;transform-origin:left;background:linear-gradient(90deg,var(--accent),var(--gold));transition:transform .12s linear}
+
+/* Drawer */
+.drawer{position:fixed;right:0;top:0;z-index:60;height:100dvh;width:min(410px,94vw);background:#0c1926;border-left:1px solid var(--line);transform:translateX(103%);transition:.28s;overflow:auto;padding:16px;box-shadow:-28px 0 80px #000a}.drawer.open{transform:none}.drawerBackdrop{display:none;position:fixed;inset:0;background:#0008;z-index:50}.drawerBackdrop.show{display:block}.drawerHead{position:sticky;top:-16px;z-index:2;display:flex;justify-content:space-between;align-items:center;background:#0c1926;padding:14px 0}.drawer section{border-bottom:1px solid var(--line);padding:0 0 15px;margin:0 0 15px}.drawer h2{font-size:1rem}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.field label{color:var(--muted);font-size:.78rem}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.drawer input,.drawer select,.wizard input,.wizard select{width:100%;background:#071421;color:var(--text);border:1px solid #34516d;border-radius:9px;padding:9px}.hint{color:var(--muted);font-size:.76rem;line-height:1.45}.readout{font-variant-numeric:tabular-nums;color:#dff6ff}
+
+/* Wizard */
+.wizard{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:14px;background:radial-gradient(circle at 30% 8%,#1a4368,#06101a 60%)}.wizardCard{width:min(1240px,100%);height:min(830px,calc(100dvh - 28px));display:flex;flex-direction:column;overflow:hidden;border:1px solid #395e7e;border-radius:24px;background:#091522f2;box-shadow:0 35px 110px #000b}.wizardTop{height:66px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line)}.wizardBrand b{font-size:1.05rem}.wizardBrand span{color:var(--accent)}.steps{display:flex;gap:8px}.stepDot{width:42px;height:6px;border-radius:99px;background:#2b465f}.stepDot.active{background:var(--accent)}.wizardStep{display:none;min-height:0;flex:1;padding:clamp(14px,2.5vw,30px)}.wizardStep.active{display:flex;flex-direction:column}.wizardStep.scroll{overflow:auto}.hero{margin:auto;width:min(900px,100%);text-align:center;display:flex;flex-direction:column;gap:15px}.hero h1{font-size:clamp(2.2rem,6vw,5rem);line-height:1;margin:.1em 0}.hero p{margin:0;color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem)}.author{color:var(--accent);letter-spacing:.09em}.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}.choice{text-align:left;background:#10243a;color:white;border:1px solid #365875;border-radius:17px;padding:20px}.choice.selected{outline:2px solid var(--accent);background:#132b45}.choice b{font-size:1.04rem}.choice small{display:block;color:#bed1e1;margin-top:6px;line-height:1.45}.stepActions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+/* Explorador */
+.exploreGrid{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:16px}.exploreCanvas{position:relative;min-height:340px;background:#000;border:1px solid var(--line);border-radius:17px;overflow:hidden;touch-action:none}.exploreCanvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.selectionBox{position:absolute;z-index:7;border:2px solid var(--gold);background:#ffd85e20;box-shadow:0 0 0 9999px #0005;pointer-events:none}.fractalBadge,.zoomBadge{position:absolute;top:12px;z-index:6;background:#071522dd;border:1px solid #426581;border-radius:999px;padding:7px 11px;font-size:.76rem}.fractalBadge{left:12px}.zoomBadge{right:12px}.guide{min-height:0;overflow:auto;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:17px;background:#0d1d2d;padding:16px}.guide h2{font-size:1.25rem;margin:.15em 0}.guide p{margin:.25em 0;color:var(--muted);line-height:1.5}.miniButtons{display:flex;gap:8px;flex-wrap:wrap}.statusBox{border:1px solid #385773;border-radius:12px;padding:11px 12px;background:#07131e;font-size:.84rem}.statusBox.busy{color:var(--gold)}.statusBox.ok{color:#9dffb6}.progressTrack{height:12px;overflow:hidden;border:1px solid #385773;border-radius:999px;background:#06101a}.progressFill{height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--accent),var(--gold));transition:transform .12s linear}.loadingOverlay{position:absolute;inset:0;z-index:9;display:grid;place-items:center;background:#000a;backdrop-filter:blur(2px)}.loadingOverlay.hidden{display:none}.loadingCard{width:min(430px,84%);padding:18px;border:1px solid #41647f;border-radius:16px;background:#07131ee8;box-shadow:0 18px 55px #000a}.loadingTitle{font-weight:850;margin-bottom:11px}.loadingPct{margin-top:8px;color:#d9ecfb;font-size:.8rem}.crosshair{cursor:crosshair}
+
+/* Paso sonido */
+.step3Wrap{width:min(930px,100%);margin:auto;display:flex;flex-direction:column;gap:13px}.step3Wrap h1{font-size:clamp(1.9rem,4.4vw,3.4rem);margin:.1em 0}.bandTrack{position:relative;height:55px;margin:8px 4px}.bandTrack:before{content:"";position:absolute;left:0;right:0;top:22px;height:11px;border-radius:999px;background:linear-gradient(90deg,#553cff,#42a9ff,#74eadf,#ffe06c,#ff765d)}.bandTrack:after{content:"";position:absolute;left:var(--lowPct);right:calc(100% - var(--highPct));top:18px;height:19px;border:3px solid white;border-radius:999px;pointer-events:none}.bandTrack input{position:absolute;inset:0;width:100%;background:transparent;border:0;appearance:none;pointer-events:none}.bandTrack input::-webkit-slider-thumb{appearance:none;width:27px;height:27px;border-radius:50%;background:white;border:4px solid #173149;pointer-events:auto;cursor:grab}.bandRead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted)}.bandRead b{color:white;font-size:1.1rem}.simpleGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.simpleCard{border:1px solid var(--line);border-radius:15px;background:#0e1e2e;padding:15px}.simpleCard input[type=range]{padding:0}.stickyActions{position:sticky;bottom:-1px;padding-top:10px;background:linear-gradient(180deg,transparent,#091522 24%,#091522)}
+
+/* Paso generación */
+.finish{margin:auto;width:min(620px,100%);text-align:center}.finish h1{font-size:clamp(2rem,4.5vw,3.5rem)}.finish .progressTrack{height:15px;margin:20px 0 10px}.finishStage{color:var(--muted)}
+
+@media(max-width:820px){
+  .exploreGrid{grid-template-columns:1fr}.exploreCanvas{min-height:48dvh}.guide{max-height:34dvh}.choices{grid-template-columns:1fr}.simpleGrid{grid-template-columns:1fr}.wizardCard{height:calc(100dvh - 12px);border-radius:17px}.wizard{padding:6px}.wizardStep{padding:13px}.wizardBrand span{display:block}.player{grid-template-columns:auto minmax(0,1fr) auto}.volume{display:none}.download{grid-column:1/-1;text-align:center}.viewTools .hintText{display:none}}
+@media(max-width:520px){.topbar{height:58px;padding:0 10px}.appShell{height:calc(100dvh - 58px);padding:6px}.brand small{display:none}.viewHead{height:auto;min-height:45px;align-items:flex-start;padding:7px}.tabs{flex-wrap:wrap}.player{padding:8px}.seekWrap{gap:4px}.wizardTop{padding:0 12px}.steps{gap:5px}.stepDot{width:24px}.guide{padding:12px}.grid2{grid-template-columns:1fr}.hero h1{font-size:clamp(2rem,12vw,3.4rem)}}
+
+/* v13 · experiencia menos genérica */
+.choice{position:relative;overflow:hidden;min-height:210px;padding:0}.choiceBody{position:relative;z-index:2;padding:18px 20px 20px}.choiceThumb{display:block;width:100%;height:118px;background:#02060a}.choice:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#10243af2 68%);pointer-events:none}.choice.selected{transform:translateY(-2px);box-shadow:0 18px 50px #0006,0 0 0 1px #61dcff66}.choice{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.guideCompact{display:grid;grid-template-rows:auto auto auto auto 1fr auto;gap:9px}.historyRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}.miniMapWrap{position:relative;height:92px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#02070c}.miniMapWrap.hidden{display:none}.miniMapWrap canvas{width:100%;height:100%;display:block}.miniMapRect{position:absolute;border:2px solid var(--gold);background:#ffd85e18;pointer-events:none}.compactHelp{font-size:.76rem;color:var(--muted);line-height:1.35}.desktopOnly{display:block}.mobileOnly{display:none}.contextHint{transition:opacity .15s ease}.viewTools.hiddenTools{visibility:hidden;pointer-events:none}
+.bandInputs{display:grid;grid-template-columns:1fr 1fr minmax(150px,.72fr);gap:10px;align-items:end}.scaleSwitch{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.scaleSwitch button{padding:9px 6px;background:#14283d;color:#dff4ff;border:1px solid #345572}.scaleSwitch button.active{background:linear-gradient(135deg,#61dcff,#7b61ff);color:#06111b;border-color:transparent}.presetChips{display:flex;gap:7px;flex-wrap:wrap}.presetChips button{padding:7px 10px;border-radius:999px;background:#14283d;color:#dff4ff;border:1px solid #345572;font-weight:700}.summaryCard{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(135deg,#0c1d2d,#10283e);padding:12px}.summaryCard div{min-width:0}.summaryCard span{display:block;color:var(--muted);font-size:.7rem}.summaryCard b{display:block;margin-top:3px;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.estimate{color:#a9ffd0!important}
+.errorPanel{display:none;margin-top:16px;padding:15px;border:1px solid #ff7a7a66;border-radius:15px;background:#35131a}.errorPanel.show{display:block}.errorActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.errorActions button{flex:1}.mobileSpecChips{display:none;gap:6px;flex-wrap:wrap}.mobileSpecChips button{padding:6px 9px;border-radius:999px;background:#14283d;color:#e6f7ff;border:1px solid #345572}
+.wizardStep[data-step="2"]{overflow:hidden}.guide{overflow:hidden}.guideCompact h2{font-size:1.12rem;margin:0}.guideCompact .field{margin-bottom:0}.guideCompact .miniButtons button{padding:9px 10px}.guideCompact .stepActions{margin-top:0}
+@media (max-height:760px) and (min-width:821px){.wizardTop{height:58px}.wizardStep{padding:12px 16px}.exploreGrid{gap:11px;grid-template-columns:minmax(0,1fr) 330px}.guide{padding:12px}.guideCompact{gap:6px}.guideCompact h2{font-size:1rem}.compactHelp{font-size:.7rem}.miniMapWrap{height:70px}.stepActions button{padding:9px 12px}.fractalBadge,.zoomBadge{padding:5px 9px}.statusBox{padding:8px 10px}.progressTrack{height:9px}}
+@media(max-width:820px){.desktopOnly{display:none!important}.mobileOnly{display:block}.guide{max-height:none;overflow:auto}.wizardStep[data-step="2"] .exploreGrid{position:relative;display:block;height:100%}.wizardStep[data-step="2"] .exploreCanvas{height:100%;min-height:0}.wizardStep[data-step="2"] .guide{position:absolute;left:0;right:0;bottom:0;z-index:12;max-height:55dvh;overflow:auto;border-radius:22px 22px 0 0;padding:10px 13px 14px;box-shadow:0 -20px 55px #000a;transform:translateY(calc(100% - 54px));transition:transform .25s ease}.wizardStep[data-step="2"] .guide.sheetOpen{transform:translateY(0)}.guideCompact{display:flex;flex-direction:column}.compactHelp{display:none}.miniMapWrap{display:none}.drawer{top:auto;bottom:0;height:auto;max-height:82dvh;width:100vw;border-left:0;border-top:1px solid var(--line);border-radius:22px 22px 0 0;transform:translateY(105%)}.drawer.open{transform:none}.drawerHead{top:-16px}.mobileSpecChips{display:flex}.bandInputs{grid-template-columns:1fr 1fr}.bandInputs .scaleField{grid-column:1/-1}.summaryCard{grid-template-columns:1fr 1fr}.step3Wrap{gap:10px}.simpleGrid{grid-template-columns:1fr 1fr}.step3Wrap h1{font-size:1.85rem}.wizardStep.scroll{overflow:auto}.wizardStep[data-step="3"] .stickyActions{position:static;background:none;padding-bottom:18px}.wizardStep[data-step="3"] .step3Wrap{padding-bottom:14px}#mobileSheetToggle{position:sticky;top:0;z-index:3;width:100%;background:#0d1d2df2;backdrop-filter:blur(8px)}}
+@media(max-width:540px){.wizardStep[data-step="3"]{padding-bottom:72px}.wizardStep[data-step="3"] .stepActions{position:sticky;bottom:-1px;z-index:5;padding:8px 0;background:linear-gradient(180deg,transparent,#091522 22%,#091522)}.compactSummary{display:none}.simpleGrid{grid-template-columns:1fr}.summaryCard{grid-template-columns:1fr 1fr}.bandInputs{grid-template-columns:1fr 1fr}.presetChips{gap:5px}.presetChips button{font-size:.74rem}.wizardBrand span{font-size:.78rem}.choice{min-height:180px}.choiceThumb{height:92px}}
+
+
+/* v14 · densidad, resolución y navegación final */
+.topActions{align-items:center;flex-wrap:nowrap}.topActions .secondary{padding:9px 12px;white-space:nowrap}.modeTools{display:flex;align-items:center;gap:6px;white-space:nowrap}.modeTools.hidden{display:none!important}.modeTools label{font-size:.72rem;color:var(--muted)}.modeTools select{width:auto;min-width:112px;padding:7px 28px 7px 9px;background:#0b1d2d;color:var(--text);border:1px solid #345572;border-radius:9px}.modeTools button{padding:7px 10px}.viewTools{min-width:0;flex-wrap:nowrap}.viewTools .hintText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.quickQuality{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}.quickQuality button{padding:8px 5px;background:#14283d;color:#dff4ff;border:1px solid #345572;font-size:.76rem}.quickQuality button.active{background:linear-gradient(135deg,#61dcff,#7b61ff);color:#06111b;border-color:transparent}.rangeLabels{display:flex;justify-content:space-between;color:var(--muted);font-size:.66rem;margin-top:-3px}.soundControls{display:grid;grid-template-columns:1.05fr 1.05fr 1fr;gap:10px}.soundControls .simpleCard{min-height:118px}.visuallyHiddenControl{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}.energyTrack{position:relative;height:37px;margin:5px 0 2px}.energyTrack:before{content:"";position:absolute;left:0;right:0;top:15px;height:8px;border-radius:999px;background:linear-gradient(90deg,#172033,#516a8c,#61dcff,#ffd85e)}.energyTrack:after{content:"";position:absolute;left:var(--energyLowPct,40%);right:calc(100% - var(--energyHighPct,98%));top:11px;height:16px;border:2px solid white;border-radius:999px;pointer-events:none}.energyTrack input{position:absolute;inset:0;width:100%;appearance:none;background:transparent;border:0;padding:0;pointer-events:none}.energyTrack input::-webkit-slider-thumb{appearance:none;width:22px;height:22px;border-radius:50%;background:white;border:4px solid #173149;pointer-events:auto}.energyRead{font-size:.74rem;color:#cfe4f5}.compactSummary{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;background:#0c1d2d;padding:8px 10px;font-size:.76rem;min-width:0}.compactSummary span{color:var(--muted)}.compactSummary b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.loadingOverlay.soft{background:#0003;place-items:end center;pointer-events:none;padding:0 14px 14px}.loadingOverlay.soft .loadingCard{width:min(520px,92%);padding:10px 13px;background:#07131ee8}.loadingOverlay.soft .loadingTitle{margin-bottom:7px;font-size:.82rem}.loadingOverlay.soft .loadingPct{margin-top:5px}.miniMapWrap:before{content:"Contexto anterior";position:absolute;left:7px;top:5px;z-index:2;padding:3px 6px;border-radius:999px;background:#06111ddd;color:#dceeff;font-size:.62rem}.wizardStep[data-step="3"]{overflow:hidden}.wizardStep[data-step="3"] .step3Wrap{height:100%;justify-content:space-between}.wizardStep[data-step="3"] .stepActions{margin-top:0}.wizardStep[data-step="3"] .presetChips{order:1}.wizardStep[data-step="3"] .bandInputs{order:2}.wizardStep[data-step="3"] .bandTrack{order:3}.wizardStep[data-step="3"] .bandRead{order:4}.wizardStep[data-step="3"] .soundControls{order:5}.wizardStep[data-step="3"] .compactSummary{order:6}.wizardStep[data-step="3"] .stepActions{order:7}.wizardCard{height:calc(100dvh - 18px);max-height:860px}.wizardTop{height:58px}.wizardStep{padding:14px 20px}.guideCompact{grid-template-rows:auto auto auto auto auto 1fr auto}.guideCompact .field input[type=range]{padding:0}.guideCompact .statusBox{padding:8px 10px}.guideCompact .miniMapWrap{height:76px}.guideCompact .compactHelp{font-size:.69rem}.guideCompact .stepActions button{padding:9px 11px}.step3Wrap{width:min(1100px,100%);gap:8px}.step3Wrap h1{font-size:clamp(1.7rem,3.5vw,2.8rem);line-height:1;margin:0}.step3Wrap .hint{margin:.2em 0}.bandInputs{gap:8px}.bandTrack{height:44px;margin:0 4px}.bandTrack:before{top:18px}.bandTrack:after{top:14px}.bandRead{min-height:25px}.presetChips{gap:5px}.presetChips button{padding:6px 9px}.simpleCard{padding:11px}.summaryCard{display:none}.stickyActions{position:static;background:none;padding-top:0}
+@media(max-height:760px) and (min-width:821px){
+ .wizardCard{height:calc(100dvh - 10px)}.wizardTop{height:50px}.wizardStep{padding:8px 12px}.hero{gap:8px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem)}.choices{margin:9px 0;gap:10px}.choice{min-height:166px}.choiceThumb{height:82px}.choiceBody{padding:10px 14px}.exploreGrid{grid-template-columns:minmax(0,1fr) 315px;gap:8px}.guide{padding:9px}.guideCompact{gap:5px}.guideCompact h2{font-size:.94rem}.guideCompact .field label{font-size:.7rem}.guideCompact .miniButtons button{padding:7px 8px;font-size:.78rem}.guideCompact .miniMapWrap{height:58px}.step3Wrap{gap:5px}.step3Wrap h1{font-size:2rem}.bandInputs .field{margin-bottom:2px}.bandInputs input{padding:7px}.scaleSwitch button{padding:7px 5px}.presetChips button{padding:5px 8px;font-size:.72rem}.bandTrack{height:38px}.bandTrack:before{top:15px}.bandTrack:after{top:11px}.soundControls .simpleCard{min-height:100px;padding:8px}.soundControls label{font-size:.72rem}.quickQuality button{padding:6px 3px;font-size:.68rem}.energyTrack{height:30px}.energyTrack:before{top:12px}.energyTrack:after{top:8px}.compactSummary{padding:6px 8px}.stepActions button{padding:8px 10px}
+}
+@media(max-width:1080px){.viewTools .hintText{display:none}.modeTools label{display:none}.modeTools select{min-width:100px}.topActions .secondary{font-size:.78rem}}
+@media(max-width:820px){.wizardCard{height:calc(100dvh - 12px);max-height:none}.topActions #editSoundFinal{display:none}.topActions .secondary{padding:8px 9px}.soundControls{grid-template-columns:1fr}.wizardStep[data-step="3"]{overflow:auto}.wizardStep[data-step="3"] .step3Wrap{height:auto}.modeTools{gap:4px}.modeTools select{min-width:86px;max-width:110px}.modeTools button{padding:7px 8px}.viewHead{flex-wrap:wrap}.viewTools{width:100%;justify-content:flex-end}.miniMapWrap:before{display:none}}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><b>Sonidero Fractal</b><small>por Pedro K. Galindo Vera · Escucha las matemáticas</small></div>
+  <div class="topActions"><button id="editSoundFinal" class="secondary">← Sonido</button><button id="editFractalFinal" class="secondary">← Fractal</button><button id="gearBtn" class="iconBtn secondary" title="Abrir laboratorio">⚙</button></div>
+</header>
+
+<div id="appShell" class="appShell">
+  <div class="workspace">
+    <div class="viewHead">
+      <div class="tabs"><button class="tab" data-view="fractal">Fractal fuente</button><button class="tab active" data-view="spec">Espectrograma</button></div>
+      <div id="viewTools" class="viewTools">
+        <div id="fractalModeTools" class="modeTools hidden"><label>Resolución fractal</label><select id="finalFractalQuality"><option value="1">Suave</option><option value="2" selected>Balanceada</option><option value="3">Alta</option><option value="4">Máxima</option></select><button id="refineFinalFractal" class="ghost">Refinar</button></div>
+        <div id="specModeTools" class="modeTools"><label>Resolución espectral</label><select id="finalSpecQuality"><option value="0">Rápida</option><option value="2" selected>Balanceada</option><option value="3">Alta</option><option value="4">Máxima</option></select><button id="applySpecQuality" class="ghost">Aplicar</button><button id="resetSpecView" class="ghost">Ver todo</button></div>
+        <span class="hintText contextHint">Rueda: zoom temporal · Shift+rueda: frecuencia · arrastrar: mover</span><div class="mobileSpecChips"><button data-specband="full">Completa</button><button data-specband="voice">Voz</button><button data-specband="birds">Aves</button></div>
+      </div>
+    </div>
+    <div class="visualStack">
+      <div id="canvasWrap" class="canvasWrap">
+        <canvas id="fractalCanvas"></canvas>
+        <canvas id="specCanvas"></canvas>
+        <canvas id="cursorCanvas"></canvas>
+        <div id="finalBadge" class="badge">Espectrograma real del WAV · clic para saltar</div>
+      </div>
+      <div class="player">
+        <button id="playBtn" class="playBtn">▶</button>
+        <div class="seekWrap"><span id="currentTime" class="timeRead">0:00.00</span><input id="seek" class="seek" type="range" min="0" max="5" step="0.001" value="0"><span id="totalTime" class="timeRead">0:05.00</span></div>
+        <input id="volume" class="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+        <a id="download" class="download" download="sonidero-fractal-pedro-k-galindo-vera.wav">Descargar WAV</a>
+      </div>
+      <div class="statusBar"><span id="finalStatus">Preparando experiencia…</span><div class="meter"><div id="finalProgress"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<audio id="audio"></audio>
+<div id="drawerBackdrop" class="drawerBackdrop"></div>
+<aside id="drawer" class="drawer">
+  <div class="drawerHead"><div><b>Laboratorio</b><div class="hint">Parámetros técnicos y visualización</div></div><button id="closeDrawer" class="iconBtn secondary">×</button></div>
+  <section>
+    <h2>Ajustes avanzados de sonido</h2>
+    <div class="grid2"><div class="field"><label>Frecuencia mínima (Hz)</label><input id="techFmin" type="number" value="300"></div><div class="field"><label>Frecuencia máxima (Hz)</label><input id="techFmax" type="number" value="20000"></div></div>
+    <div class="grid2"><div class="field"><label>Duración (s)</label><input id="duration" type="number" min="1" max="30" step="1" value="5"></div><div class="field"><label>Calidad de muestreo</label><select id="sampleRate"><option>44100</option><option selected>48000</option><option>96000</option><option>192000</option></select></div></div>
+    <div class="grid2"><div class="field"><label>Detalle frecuencial (FFT)</label><select id="nfft"><option>1024</option><option selected>2048</option><option>4096</option><option>8192</option><option>16384</option></select></div><div class="field"><label>Suavidad temporal (salto)</label><select id="hop"><option>64</option><option>128</option><option selected>256</option><option>512</option><option>1024</option></select></div></div>
+    <div class="grid2"><div class="field"><label>Ruido de fondo (dBFS)</label><input id="floorDb" type="number" value="-72"></div><div class="field"><label>Nivel máximo (dBFS)</label><input id="peakDb" type="number" value="-3"></div></div>
+    <div class="grid2"><div class="field"><label>Sensibilidad al detalle</label><input id="audioGamma" type="number" min="0.2" max="2" step="0.05" value="0.62"></div><div class="field"><label>Qué parte de la imagen suena</label><select id="powerMode"><option value="luma">Luminancia</option><option value="edges">Bordes</option><option value="hybrid" selected>Híbrido</option></select></div></div>
+    <div class="field"><label>Textura de síntesis</label><select id="synthMode"><option value="coherent" selected>Fase coherente</option><option value="diffuse">Textura difusa</option></select></div>
+    <div id="resolutionHint" class="hint"></div>
+    <div class="grid2"><button id="regenerateBtn">Regenerar audio</button><button id="cancelDspBtn" class="secondary" disabled>Cancelar</button></div>
+  </section>
+  <section>
+    <h2>Visualización del espectrograma</h2>
+    <div class="field"><label>Brillo <span id="brightnessRead" class="readout">0.00</span></label><input id="specBrightness" type="range" min="-0.35" max="0.35" step="0.01" value="0"></div>
+    <div class="field"><label>Contraste <span id="contrastRead" class="readout">1.15</span></label><input id="specContrast" type="range" min="0.60" max="2.20" step="0.01" value="1.15"></div>
+    <div class="field"><label>Gamma visual <span id="gammaRead" class="readout">0.85</span></label><input id="specGamma" type="range" min="0.40" max="1.60" step="0.01" value="0.85"></div>
+    <div class="field"><label>Piso visual (dB) <span id="visualFloorRead" class="readout">-80</span></label><input id="visualFloor" type="range" min="-110" max="-35" step="1" value="-80"></div>
+    <div class="hint">La STFT se calcula una sola vez. Estos controles solo recolorean la matriz en caché.</div>
+  </section>
+</aside>
+
+<div id="wizard" class="wizard">
+  <div class="wizardCard">
+    <div class="wizardTop">
+      <div class="wizardBrand"><b>Sonidero Fractal</b> <span>· Pedro K. Galindo Vera</span></div>
+      <div class="steps"><i class="stepDot active" data-step="1"></i><i class="stepDot" data-step="2"></i><i class="stepDot" data-step="3"></i><i class="stepDot" data-step="4"></i></div>
+    </div>
+
+    <div class="wizardStep active" data-step="1">
+      <div class="hero">
+        <div class="author">UNA EXPERIENCIA DE PEDRO K GALINDO VERA</div>
+        <h1>Escucha las matemáticas.</h1>
+        <p>Elige un universo, explora sus fronteras y escucha su geometría.</p>
+        <div class="choices">
+          <button class="choice selected" data-fractal="mandelbrot"><canvas id="mandelbrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Mandelbrot</b><small>El universo fractal clásico, infinito en detalle.</small></div></button>
+          <button class="choice" data-fractal="julia"><canvas id="juliaThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Julia</b><small>Variaciones complejas, orgánicas y filamentosas.</small></div></button>
+        </div>
+        <button id="startExplore">Explorar Mandelbrot →</button>
+      </div>
+    </div>
+
+    <div class="wizardStep" data-step="2">
+      <div class="exploreGrid">
+        <div id="explorer" class="exploreCanvas">
+          <canvas id="explorerCanvas"></canvas>
+          <div id="selectionBox" class="selectionBox hidden"></div>
+          <div id="fractalBadge" class="fractalBadge">Mandelbrot</div>
+          <div id="zoomBadge" class="zoomBadge">Zoom 1×</div>
+          <div id="explorerLoading" class="loadingOverlay hidden">
+            <div class="loadingCard"><div id="explorerLoadingTitle" class="loadingTitle">Calculando fractal…</div><div class="progressTrack"><div id="explorerProgress" class="progressFill"></div></div><div id="explorerPct" class="loadingPct">0%</div></div>
+          </div>
+        </div>
+        <div id="mobileGuideSheet" class="guide guideCompact sheetOpen">
+          <button id="mobileSheetToggle" class="ghost mobileOnly">Controles · desliza o toca ▾</button>
+          <div><div class="author">PASO 2 · EXPLORA Y ACÉRCATE</div><h2>Arrastra una caja para acercarte, o continúa con la vista actual.</h2></div>
+          <div class="field"><label>Lugar destacado</label><select id="famousSpot"></select></div>
+          <div class="historyRow"><button id="historyBack" class="secondary" disabled>← Anterior</button><button id="historyForward" class="secondary" disabled>Siguiente →</button></div>
+          <div class="miniButtons"><button id="zoomIn" class="secondary">＋ Acercar</button><button id="zoomOut" class="secondary">－ Alejar</button><button id="resetFractal" class="secondary">Vista completa</button><button id="mobileSelectRegion" class="secondary mobileOnly">Seleccionar región</button></div>
+          <div class="field"><label>Resolución del fractal</label><input id="fractalDetail" type="range" min="0" max="4" step="1" value="2"><div class="rangeLabels"><span>Vista previa</span><span>Suave</span><span>Alta</span><span>Máxima</span></div><div id="fractalDetailRead" class="hint">Balanceada · 1.150 px y detalle medio.</div></div>
+          <div id="miniMapWrap" class="miniMapWrap hidden"><canvas id="miniMapCanvas"></canvas><div id="miniMapRect" class="miniMapRect"></div></div>
+          <div><div id="explorerStatus" class="statusBox">La vista completa también puede convertirse en sonido.</div><div class="compactHelp desktopOnly">Arrastra: seleccionar · Espacio + arrastrar: mover · Rueda: zoom fino</div></div>
+          <div class="stepActions"><button id="backToChoice" class="secondary">← Atrás</button><button id="useRegion" disabled>Usar vista actual →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wizardStep" data-step="3">
+      <div class="step3Wrap">
+        <div><div class="author">PASO 3 · DALE UNA VOZ</div><h1>Dale voz a la imagen.</h1><p class="hint">Elige una banda rápida o ajusta cada valor con precisión.</p></div>
+        <div class="presetChips"><button type="button" data-band="voice">Voz</button><button type="button" data-band="birds">Aves</button><button type="button" data-band="insects">Insectos</button><button type="button" data-band="bats">Murciélagos</button><button type="button" data-band="full">Banda completa</button></div>
+        <div class="bandInputs">
+          <div class="field"><label>Frecuencia mínima (Hz)</label><input id="bandLowInput" type="number" min="0" value="300"></div>
+          <div class="field"><label>Frecuencia máxima (Hz)</label><input id="bandHighInput" type="number" min="100" value="20000"></div>
+          <div class="field scaleField"><label>Escala de la barra</label><div id="scaleSwitch" class="scaleSwitch"><button type="button" data-scale="linear">Lineal</button><button type="button" data-scale="log" class="active">Log</button><button type="button" data-scale="mel">Mel</button></div></div>
+        </div>
+        <div class="bandTrack"><input id="lowRange" type="range" min="0" max="10000" step="1" value="0"><input id="highRange" type="range" min="0" max="10000" step="1" value="10000"></div>
+        <div id="bandRead" class="bandRead"></div>
+        <div class="soundControls">
+          <div class="simpleCard"><label>Resolución del audio y espectrograma</label><input id="audioQuality" class="visuallyHiddenControl" type="range" min="0" max="4" step="1" value="2"><div id="qualitySwitch" class="quickQuality"><button type="button" data-quality="0">Rápida</button><button type="button" data-quality="2" class="active">Balanceada</button><button type="button" data-quality="3">Alta</button><button type="button" data-quality="4">Máxima</button></div><b id="audioQualityRead">Balanceada</b><p id="audioEstimate" class="hint estimate">Tiempo estimado: ~3–6 s.</p></div>
+          <div class="simpleCard"><label>Rango de energía</label><div class="energyTrack"><input id="simpleFloor" type="range" min="-120" max="-1" step="1" value="-72"><input id="simplePeak" type="range" min="-120" max="-1" step="1" value="-3"></div><div id="energyRead" class="energyRead">Fondo −72 dB · Picos −3 dB</div><p class="hint">Fondo más bajo revela detalles tenues; picos más altos producen más contraste sonoro.</p></div>
+          <div class="simpleCard"><label>Carácter del sonido</label><select id="soundProfile"><option value="natural">Natural y definido</option><option value="clean">Limpio y fino</option><option value="texture">Textura envolvente</option><option value="experimental">Experimental</option></select><p class="hint">Ajusta automáticamente textura, bordes y sensibilidad.</p></div>
+        </div>
+        <div class="compactSummary"><span><b id="summaryFractal">Mandelbrot</b> · <b id="summaryRegion">Vista actual</b></span><span><b id="summaryBand">300–20.000 Hz</b> · <b id="summaryEstimate">~3–6 s</b></span></div>
+        <div class="stepActions"><button id="backToFractal" class="secondary">← Volver al fractal</button><button id="makeSound">Generar sonido →</button></div>
+      </div>
+    </div>
+
+    <div class="wizardStep" data-step="4">
+      <div class="finish">
+        <div class="author">PASO 4 · TRANSFORMANDO</div>
+        <h1>Tu región se está convirtiendo en sonido.</h1>
+        <div class="progressTrack"><div id="dspProgress" class="progressFill"></div></div>
+        <div id="dspPct" class="loadingPct">0%</div>
+        <p id="dspStage" class="finishStage">Preparando la huella espectral…</p>
+        <button id="cancelDspWizard" class="secondary">Cancelar</button><div id="generationError" class="errorPanel"><b>No pudimos completar esta configuración.</b><div id="generationErrorText" class="hint"></div><div class="errorActions"><button id="retryGeneration">Reintentar</button><button id="useFastMode" class="secondary">Usar modo rápido</button><button id="backFromError" class="secondary">Volver</button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const nextFrame=()=>new Promise(r=>requestAnimationFrame(()=>r()));
+
+const fractalWorkerSource=String.raw`
+let activeJob=0;
+self.onmessage=e=>{
+ const m=e.data;
+ if(m.type==='render'){activeJob=m.jobId;render(m);}
+ if(m.type==='cancel'){activeJob=m.jobId;}
+};
+function hsv(h,s,v){h=((h%1)+1)%1;let i=Math.floor(h*6),f=h*6-i,p=v*(1-s),q=v*(1-f*s),t=v*(1-(1-f)*s),r,g,b;switch(i%6){case 0:r=v;g=t;b=p;break;case 1:r=q;g=v;b=p;break;case 2:r=p;g=v;b=t;break;case 3:r=p;g=q;b=v;break;case 4:r=t;g=p;b=v;break;default:r=v;g=p;b=q;}return [r*255,g*255,b*255];}
+async function render(p){
+ const {jobId,width,height,cx,cy,scale,maxIter,fractal,juliaCr,juliaCi}=p;
+ const out=new Uint8ClampedArray(width*height*4),sy=scale*height/width;
+ const chunk=8;
+ for(let y0=0;y0<height;y0+=chunk){
+  if(activeJob!==jobId)return;
+  const yEnd=Math.min(height,y0+chunk);
+  for(let y=y0;y<yEnd;y++){
+   const pi=cy+(y/(height-1)-.5)*sy;
+   for(let x=0;x<width;x++){
+    const pr=cx+(x/(width-1)-.5)*scale;
+    let zr=fractal==='julia'?pr:0,zi=fractal==='julia'?pi:0;
+    const cr=fractal==='julia'?juliaCr:pr,ci=fractal==='julia'?juliaCi:pi;
+    let i=0,zr2=zr*zr,zi2=zi*zi;
+    while(i<maxIter && zr2+zi2<=16){zi=2*zr*zi+ci;zr=zr2-zi2+cr;zr2=zr*zr;zi2=zi*zi;i++;}
+    const k=(y*width+x)*4;
+    if(i===maxIter){out[k]=0;out[k+1]=0;out[k+2]=0;out[k+3]=255;}
+    else{
+      const mag=Math.sqrt(zr2+zi2),mu=i+1-Math.log(Math.log(Math.max(mag,1.000001)))/Math.log(2);
+      const band=.5+.5*Math.cos(mu*.26),t=clampLocal(.58*((mu%96)/96)+.42*band,0,1);
+      const c=hsv(.59+.52*t,.94-.48*t,.16+.84*Math.pow(t,.72));
+      out[k]=c[0];out[k+1]=c[1];out[k+2]=c[2];out[k+3]=255;
+    }
+   }
+  }
+  self.postMessage({type:'progress',jobId,progress:yEnd/height});
+  await new Promise(r=>setTimeout(r,0));
+ }
+ if(activeJob!==jobId)return;
+ self.postMessage({type:'done',jobId,width,height,pixels:out.buffer},[out.buffer]);
+}
+function clampLocal(v,a,b){return Math.max(a,Math.min(b,v));}
+`;
+
+const dspWorkerSource=String.raw`
+let activeJob=0;
+self.onmessage=e=>{const m=e.data;if(m.type==='generate'){activeJob=m.jobId;generate(m);}if(m.type==='cancel'){activeJob=m.jobId;}};
+function post(jobId,p,stage){self.postMessage({type:'progress',jobId,progress:p,stage});}
+function fft(re,im,inverse){const n=re.length;for(let i=1,j=0;i<n;i++){let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t;}}for(let len=2;len<=n;len<<=1){const ang=2*Math.PI/len*(inverse?1:-1),wr0=Math.cos(ang),wi0=Math.sin(ang);for(let i=0;i<n;i+=len){let wr=1,wi=0;for(let j=0;j<len/2;j++){const uR=re[i+j],uI=im[i+j],vR=re[i+j+len/2]*wr-im[i+j+len/2]*wi,vI=re[i+j+len/2]*wi+im[i+j+len/2]*wr;re[i+j]=uR+vR;im[i+j]=uI+vI;re[i+j+len/2]=uR-vR;im[i+j+len/2]=uI-vI;const nw=wr*wr0-wi*wi0;wi=wr*wi0+wi*wr0;wr=nw;}}}if(inverse)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n;}}
+function hann(n){const w=new Float64Array(n);for(let i=0;i<n;i++)w[i]=.5-.5*Math.cos(2*Math.PI*i/(n-1));return w;}
+function rng(seed){return()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};}
+function lum(px,i){return (.2126*px[i]+.7152*px[i+1]+.0722*px[i+2])/255;}
+function sample(px,w,h,x,y,mode){const ix=Math.max(0,Math.min(w-1,Math.round(x*(w-1)))),iy=Math.max(0,Math.min(h-1,Math.round(y*(h-1)))),i=(iy*w+ix)*4,l=lum(px,i);if(mode==='luma')return l;let e=0;const n=[[1,0],[-1,0],[0,1],[0,-1]];for(let q=0;q<4;q++){const xx=Math.max(0,Math.min(w-1,ix+n[q][0])),yy=Math.max(0,Math.min(h-1,iy+n[q][1])),j=(yy*w+xx)*4;e=Math.max(e,Math.abs(l-lum(px,j)));}e=Math.min(1,e*4.8);return mode==='edges'?e:Math.min(1,.62*l+.78*e);}
+async function generate(p){
+ const {jobId,pixelsBuffer,srcW,srcH,sr,duration,nfft,hop,fmin,fmax,floorDb,peakDb,audioGamma,powerMode,synthMode}=p;
+ const pixels=new Uint8ClampedArray(pixelsBuffer),length=Math.round(sr*duration),frames=Math.floor((length-nfft)/hop)+1,bins=nfft/2+1,win=hann(nfft),mag=new Float32Array(frames*bins);
+ for(let t=0;t<frames;t++){
+  if(activeJob!==jobId)return;
+  const x=frames>1?t/(frames-1):0;
+  for(let k=0;k<bins;k++){
+   const hz=k*sr/nfft;let a=1e-7;
+   if(hz>=fmin&&hz<=fmax){const y=1-(hz-fmin)/(fmax-fmin),I=Math.pow(sample(pixels,srcW,srcH,x,y,powerMode),audioGamma),db=floorDb+(peakDb-floorDb)*I;a=Math.pow(10,db/20);}
+   mag[t*bins+k]=a;
+  }
+  if(t%24===0){post(jobId,.22*t/frames,'Mapeando el fractal a magnitud STFT…');await new Promise(r=>setTimeout(r,0));}
+ }
+ const out=new Float64Array(length+nfft),norm=new Float64Array(length+nfft),phase=new Float64Array(bins),random=rng(20260806),re=new Float64Array(nfft),im=new Float64Array(nfft);
+ for(let k=0;k<bins;k++)phase[k]=2*Math.PI*random();
+ for(let t=0;t<frames;t++){
+  if(activeJob!==jobId)return;
+  re.fill(0);im.fill(0);const base=t*bins;
+  for(let k=0;k<bins;k++){const m=mag[base+k];re[k]=m*Math.cos(phase[k]);im[k]=m*Math.sin(phase[k]);phase[k]+=2*Math.PI*k*hop/nfft+(synthMode==='diffuse'?(random()-.5)*.22:0);}
+  for(let k=1;k<nfft/2;k++){re[nfft-k]=re[k];im[nfft-k]=-im[k];}
+  fft(re,im,true);const pos=t*hop;
+  for(let i=0;i<nfft;i++){if(pos+i<out.length){const w=win[i];out[pos+i]+=re[i]*w;norm[pos+i]+=w*w;}}
+  if(t%16===0){post(jobId,.22+.45*t/frames,'Reconstruyendo una fase acústica coherente…');await new Promise(r=>setTimeout(r,0));}
+ }
+ const audio=new Float32Array(length);for(let i=0;i<length;i++)audio[i]=norm[i]>1e-12?out[i]/norm[i]:0;
+ const fade=Math.min(Math.round(sr*.025),Math.floor(length/2));for(let i=0;i<fade;i++){const q=.5-.5*Math.cos(Math.PI*i/fade);audio[i]*=q;audio[length-1-i]*=q;}
+ let sum=0;for(let i=0;i<length;i++)sum+=audio[i]*audio[i];const target=Math.pow(10,-16/20),gain=target/Math.max(Math.sqrt(sum/length),1e-12);let peak=0;for(let i=0;i<length;i++){audio[i]=Math.tanh(audio[i]*gain*1.28)/Math.tanh(1.28);peak=Math.max(peak,Math.abs(audio[i]));}const pg=Math.pow(10,-1/20)/Math.max(peak,1e-12);for(let i=0;i<length;i++)audio[i]*=pg;
+ post(jobId,.70,'Calculando el espectrograma real del WAV…');await new Promise(r=>setTimeout(r,0));
+ const k0=Math.max(0,Math.floor(fmin*nfft/sr)),k1=Math.min(bins-1,Math.ceil(fmax*nfft/sr)),used=k1-k0+1,spec=new Float32Array(frames*used);let maxMag=1e-12;
+ for(let t=0;t<frames;t++){
+  if(activeJob!==jobId)return;
+  re.fill(0);im.fill(0);const pos=t*hop;for(let i=0;i<nfft;i++)re[i]=(audio[pos+i]||0)*win[i];fft(re,im,false);
+  for(let k=k0;k<=k1;k++){const m=Math.hypot(re[k],im[k]);spec[t*used+(k-k0)]=m;if(m>maxMag)maxMag=m;}
+  if(t%16===0){post(jobId,.70+.26*t/frames,'Calculando el espectrograma real del WAV…');await new Promise(r=>setTimeout(r,0));}
+ }
+ for(let i=0;i<spec.length;i++)spec[i]=20*Math.log10((spec[i]+1e-15)/maxMag);
+ post(jobId,1,'Listo');
+ self.postMessage({type:'done',jobId,audio:audio.buffer,spec:spec.buffer,specFrames:frames,specBins:used,k0,k1,sr,duration,nfft,hop,fmin,fmax},[audio.buffer,spec.buffer]);
+}
+`;
+
+function makeWorker(source){return new Worker(URL.createObjectURL(new Blob([source],{type:'application/javascript'})));}
+const fractalWorker=makeWorker(fractalWorkerSource),dspWorker=makeWorker(dspWorkerSource),thumbWorker=makeWorker(fractalWorkerSource);
+
+const state={
+ step:1,fractal:'mandelbrot',juliaCr:-.8,juliaCi:.156,view:{cx:-.55,cy:0,scale:3.1},baseScale:3.1,
+ fractalJob:0,dspJob:0,busyFractal:false,busyDsp:false,regionReady:false,selecting:false,
+ fractalCache:null,audioCache:null,specCache:null,lastError:null,
+ specView:{t0:0,t1:5,f0:300,f1:20000},activeView:'spec',fractalHandler:null,dspHandler:null,dspReject:null,history:[],historyIndex:-1,hasSelection:false,viewReady:false,softRefining:false,bandScale:'log',mobileSelectMode:false,thumbJob:0,progressiveToken:0
+};
+const famousSets={
+ mandelbrot:{full:{label:'Vista completa',cx:-.55,cy:0,scale:3.1},elephant:{label:'Valle de elefantes',cx:.285,cy:.01,scale:.18},seahorse:{label:'Valle de caballitos',cx:-.743643887037151,cy:.13182590420533,scale:.0035},doubleSpiral:{label:'Espirales dobles',cx:-.776411840992588,cy:.13664084807579,scale:.000055},mini:{label:'Minibrot profundo',cx:-1.25066,cy:.02012,scale:.00075}},
+ julia:{full:{label:'Vista inicial',cx:0,cy:0,scale:3.2,juliaCr:-.8,juliaCi:.156},rabbit:{label:'Conejo de Douady',cx:0,cy:0,scale:3.15,juliaCr:-.123,juliaCi:.745},dendrite:{label:'Dendrita',cx:0,cy:0,scale:3.15,juliaCr:0,juliaCi:1},spiral:{label:'Espiral',cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301},basilica:{label:'Basílica',cx:0,cy:0,scale:3.1,juliaCr:-1,juliaCi:0}}
+};
+function currentFamous(){return famousSets[state.fractal];}
+function populateFamousSpot(){const sel=$('famousSpot'),set=currentFamous();sel.innerHTML='';Object.entries(set).forEach(([key,p])=>{const o=document.createElement('option');o.value=key;o.textContent=p.label;sel.appendChild(o);});sel.value='full';}
+const detailProfiles=[
+ {name:'Rápido',w:720,it:260,text:'Rápido · respuesta muy ágil.'},
+ {name:'Suave',w:900,it:420,text:'Suave · buena fluidez y detalle moderado.'},
+ {name:'Balanceado',w:1150,it:700,text:'Balanceado · buen detalle sin volverse lento.'},
+ {name:'Fino',w:1450,it:1100,text:'Fino · más filigrana, tarda más.'},
+ {name:'Extremo',w:1800,it:1800,text:'Extremo · máximo detalle, úsalo solo cuando lo necesites.'}
+];
+const audioProfiles=[
+ {name:'Vista rápida',nfft:1024,hop:512},{name:'Ágil',nfft:2048,hop:512},{name:'Balanceado',nfft:2048,hop:256},{name:'Alta definición',nfft:4096,hop:256},{name:'Máximo detalle',nfft:8192,hop:128}
+];
+
+function setWizardStep(n){state.step=n;document.querySelectorAll('.wizardStep').forEach(el=>el.classList.toggle('active',+el.dataset.step===n));document.querySelectorAll('.stepDot').forEach(el=>el.classList.toggle('active',+el.dataset.step<=n));if(n===3)updateSoundSummary();}
+function snapshotView(){return {view:{...state.view},juliaCr:state.juliaCr,juliaCi:state.juliaCi,hasSelection:state.hasSelection,cache:state.fractalCache,detail:+$('fractalDetail').value};}
+function sameView(a,b){return a&&b&&Math.abs(a.view.cx-b.view.cx)<1e-15&&Math.abs(a.view.cy-b.view.cy)<1e-15&&Math.abs(a.view.scale-b.view.scale)<1e-15&&a.juliaCr===b.juliaCr&&a.juliaCi===b.juliaCi;}
+function resetHistory(){state.history=[snapshotView()];state.historyIndex=0;updateHistoryButtons();}
+function pushHistory(){const snap=snapshotView(),current=state.history[state.historyIndex];if(sameView(snap,current))return;state.history=state.history.slice(0,state.historyIndex+1);state.history.push({...snap,cache:null});if(state.history.length>14)state.history.shift();state.historyIndex=state.history.length-1;updateHistoryButtons();}
+function cacheCurrentHistory(cache){const h=state.history[state.historyIndex];if(h&&sameView(h,snapshotView())){h.cache=cache;h.detail=+$('fractalDetail').value;}}
+function updateHistoryButtons(){$('historyBack').disabled=state.busyFractal||state.historyIndex<=0;$('historyForward').disabled=state.busyFractal||state.historyIndex>=state.history.length-1;}
+async function navigateHistory(delta){const next=state.historyIndex+delta;if(next<0||next>=state.history.length||state.busyFractal)return;state.historyIndex=next;const s=state.history[next];state.view={...s.view};state.juliaCr=s.juliaCr;state.juliaCi=s.juliaCi;state.hasSelection=s.hasSelection;state.viewReady=!!s.cache;state.regionReady=true;$('miniMapWrap').classList.add('hidden');if(s.cache){state.fractalCache=s.cache;drawPixelsToCanvas(s.cache,$('explorerCanvas'));drawPixelsToCanvas(s.cache,$('fractalCanvas'));updateZoomBadge(s.cache.maxIter);setExplorerBusy(false,'Vista recuperada instantáneamente desde el historial.');updateUseRegion();updateHistoryButtons();if(s.detail!==+$('fractalDetail').value)await renderFractal({quality:'final',markReady:true,label:'Actualizando la resolución…',soft:true});return;}updateHistoryButtons();await renderFractal({quality:'preview',markReady:true,label:'Recuperando vista…'});}
+function updateUseRegion(){const btn=$('useRegion');btn.disabled=state.busyFractal||!state.viewReady;btn.textContent=state.hasSelection?'Usar esta región →':'Usar vista actual →';}
+function updateContextTools(){const spec=state.activeView==='spec';$('specModeTools').classList.toggle('hidden',!spec);$('fractalModeTools').classList.toggle('hidden',spec);document.querySelector('.contextHint').textContent=spec?'Rueda: tiempo · Shift+rueda: frecuencia · arrastrar: mover':'Resolución real del fractal; usa Refinar para aumentarla.';}
+function setProgress(el,p){el.style.transform='scaleX('+clamp(p,0,1)+')';}
+function setExplorerProgress(p){setProgress($('explorerProgress'),p);$('explorerPct').textContent=Math.round(p*100)+'%';if($('wizard').classList.contains('hidden'))setProgress($('finalProgress'),p);}
+function showExplorerLoading(show,title,blank=false,soft=false){const o=$('explorerLoading');o.classList.toggle('hidden',!show);o.classList.toggle('soft',show&&soft);if(title)$('explorerLoadingTitle').textContent=title;if(blank){const c=$('explorerCanvas'),ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);}if(show)setExplorerProgress(0);}
+function explorerSize(maxW){const target=$('wizard').classList.contains('hidden')?$('canvasWrap'):$('explorer'),r=target.getBoundingClientRect(),aspect=Math.max(.38,r.height/Math.max(1,r.width)),w=Math.max(480,Math.min(maxW,Math.round(r.width))),h=Math.max(260,Math.round(w*aspect));return {w,h};}
+function iterationForView(base){const depth=Math.max(0,Math.log10(state.baseScale/Math.max(state.view.scale,1e-300)));return Math.min(6500,Math.round(base+depth*150));}
+function drawPixelsToCanvas(cache,canvas){if(!cache)return;const r=canvas.getBoundingClientRect();canvas.width=Math.max(2,Math.round(r.width));canvas.height=Math.max(2,Math.round(r.height));const off=document.createElement('canvas');off.width=cache.width;off.height=cache.height;off.getContext('2d').putImageData(new ImageData(cache.pixels,cache.width,cache.height),0,0);const ctx=canvas.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';const q=Math.min(canvas.width/cache.width,canvas.height/cache.height),dw=cache.width*q,dh=cache.height*q,dx=(canvas.width-dw)/2,dy=(canvas.height-dh)/2;ctx.drawImage(off,dx,dy,dw,dh);}
+function updateZoomBadge(iter=0){const z=Math.max(1,state.baseScale/Math.max(state.view.scale,1e-300));$('zoomBadge').textContent='Zoom '+(z<1000?z.toFixed(z<10?1:0):z.toExponential(2))+'× · '+iter+' iter.';}
+function setExplorerBusy(flag,msg,{soft=false}={}){state.busyFractal=flag&&!soft;state.softRefining=soft;$('backToChoice').disabled=state.busyFractal;$('famousSpot').disabled=state.busyFractal;$('zoomIn').disabled=state.busyFractal;$('zoomOut').disabled=state.busyFractal;$('resetFractal').disabled=state.busyFractal;$('fractalDetail').disabled=state.busyFractal;$('mobileSelectRegion').disabled=state.busyFractal;$('explorerStatus').className='statusBox '+((flag||soft)?'busy':(state.viewReady?'ok':''));if(msg)$('explorerStatus').textContent=msg;updateHistoryButtons();updateUseRegion();}
+
+function renderFractal({quality='preview',blank=false,markReady=false,label='Calculando fractal…',soft=false,keepSelection=false}={}){
+ return new Promise((resolve,reject)=>{
+  const jobId=++state.fractalJob,preview=quality==='preview',profile=detailProfiles[+$('fractalDetail').value||2],sz=explorerSize(preview?680:profile.w),maxIter=preview?Math.max(105,iterationForView(125)):iterationForView(profile.it);
+  setExplorerBusy(true,label,{soft});showExplorerLoading(true,label,blank,soft);setExplorerProgress(0);
+  if(state.fractalHandler)fractalWorker.removeEventListener('message',state.fractalHandler);
+  const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='progress'){setExplorerProgress(m.progress);return;}if(m.type==='done'){fractalWorker.removeEventListener('message',handler);state.fractalHandler=null;const cache={pixels:new Uint8ClampedArray(m.pixels),width:m.width,height:m.height,view:{...state.view},fractal:state.fractal,maxIter};state.fractalCache=cache;cacheCurrentHistory(cache);drawPixelsToCanvas(cache,$('explorerCanvas'));drawPixelsToCanvas(cache,$('fractalCanvas'));updateZoomBadge(maxIter);state.viewReady=true;if(markReady)state.regionReady=true;setExplorerBusy(false,soft?'Refinamiento completo.':(state.hasSelection?'Región lista para convertirse en sonido.':'Vista actual lista para convertirse en sonido.'));showExplorerLoading(false);setExplorerProgress(0);if(!keepSelection)$('selectionBox').classList.add('hidden');updateUseRegion();resolve(cache);}};
+  state.fractalHandler=handler;fractalWorker.addEventListener('message',handler);
+  fractalWorker.postMessage({type:'render',jobId,width:sz.w,height:sz.h,cx:state.view.cx,cy:state.view.cy,scale:state.view.scale,maxIter,fractal:state.fractal,juliaCr:state.juliaCr,juliaCi:state.juliaCi});
+  setTimeout(()=>{if(state.fractalJob===jobId&&(state.busyFractal||state.softRefining)){reject(new Error('El cálculo fractal tardó demasiado.'));}},120000);
+ }).catch(err=>{state.lastError=err;setExplorerBusy(false,'No se pudo completar el fractal: '+err.message);showExplorerLoading(false);});
+}
+
+fractalWorker.onerror=e=>{state.lastError=e;setExplorerBusy(false,'Error del motor fractal.');showExplorerLoading(false);};
+async function renderProgressive({blank=false,markReady=true,label='Calculando vista…'}={}){const token=++state.progressiveToken,viewKey=JSON.stringify([state.view.cx,state.view.cy,state.view.scale,state.juliaCr,state.juliaCi]);await renderFractal({quality:'preview',blank,markReady,label});if(token!==state.progressiveToken||viewKey!==JSON.stringify([state.view.cx,state.view.cy,state.view.scale,state.juliaCr,state.juliaCi]))return;const q=+$('fractalDetail').value;if(q>0)await renderFractal({quality:'final',markReady,label:'Refinando la resolución…',soft:true});}
+
+/* Wizard paso 1 */
+document.querySelectorAll('.choice[data-fractal]').forEach(btn=>btn.addEventListener('click',()=>{
+ state.fractal=btn.dataset.fractal;document.querySelectorAll('.choice[data-fractal]').forEach(x=>x.classList.toggle('selected',x===btn));$('startExplore').textContent='Explorar '+(state.fractal==='julia'?'Julia':'Mandelbrot')+' →';$('fractalBadge').textContent=state.fractal==='julia'?'Julia':'Mandelbrot';populateFamousSpot();
+}));
+$('startExplore').addEventListener('click',async()=>{setWizardStep(2);const p=currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale};state.juliaCr=p.juliaCr??state.juliaCr;state.juliaCi=p.juliaCi??state.juliaCi;state.baseScale=state.view.scale;state.regionReady=false;state.viewReady=false;state.hasSelection=false;populateFamousSpot();$('mobileGuideSheet').classList.add('sheetOpen');await nextFrame();await renderFractal({quality:'preview',blank:true,markReady:true,label:'Calculando la vista general…'});resetHistory();updateUseRegion();renderFractal({quality:'final',markReady:true,label:'Refinando la vista general…',soft:true}).catch(()=>{});});
+$('backToChoice').addEventListener('click',()=>{if(!state.busyFractal)setWizardStep(1);});
+/* Explorador */
+let detailTimer=null;$('fractalDetail').addEventListener('input',()=>{const p=detailProfiles[+$('fractalDetail').value];$('fractalDetailRead').textContent=p.name+' · '+p.w.toLocaleString('es-EC')+' px y '+p.it.toLocaleString('es-EC')+' iteraciones base.';clearTimeout(detailTimer);detailTimer=setTimeout(()=>{if(state.viewReady&&!state.busyFractal)renderFractal({quality:'final',markReady:true,label:'Aplicando nueva resolución…',soft:true});},320);});
+$('historyBack').addEventListener('click',()=>navigateHistory(-1));$('historyForward').addEventListener('click',()=>navigateHistory(1));
+$('famousSpot').addEventListener('change',async()=>{const p=currentFamous()[$('famousSpot').value]||currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale};if(p.juliaCr!==undefined){state.juliaCr=p.juliaCr;state.juliaCi=p.juliaCi;}state.hasSelection=$('famousSpot').value!=='full';state.viewReady=false;pushHistory();await renderFractal({quality:state.hasSelection?'final':'preview',markReady:true,label:'Cargando la región elegida…'});});
+$('zoomIn').addEventListener('click',async()=>{if(state.busyFractal)return;state.view.scale*=.72;state.hasSelection=true;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Acercando…'});});
+$('zoomOut').addEventListener('click',async()=>{if(state.busyFractal)return;state.view.scale=Math.min(state.baseScale*1.6,state.view.scale*1.35);state.hasSelection=state.view.scale<state.baseScale*.95;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Alejando…'});});
+$('resetFractal').addEventListener('click',async()=>{if(state.busyFractal)return;const p=currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale};if(p.juliaCr!==undefined){state.juliaCr=p.juliaCr;state.juliaCi=p.juliaCi;}state.baseScale=state.view.scale;$('famousSpot').value='full';state.hasSelection=false;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',label:'Volviendo a la vista completa…'});});
+$('mobileSheetToggle').addEventListener('click',()=>{$('mobileGuideSheet').classList.toggle('sheetOpen');$('mobileSheetToggle').textContent=$('mobileGuideSheet').classList.contains('sheetOpen')?'Controles · toca para ocultar ▾':'Controles · toca para abrir ▴';});
+$('mobileSelectRegion').addEventListener('click',()=>{if(state.busyFractal)return;state.mobileSelectMode=!state.mobileSelectMode;$('mobileSelectRegion').textContent=state.mobileSelectMode?'Cancelar selección':'Seleccionar región';$('explorer').classList.toggle('crosshair',state.mobileSelectMode);$('explorerStatus').textContent=state.mobileSelectMode?'Arrastra una caja y suéltala para acercarte.':'Mueve y amplía el fractal con gestos.';});
+
+let drag=null,pan=null,wheelTimer=null,spaceDown=false;const activePointers=new Map();let pinchStart=null;
+window.addEventListener('keydown',e=>{if(e.code==='Space'){spaceDown=true;e.preventDefault();}});window.addEventListener('keyup',e=>{if(e.code==='Space')spaceDown=false;});
+$('explorer').addEventListener('contextmenu',e=>e.preventDefault());
+function pointInExplorer(e){const r=$('explorer').getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top,w:r.width,h:r.height};}
+function showMiniMap(cache,rect){if(!cache||!rect)return;const c=$('miniMapCanvas'),wrap=$('miniMapWrap'),r=wrap.getBoundingClientRect();c.width=Math.max(240,Math.round(r.width));c.height=Math.max(70,Math.round(r.height));drawPixelsToCanvas(cache,c);const wp=(rect.x1-rect.x0)/rect.w*100,hp=(rect.y1-rect.y0)/rect.h*100,left=clamp(rect.x0/rect.w*100,0,100-Math.max(5,wp)),top=clamp(rect.y0/rect.h*100,0,100-Math.max(8,hp));Object.assign($('miniMapRect').style,{left:left+'%',top:top+'%',width:Math.max(5,wp)+'%',height:Math.max(8,hp)+'%'});wrap.classList.remove('hidden');}
+async function applySelection(rect){const old={...state.view},cache=state.fractalCache,cx=(rect.x0+rect.x1)/2,cy=(rect.y0+rect.y1)/2;showMiniMap(cache,rect);state.view.cx=old.cx+(cx/rect.w-.5)*old.scale;state.view.cy=old.cy+(cy/rect.h-.5)*old.scale*(rect.h/rect.w);state.view.scale=old.scale*Math.max((rect.x1-rect.x0)/rect.w,(rect.y1-rect.y0)/rect.h);state.hasSelection=true;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Acercando a la selección…',keepSelection:true});$('selectionBox').classList.add('hidden');await renderFractal({quality:'final',markReady:true,label:'Refinando la resolución…',soft:true});}
+$('explorer').addEventListener('pointerdown',e=>{if(state.busyFractal)return;activePointers.set(e.pointerId,pointInExplorer(e));$('explorer').setPointerCapture(e.pointerId);const mobile=matchMedia('(max-width:820px)').matches;if(mobile&&activePointers.size===2){const pts=[...activePointers.values()];pinchStart={distance:Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y),view:{...state.view},center:{x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2},w:pts[0].w,h:pts[0].h};drag=null;pan=null;return;}const p=pointInExplorer(e),selecting=!mobile||state.mobileSelectMode;const wantsPan=spaceDown||e.button===1||e.button===2||(mobile&&!state.mobileSelectMode);if(selecting&&!wantsPan){drag={start:p,current:p};$('selectionBox').classList.remove('hidden');}else{pan={start:p,view:{...state.view}};}});
+$('explorer').addEventListener('pointermove',e=>{if(activePointers.has(e.pointerId))activePointers.set(e.pointerId,pointInExplorer(e));if(pinchStart&&activePointers.size>=2){const pts=[...activePointers.values()].slice(0,2),dist=Math.max(10,Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y)),center={x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2},factor=pinchStart.distance/dist,next=clamp(pinchStart.view.scale*factor,1e-14,state.baseScale*1.6),old=pinchStart.view.scale,cr=pinchStart.view.cx+(pinchStart.center.x/pinchStart.w-.5)*old,ci=pinchStart.view.cy+(pinchStart.center.y/pinchStart.h-.5)*old*(pinchStart.h/pinchStart.w);state.view.cx=cr-(center.x/pinchStart.w-.5)*next;state.view.cy=ci-(center.y/pinchStart.h-.5)*next*(pinchStart.h/pinchStart.w);state.view.scale=next;return;}const p=pointInExplorer(e);if(drag){drag.current=p;const x=Math.min(drag.start.x,p.x),y=Math.min(drag.start.y,p.y),w=Math.abs(p.x-drag.start.x),h=Math.abs(p.y-drag.start.y);Object.assign($('selectionBox').style,{left:(100*x/p.w)+'%',top:(100*y/p.h)+'%',width:(100*w/p.w)+'%',height:(100*h/p.h)+'%'});}else if(pan){const dx=(p.x-pan.start.x)/p.w,dy=(p.y-pan.start.y)/p.h;state.view.cx=pan.view.cx-dx*pan.view.scale;state.view.cy=pan.view.cy-dy*pan.view.scale*(p.h/p.w);}});
+$('explorer').addEventListener('pointerup',async e=>{const p=pointInExplorer(e);activePointers.delete(e.pointerId);if(pinchStart&&activePointers.size<2){pinchStart=null;state.hasSelection=true;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Actualizando zoom…'});return;}if(drag){const rect={x0:Math.min(drag.start.x,p.x),x1:Math.max(drag.start.x,p.x),y0:Math.min(drag.start.y,p.y),y1:Math.max(drag.start.y,p.y),w:p.w,h:p.h};drag=null;if(rect.x1-rect.x0<20||rect.y1-rect.y0<20){$('selectionBox').classList.add('hidden');$('explorerStatus').textContent='La selección fue muy pequeña. Intenta de nuevo.';return;}if(state.mobileSelectMode){state.mobileSelectMode=false;$('mobileSelectRegion').textContent='Seleccionar región';$('explorer').classList.remove('crosshair');}await applySelection(rect);}else if(pan){pan=null;state.hasSelection=true;state.viewReady=false;pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Actualizando la vista…'});}});
+$('explorer').addEventListener('pointercancel',e=>{activePointers.delete(e.pointerId);drag=null;pan=null;pinchStart=null;$('selectionBox').classList.add('hidden');});
+$('explorer').addEventListener('wheel',e=>{if(state.busyFractal)return;e.preventDefault();const p=pointInExplorer(e),old=state.view.scale,f=e.deltaY<0?.82:1.22,next=clamp(old*f,1e-14,state.baseScale*1.6),cr=state.view.cx+(p.x/p.w-.5)*old,ci=state.view.cy+(p.y/p.h-.5)*old*(p.h/p.w);state.view.cx=cr-(p.x/p.w-.5)*next;state.view.cy=ci-(p.y/p.h-.5)*next*(p.h/p.w);state.view.scale=next;state.hasSelection=true;state.viewReady=false;clearTimeout(wheelTimer);wheelTimer=setTimeout(async()=>{pushHistory();await renderFractal({quality:'preview',markReady:true,label:'Ajustando el zoom…'});},180);},{passive:false});
+$('useRegion').addEventListener('click',()=>{if(state.viewReady&&!state.busyFractal)setWizardStep(3);});
+/* Paso 3 */
+const lowRange=$('lowRange'),highRange=$('highRange'),BAND_MAX=96000;
+function describeHz(v){if(v<80)return'retumbo muy grave';if(v<300)return'bajo / elefante';if(v<1200)return'voz grave';if(v<4000)return'voz y música';if(v<10000)return'aves y brillo';if(v<20000)return'silbido muy agudo';return'ultrasonido / murciélagos';}
+function hzToMel(hz){return 2595*Math.log10(1+Math.max(0,hz)/700);}function melToHz(m){return 700*(Math.pow(10,m/2595)-1);}
+function hzToPos(hz){const q=clamp(hz/BAND_MAX,0,1);if(state.bandScale==='linear')return q;if(state.bandScale==='mel')return hzToMel(hz)/hzToMel(BAND_MAX);return Math.log1p(hz)/Math.log1p(BAND_MAX);}
+function posToHz(pos){const q=clamp(pos,0,1);if(state.bandScale==='linear')return q*BAND_MAX;if(state.bandScale==='mel')return melToHz(q*hzToMel(BAND_MAX));return Math.expm1(q*Math.log1p(BAND_MAX));}
+function updateRangeFromHz(){lowRange.value=Math.round(hzToPos(+$('bandLowInput').value)*10000);highRange.value=Math.round(hzToPos(+$('bandHighInput').value)*10000);}
+function syncBand(source){let lo=+$('bandLowInput').value,hi=+$('bandHighInput').value;if(source==='lowRange')lo=posToHz(+lowRange.value/10000);if(source==='highRange')hi=posToHz(+highRange.value/10000);if(lo>hi-100){if(source==='lowRange'||source==='lowInput')lo=hi-100;else hi=lo+100;}lo=clamp(lo,0,BAND_MAX-100);hi=clamp(hi,100,BAND_MAX);$('bandLowInput').value=Math.round(lo);$('bandHighInput').value=Math.round(hi);$('techFmin').value=Math.round(lo);$('techFmax').value=Math.round(hi);updateRangeFromHz();document.documentElement.style.setProperty('--lowPct',(+lowRange.value/100)+'%');document.documentElement.style.setProperty('--highPct',(+highRange.value/100)+'%');$('bandRead').innerHTML='<b>'+Math.round(lo).toLocaleString('es-EC')+'–'+Math.round(hi).toLocaleString('es-EC')+' Hz</b><span>'+describeHz(lo)+' → '+describeHz(hi)+'</span>';autoSampleRate(hi);updateResolutionHint();updateSoundSummary();}
+lowRange.addEventListener('input',()=>syncBand('lowRange'));highRange.addEventListener('input',()=>syncBand('highRange'));$('bandLowInput').addEventListener('input',()=>syncBand('lowInput'));$('bandHighInput').addEventListener('input',()=>syncBand('highInput'));
+document.querySelectorAll('#scaleSwitch button').forEach(btn=>btn.addEventListener('click',()=>{state.bandScale=btn.dataset.scale;document.querySelectorAll('#scaleSwitch button').forEach(x=>x.classList.toggle('active',x===btn));updateRangeFromHz();syncBand();}));
+const bandPresets={voice:[80,5000],birds:[500,12000],insects:[2500,22000],bats:[18000,90000],full:[20,20000]};document.querySelectorAll('[data-band]').forEach(btn=>btn.addEventListener('click',()=>{const [lo,hi]=bandPresets[btn.dataset.band];$('bandLowInput').value=lo;$('bandHighInput').value=hi;syncBand();}));
+function autoSampleRate(fmax){const needed=fmax*2.05,choices=[44100,48000,96000,192000];$('sampleRate').value=choices.find(x=>x>=needed)||192000;}
+function estimateGeneration(){const q=+$('audioQuality').value,dur=+$('duration').value,sr=+$('sampleRate').value,cores=navigator.hardwareConcurrency||4,base=[2.5,4,8,16,32][q]*dur/5*(sr/48000)*(4/Math.min(8,cores));const lo=Math.max(2,Math.round(base*.7)),hi=Math.max(lo+2,Math.round(base*1.6));return {text:'~'+lo+'–'+hi+' s',long:hi>35};}
+function updateSoundSummary(){const est=estimateGeneration(),lo=+$('bandLowInput').value,hi=+$('bandHighInput').value;$('summaryFractal').textContent=state.fractal==='julia'?'Julia':'Mandelbrot';$('summaryRegion').textContent=state.hasSelection?'Región seleccionada':'Vista actual';$('summaryBand').textContent=Math.round(lo).toLocaleString('es-EC')+'–'+Math.round(hi).toLocaleString('es-EC')+' Hz · '+state.bandScale;$('summaryEstimate').textContent=est.text;$('audioEstimate').textContent=(est.long?'Puede tardar en equipos modestos · ':'Tiempo estimado · ')+est.text;}
+function setAudioQuality(index){const i=+index,q=audioProfiles[i];$('audioQuality').value=i;$('audioQualityRead').textContent=q.name;$('nfft').value=q.nfft;$('hop').value=q.hop;document.querySelectorAll('#qualitySwitch [data-quality]').forEach(b=>b.classList.toggle('active',+b.dataset.quality===i));$('finalSpecQuality').value=String(i);updateResolutionHint();updateSoundSummary();}
+$('audioQuality').addEventListener('input',()=>setAudioQuality($('audioQuality').value));document.querySelectorAll('#qualitySwitch [data-quality]').forEach(b=>b.addEventListener('click',()=>setAudioQuality(b.dataset.quality)));
+function syncEnergy(source='floor'){let lo=+$('simpleFloor').value,hi=+$('simplePeak').value;if(lo>hi-6){if(source==='floor')lo=hi-6;else hi=lo+6;}lo=clamp(lo,-120,-7);hi=clamp(hi,lo+6,-1);$('simpleFloor').value=lo;$('simplePeak').value=hi;$('floorDb').value=lo;$('peakDb').value=hi;$('energyRead').textContent='Fondo '+lo+' dB · Picos '+hi+' dB';document.documentElement.style.setProperty('--energyLowPct',((lo+120)/119*100)+'%');document.documentElement.style.setProperty('--energyHighPct',((hi+120)/119*100)+'%');}
+$('simpleFloor').addEventListener('input',()=>syncEnergy('floor'));$('simplePeak').addEventListener('input',()=>syncEnergy('peak'));$('floorDb').addEventListener('input',()=>{$('simpleFloor').value=$('floorDb').value;syncEnergy('floor');});$('peakDb').addEventListener('input',()=>{$('simplePeak').value=$('peakDb').value;syncEnergy('peak');});
+$('soundProfile').addEventListener('change',()=>{const v=$('soundProfile').value;if(v==='clean'){$('synthMode').value='coherent';$('powerMode').value='edges';$('audioGamma').value=.8;}else if(v==='natural'){$('synthMode').value='coherent';$('powerMode').value='hybrid';$('audioGamma').value=.62;}else if(v==='texture'){$('synthMode').value='diffuse';$('powerMode').value='hybrid';$('audioGamma').value=.55;}else{$('synthMode').value='diffuse';$('powerMode').value='luma';$('audioGamma').value=.45;}updateSoundSummary();});
+$('backToFractal').addEventListener('click',()=>setWizardStep(2));
+/* DSP */
+function updateResolutionHint(){const sr=+$('sampleRate').value,nfft=+$('nfft').value,hop=+$('hop').value,dur=+$('duration').value,frames=Math.max(0,Math.floor((sr*dur-nfft)/hop)+1);$('resolutionHint').innerHTML='<b>Δf '+(sr/nfft).toFixed(3)+' Hz</b> · <b>Δt '+(1000*hop/sr).toFixed(3)+' ms</b> · '+frames.toLocaleString('es-EC')+' frames';}
+['sampleRate','nfft','hop','duration'].forEach(id=>$(id).addEventListener('change',()=>{updateResolutionHint();updateSoundSummary();}));
+function setDspProgress(p,stage){setProgress($('dspProgress'),p);setProgress($('finalProgress'),p);$('dspPct').textContent=Math.round(p*100)+'%';$('dspStage').textContent=stage||'';$('finalStatus').textContent=stage||'';}
+function encodeWav(samples,sr){const buf=new ArrayBuffer(44+samples.length*2),v=new DataView(buf);const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};str(0,'RIFF');v.setUint32(4,36+samples.length*2,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,samples.length*2,true);for(let i=0;i<samples.length;i++){const x=clamp(samples[i],-1,1);v.setInt16(44+i*2,x<0?x*32768:x*32767,true);}return new Blob([buf],{type:'audio/wav'});}
+function generateAudio(){return new Promise((resolve,reject)=>{
+ if(!state.fractalCache){reject(new Error('No existe una región fractal lista.'));return;}
+ const sr=+$('sampleRate').value,duration=+$('duration').value,nfft=+$('nfft').value,hop=+$('hop').value,fmin=+$('techFmin').value,fmax=+$('techFmax').value;
+ if(fmax<=fmin||fmax>sr/2){reject(new Error('La banda elegida no cabe en la frecuencia de muestreo.'));return;}
+ const jobId=++state.dspJob;state.busyDsp=true;state.dspReject=reject;if(state.dspHandler)dspWorker.removeEventListener('message',state.dspHandler);$('makeSound').disabled=true;$('regenerateBtn').disabled=true;$('cancelDspBtn').disabled=false;$('cancelDspWizard').disabled=false;setDspProgress(0,'Preparando la huella espectral…');
+ const pixelsCopy=state.fractalCache.pixels.slice();
+ const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='progress'){setDspProgress(m.progress,m.stage);return;}if(m.type==='done'){dspWorker.removeEventListener('message',handler);state.dspHandler=null;state.dspReject=null;const audio=new Float32Array(m.audio),spec=new Float32Array(m.spec);state.audioCache={audio,sr:m.sr,duration:m.duration,nfft:m.nfft,hop:m.hop,fmin:m.fmin,fmax:m.fmax};state.specCache={db:spec,frames:m.specFrames,bins:m.specBins,fmin:m.fmin,fmax:m.fmax,duration:m.duration};state.specView={t0:0,t1:m.duration,f0:m.fmin,f1:m.fmax};const blob=encodeWav(audio,m.sr);if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);state.audioUrl=URL.createObjectURL(blob);$('audio').src=state.audioUrl;$('download').href=state.audioUrl;$('download').style.display='inline-block';$('seek').max=m.duration;$('totalTime').textContent=formatTime(m.duration);state.busyDsp=false;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;setDspProgress(1,'Listo');resolve();}};
+ state.dspHandler=handler;dspWorker.addEventListener('message',handler);dspWorker.postMessage({type:'generate',jobId,pixelsBuffer:pixelsCopy.buffer,srcW:state.fractalCache.width,srcH:state.fractalCache.height,sr,duration,nfft,hop,fmin,fmax,floorDb:+$('floorDb').value,peakDb:+$('peakDb').value,audioGamma:+$('audioGamma').value,powerMode:$('powerMode').value,synthMode:$('synthMode').value},[pixelsCopy.buffer]);
+ setTimeout(()=>{if(state.dspJob===jobId&&state.busyDsp){reject(new Error('La generación acústica tardó demasiado.'));}},180000);
+ });}
+dspWorker.onerror=e=>{state.busyDsp=false;state.lastError=e;setDspProgress(0,'Error del motor acústico.');};
+function cancelDsp(){if(!state.busyDsp)return;const id=++state.dspJob;dspWorker.postMessage({type:'cancel',jobId:id});if(state.dspHandler){dspWorker.removeEventListener('message',state.dspHandler);state.dspHandler=null;}const reject=state.dspReject;state.dspReject=null;state.busyDsp=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;setDspProgress(0,'Generación cancelada.');setWizardStep(3);if(reject)reject(new Error('Generación cancelada.'));}
+$('cancelDspBtn').addEventListener('click',cancelDsp);$('cancelDspWizard').addEventListener('click',cancelDsp);
+async function runGeneration(){setWizardStep(4);$('generationError').classList.remove('show');try{await generateAudio();await enterFinalExperience();}catch(err){state.lastError=err;setDspProgress(0,'No se pudo completar la generación.');$('generationErrorText').textContent=err.message;$('generationError').classList.add('show');}}$('makeSound').addEventListener('click',runGeneration);$('retryGeneration').addEventListener('click',runGeneration);$('useFastMode').addEventListener('click',()=>{setAudioQuality(0);runGeneration();});$('backFromError').addEventListener('click',()=>{setWizardStep(3);$('generationError').classList.remove('show');});
+$('regenerateBtn').addEventListener('click',async()=>{try{setWizardStep(4);$('wizard').classList.remove('hidden');await generateAudio();await enterFinalExperience();}catch(err){setDspProgress(0,err.message);}});
+
+/* Espectrograma desde caché */
+const PLOT={left:76,right:22,top:22,bottom:54};
+function formatTime(t){const m=Math.floor(t/60),s=t-m*60;return m+':'+s.toFixed(2).padStart(5,'0');}
+function colorize(v){v=clamp(v,0,1);const h=.59+.52*v,s=.94-.48*v,val=.16+.84*Math.pow(v,.72),i=Math.floor((((h%1)+1)%1)*6),f=(((h%1)+1)%1)*6-i,p=val*(1-s),q=val*(1-f*s),t=val*(1-(1-f)*s);let r,g,b;switch(i%6){case 0:r=val;g=t;b=p;break;case 1:r=q;g=val;b=p;break;case 2:r=p;g=val;b=t;break;case 3:r=p;g=q;b=val;break;case 4:r=t;g=p;b=val;break;default:r=val;g=p;b=q;}return[r*255,g*255,b*255];}
+function niceTicks(min,max,count){const span=Math.max(1e-12,max-min),raw=span/count,pow=Math.pow(10,Math.floor(Math.log10(raw))),u=raw/pow,step=(u<=1?1:u<=2?2:u<=5?5:10)*pow,out=[];for(let v=Math.ceil(min/step)*step;v<=max+step*1e-6;v+=step)out.push(v);return out;}
+function drawAxes(ctx,W,H){const L=PLOT.left,R=W-PLOT.right,T=PLOT.top,B=H-PLOT.bottom,v=state.specView;ctx.save();ctx.strokeStyle='#a9bbcf';ctx.fillStyle='#dceaff';ctx.lineWidth=1;ctx.font='13px Inter,system-ui';ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L,B);ctx.lineTo(R,B);ctx.stroke();ctx.textAlign='center';ctx.textBaseline='top';for(const t of niceTicks(v.t0,v.t1,6)){const x=L+(t-v.t0)/(v.t1-v.t0)*(R-L);ctx.beginPath();ctx.moveTo(x,B);ctx.lineTo(x,B+6);ctx.stroke();ctx.fillText(t.toFixed(v.t1-v.t0<=6?1:0),x,B+9);}ctx.font='bold 14px Inter,system-ui';ctx.fillText('Tiempo (s)',(L+R)/2,H-24);ctx.font='12px Inter,system-ui';ctx.textAlign='right';ctx.textBaseline='middle';for(const f of niceTicks(v.f0,v.f1,7)){const y=B-(f-v.f0)/(v.f1-v.f0)*(B-T);ctx.beginPath();ctx.moveTo(L-6,y);ctx.lineTo(L,y);ctx.stroke();ctx.fillText(Math.round(f).toLocaleString('es-EC'),L-10,y);}ctx.save();ctx.translate(22,(T+B)/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font='bold 14px Inter,system-ui';ctx.fillText('Frecuencia (Hz)',0,0);ctx.restore();ctx.restore();}
+function ensureCanvasSize(canvas){const r=canvas.parentElement.getBoundingClientRect();const w=Math.max(320,Math.round(r.width)),h=Math.max(220,Math.round(r.height));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}return{w,h};}
+function drawFractalFinal(){drawPixelsToCanvas(state.fractalCache,$('fractalCanvas'));}
+function drawSpectrogram(){if(!state.specCache)return;const c=$('specCanvas'),ctx=c.getContext('2d'),{w:W,h:H}=ensureCanvasSize(c),L=PLOT.left,R=W-PLOT.right,T=PLOT.top,B=H-PLOT.bottom,pw=Math.max(1,R-L),ph=Math.max(1,B-T),img=ctx.createImageData(pw,ph),d=img.data,s=state.specCache,v=state.specView,brightness=+$('specBrightness').value,contrast=+$('specContrast').value,gamma=+$('specGamma').value,floor=+$('visualFloor').value;for(let py=0;py<ph;py++){const hz=v.f1-(py/(ph-1))*(v.f1-v.f0),bf=(hz-s.fmin)/(s.fmax-s.fmin)*(s.bins-1),b0=clamp(Math.floor(bf),0,s.bins-1),b1=clamp(b0+1,0,s.bins-1),by=bf-b0;for(let px=0;px<pw;px++){const sec=v.t0+(px/(pw-1))*(v.t1-v.t0),tf=sec/s.duration*(s.frames-1),t0=clamp(Math.floor(tf),0,s.frames-1),t1=clamp(t0+1,0,s.frames-1),tx=tf-t0,a=s.db[t0*s.bins+b0]*(1-by)+s.db[t0*s.bins+b1]*by,b=s.db[t1*s.bins+b0]*(1-by)+s.db[t1*s.bins+b1]*by,db=a*(1-tx)+b*tx;let q=clamp((db-floor)/(0-floor),0,1);q=clamp((q-.5)*contrast+.5+brightness,0,1);q=Math.pow(q,gamma);const col=colorize(q),i=(py*pw+px)*4;d[i]=col[0];d[i+1]=col[1];d[i+2]=col[2];d[i+3]=255;}}ctx.fillStyle='#06101a';ctx.fillRect(0,0,W,H);ctx.putImageData(img,L,T);drawAxes(ctx,W,H);ctx.strokeStyle='#526a82';ctx.strokeRect(L+.5,T+.5,pw-1,ph-1);drawCursor();}
+function drawCursor(){const c=$('cursorCanvas'),ctx=c.getContext('2d'),{w:W,h:H}=ensureCanvasSize(c);ctx.clearRect(0,0,W,H);if(!state.audioCache||state.activeView!=='spec')return;const t=$('audio').currentTime||0,v=state.specView;if(t<v.t0||t>v.t1)return;const L=PLOT.left,R=W-PLOT.right,T=PLOT.top,B=H-PLOT.bottom,x=L+(t-v.t0)/(v.t1-v.t0)*(R-L);ctx.strokeStyle='#ffdf5d';ctx.lineWidth=3;ctx.shadowColor='#000';ctx.shadowBlur=5;ctx.beginPath();ctx.moveTo(x,T);ctx.lineTo(x,B);ctx.stroke();ctx.shadowBlur=0;const label=t.toFixed(2)+' s',ww=72,hh=27,lx=clamp(x-ww/2,L,R-ww);ctx.fillStyle='#07111eee';ctx.strokeStyle='#ffdf5d';ctx.beginPath();ctx.roundRect(lx,T+8,ww,hh,7);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4b6';ctx.font='bold 13px Inter';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,lx+ww/2,T+8+hh/2);}
+function updateVizReadouts(){$('brightnessRead').textContent=(+$('specBrightness').value).toFixed(2);$('contrastRead').textContent=(+$('specContrast').value).toFixed(2);$('gammaRead').textContent=(+$('specGamma').value).toFixed(2);$('visualFloorRead').textContent=$('visualFloor').value;}
+let vizFrame=0;['specBrightness','specContrast','specGamma','visualFloor'].forEach(id=>$(id).addEventListener('input',()=>{updateVizReadouts();cancelAnimationFrame(vizFrame);vizFrame=requestAnimationFrame(drawSpectrogram);}));
+function resetSpecView(){if(!state.specCache)return;state.specView={t0:0,t1:state.specCache.duration,f0:state.specCache.fmin,f1:state.specCache.fmax};drawSpectrogram();}
+$('resetSpecView').addEventListener('click',resetSpecView);
+
+/* Zoom/pan del espectrograma desde caché */
+let specPan=null;
+$('canvasWrap').addEventListener('wheel',e=>{if(state.activeView!=='spec'||!state.specCache)return;e.preventDefault();const r=$('specCanvas').getBoundingClientRect(),x=clamp((e.clientX-r.left-PLOT.left)/(r.width-PLOT.left-PLOT.right),0,1),y=clamp((e.clientY-r.top-PLOT.top)/(r.height-PLOT.top-PLOT.bottom),0,1),factor=e.deltaY<0?.78:1.28,v=state.specView,s=state.specCache;if(e.shiftKey){const anchor=v.f1-y*(v.f1-v.f0),span=clamp((v.f1-v.f0)*factor,(s.fmax-s.fmin)*.02,s.fmax-s.fmin);v.f0=clamp(anchor-(1-y)*span,s.fmin,s.fmax-span);v.f1=v.f0+span;}else{const anchor=v.t0+x*(v.t1-v.t0),span=clamp((v.t1-v.t0)*factor,s.duration*.02,s.duration);v.t0=clamp(anchor-x*span,0,s.duration-span);v.t1=v.t0+span;}drawSpectrogram();},{passive:false});
+$('canvasWrap').addEventListener('pointerdown',e=>{if(state.activeView!=='spec'||!state.specCache)return;specPan={x:e.clientX,y:e.clientY,view:{...state.specView}};$('canvasWrap').setPointerCapture(e.pointerId);});
+$('canvasWrap').addEventListener('pointermove',e=>{if(!specPan)return;const r=$('specCanvas').getBoundingClientRect(),dx=(e.clientX-specPan.x)/(r.width-PLOT.left-PLOT.right),dy=(e.clientY-specPan.y)/(r.height-PLOT.top-PLOT.bottom),s=state.specCache,v=specPan.view,tSpan=v.t1-v.t0,fSpan=v.f1-v.f0;state.specView.t0=clamp(v.t0-dx*tSpan,0,s.duration-tSpan);state.specView.t1=state.specView.t0+tSpan;state.specView.f0=clamp(v.f0+dy*fSpan,s.fmin,s.fmax-fSpan);state.specView.f1=state.specView.f0+fSpan;drawSpectrogram();});
+$('canvasWrap').addEventListener('pointerup',()=>{specPan=null;});
+$('canvasWrap').addEventListener('dblclick',resetSpecView);
+$('cursorCanvas').addEventListener('click',e=>{if(!state.audioCache||state.activeView!=='spec')return;const r=$('cursorCanvas').getBoundingClientRect(),x=(e.clientX-r.left-PLOT.left)/(r.width-PLOT.left-PLOT.right);if(x<0||x>1)return;const t=state.specView.t0+x*(state.specView.t1-state.specView.t0);$('audio').currentTime=t;$('seek').value=t;drawCursor();});
+
+/* Reproductor */
+const audio=$('audio');
+$('playBtn').addEventListener('click',()=>{if(!audio.src)return;if(audio.paused){audio.play();$('playBtn').textContent='❚❚';animateCursor();}else{audio.pause();$('playBtn').textContent='▶';}});
+$('volume').addEventListener('input',()=>audio.volume=+$('volume').value);
+$('seek').addEventListener('input',()=>{audio.currentTime=+$('seek').value;$('currentTime').textContent=formatTime(audio.currentTime);drawCursor();});
+function animateCursor(){if(!audio.paused&&!audio.ended){$('seek').value=audio.currentTime;$('currentTime').textContent=formatTime(audio.currentTime);drawCursor();requestAnimationFrame(animateCursor);}else{$('playBtn').textContent='▶';}}
+audio.addEventListener('timeupdate',()=>{$('seek').value=audio.currentTime;$('currentTime').textContent=formatTime(audio.currentTime);});audio.addEventListener('ended',()=>{$('playBtn').textContent='▶';drawCursor();});
+
+/* Vistas y drawer */
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===btn));state.activeView=btn.dataset.view;$('fractalCanvas').style.display=state.activeView==='fractal'?'block':'none';$('specCanvas').style.display=state.activeView==='spec'?'block':'none';$('cursorCanvas').style.display=state.activeView==='spec'?'block':'none';$('finalBadge').textContent=state.activeView==='spec'?'Espectrograma real del WAV · clic para saltar':'Fuente fractal';updateContextTools();if(state.activeView==='spec')drawSpectrogram();else drawFractalFinal();}));document.querySelectorAll('[data-specband]').forEach(btn=>btn.addEventListener('click',()=>{if(!state.specCache)return;const bands={full:[state.specCache.fmin,state.specCache.fmax],voice:[80,5000],birds:[500,12000]},b=bands[btn.dataset.specband];state.specView.f0=clamp(b[0],state.specCache.fmin,state.specCache.fmax-1);state.specView.f1=clamp(b[1],state.specView.f0+1,state.specCache.fmax);drawSpectrogram();}));
+$('gearBtn').addEventListener('click',()=>{$('drawer').classList.add('open');$('drawerBackdrop').classList.add('show');});$('closeDrawer').addEventListener('click',closeDrawer);$('drawerBackdrop').addEventListener('click',closeDrawer);function closeDrawer(){$('drawer').classList.remove('open');$('drawerBackdrop').classList.remove('show');}
+function reopenWizard(step){closeDrawer();$('wizard').classList.remove('hidden');setWizardStep(step);if(step===2){drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));updateUseRegion();}if(step===3)updateSoundSummary();}
+$('editSoundFinal').addEventListener('click',()=>reopenWizard(3));$('editFractalFinal').addEventListener('click',()=>reopenWizard(2));
+$('finalFractalQuality').addEventListener('change',()=>{$('fractalDetail').value=$('finalFractalQuality').value;const p=detailProfiles[+$('fractalDetail').value];$('fractalDetailRead').textContent=p.name+' · '+p.w.toLocaleString('es-EC')+' px y '+p.it.toLocaleString('es-EC')+' iteraciones base.';});
+$('refineFinalFractal').addEventListener('click',async()=>{if(state.busyFractal)return;$('finalStatus').textContent='Refinando el fractal a mayor resolución…';$('refineFinalFractal').disabled=true;await renderFractal({quality:'final',markReady:true,label:'Refinando el fractal…',soft:true});drawFractalFinal();$('finalStatus').textContent='Fractal refinado y guardado en caché.';$('refineFinalFractal').disabled=false;setProgress($('finalProgress'),0);});
+$('finalSpecQuality').addEventListener('change',()=>setAudioQuality($('finalSpecQuality').value));
+$('applySpecQuality').addEventListener('click',async()=>{if(state.busyDsp)return;$('applySpecQuality').disabled=true;$('finalStatus').textContent='Regenerando audio y espectrograma con mayor resolución…';try{await generateAudio();drawSpectrogram();$('finalStatus').textContent='Resolución espectral actualizada.';}catch(err){$('finalStatus').textContent='No se pudo actualizar: '+err.message;}finally{$('applySpecQuality').disabled=false;setProgress($('finalProgress'),0);}});
+
+async function enterFinalExperience(){setDspProgress(1,'Preparando la vista final…');await nextFrame();$('wizard').classList.add('hidden');drawFractalFinal();drawSpectrogram();state.activeView='spec';$('fractalCanvas').style.display='none';$('specCanvas').style.display='block';$('cursorCanvas').style.display='block';$('finalStatus').textContent='Listo: audio y espectrograma cargados desde caché.';setProgress($('finalProgress'),0);}
+
+window.addEventListener('resize',()=>{clearTimeout(window.__resizeTimer);window.__resizeTimer=setTimeout(()=>{if(!$('wizard').classList.contains('hidden')&&state.step===2)drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));if($('wizard').classList.contains('hidden')){drawFractalFinal();drawSpectrogram();}},120);});
+
+function renderChoiceThumb(canvas,fractal,params){return new Promise(resolve=>{const jobId=++state.thumbJob;const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='done'){thumbWorker.removeEventListener('message',handler);const px=new Uint8ClampedArray(m.pixels),img=new ImageData(px,m.width,m.height),off=document.createElement('canvas');off.width=m.width;off.height=m.height;off.getContext('2d').putImageData(img,0,0);const ctx=canvas.getContext('2d');ctx.drawImage(off,0,0,canvas.width,canvas.height);resolve();}};thumbWorker.addEventListener('message',handler);thumbWorker.postMessage({type:'render',jobId,width:420,height:178,cx:params.cx,cy:params.cy,scale:params.scale,maxIter:150,fractal,juliaCr:params.juliaCr||-.8,juliaCi:params.juliaCi||.156});});}
+/* Inicialización */
+populateFamousSpot();syncBand();updateResolutionHint();updateVizReadouts();$('fractalDetailRead').textContent='Balanceada · 1.150 px y 700 iteraciones base.';setAudioQuality(2);syncEnergy();audio.volume=.8;updateSoundSummary();updateContextTools();renderChoiceThumb($('mandelbrotThumb'),'mandelbrot',{cx:-.62,cy:.01,scale:2.6}).then(()=>renderChoiceThumb($('juliaThumb'),'julia',{cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301}));
+</script>
+</body>
+</html>
