@@ -58,6 +58,18 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
 @media(max-width:1080px){.viewTools .hintText{display:none}.modeTools label{display:none}.modeTools select{min-width:100px}.topActions .secondary{font-size:.78rem}}
 @media(max-width:820px){.wizardCard{height:calc(100dvh - 12px);max-height:none}.topActions #editSoundFinal{display:none}.topActions .secondary{padding:8px 9px}.soundControls{grid-template-columns:1fr}.wizardStep[data-step="3"]{overflow:auto}.wizardStep[data-step="3"] .step3Wrap{height:auto}.modeTools{gap:4px}.modeTools select{min-width:86px;max-width:110px}.modeTools button{padding:7px 8px}.viewHead{flex-wrap:wrap}.viewTools{width:100%;justify-content:flex-end}.miniMapWrap:before{display:none}}
 
+
+/* v15 responsive and rail */
+.railHint{color:var(--muted);font-size:.9rem;margin-top:-4px}
+.choices{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px clamp(8px,6vw,90px) 10px;overscroll-behavior-x:contain;scrollbar-width:none}
+.choices::-webkit-scrollbar{display:none}
+.choice{flex:0 0 min(340px,72vw);scroll-snap-align:center}
+.choiceTag{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:#06121d;border:1px solid #365875;color:#9bdfff;font-size:.68rem;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase}
+.choiceBody b{display:block}
+@media(min-width:1100px){.choice{flex-basis:min(350px,30vw)}.choices{padding-left:110px;padding-right:110px}}
+@media(max-width:820px){.choices{padding-left:12px;padding-right:12px}.choice{flex-basis:min(82vw,330px)}.railHint{font-size:.82rem}.wizardStep[data-step="3"] .stepActions{position:sticky;bottom:-1px;background:linear-gradient(180deg,transparent,#091522 24%,#091522);padding-top:8px;padding-bottom:env(safe-area-inset-bottom,8px)}.bandTrack,.energyTrack{width:100%;}.bandTrack{height:54px}.bandTrack input::-webkit-slider-thumb,.energyTrack input::-webkit-slider-thumb{width:28px;height:28px}.quickQuality button,.presetChips button,.miniButtons button,.historyRow button,.stepActions button{min-height:48px}.soundControls .simpleCard{padding:12px}.wizardStep[data-step="2"] .guide{padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:560px){.topbar{padding-left:8px;padding-right:8px}.player{grid-template-columns:auto minmax(0,1fr) auto}.playBtn{width:50px;height:50px}.bandInputs{grid-template-columns:1fr}.bandInputs .scaleField{grid-column:auto}.energyTrack{height:42px}.energyTrack:before{top:16px;height:10px}.energyTrack:after{top:11px;height:20px}.bandTrack:before{top:20px;height:12px}.bandTrack:after{top:15px;height:22px}.guideCompact .miniButtons{display:grid;grid-template-columns:1fr 1fr}.guideCompact .historyRow{grid-template-columns:1fr 1fr}.guideCompact .stepActions{display:grid;grid-template-columns:1fr}.tabs{width:100%}.tab{flex:1;text-align:center}}
+
 </style>
 </head>
 <body>
@@ -128,12 +140,17 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
 
     <div class="wizardStep active" data-step="1">
       <div class="hero">
-        <div class="author">UNA EXPERIENCIA DE PEDRO K GALINDO VERA</div>
+        <div class="author">UNA EXPERIENCIA DE PEDRO K. GALINDO VERA</div>
         <h1>Escucha las matemáticas.</h1>
         <p>Elige un universo, explora sus fronteras y escucha su geometría.</p>
-        <div class="choices">
-          <button class="choice selected" data-fractal="mandelbrot"><canvas id="mandelbrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Mandelbrot</b><small>El universo fractal clásico, infinito en detalle.</small></div></button>
-          <button class="choice" data-fractal="julia"><canvas id="juliaThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Julia</b><small>Variaciones complejas, orgánicas y filamentosas.</small></div></button>
+        <div class="railHint">Desliza o usa la rueda para descubrir más fractales del plano complejo.</div>
+        <div class="choices" id="fractalRail">
+          <button class="choice selected" data-fractal="mandelbrot"><canvas id="mandelbrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Clásico</span><b>Mandelbrot</b><small>El universo fractal clásico, infinito en detalle.</small></div></button>
+          <button class="choice" data-fractal="julia"><canvas id="juliaThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Familia</span><b>Julia</b><small>Variaciones complejas, orgánicas y filamentosas.</small></div></button>
+          <button class="choice" data-fractal="burningShip"><canvas id="burningShipThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Dramático</span><b>Burning Ship</b><small>Estructuras como llamas y acantilados, con gran riqueza vertical.</small></div></button>
+          <button class="choice" data-fractal="tricorn"><canvas id="tricornThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Simetría</span><b>Tricorn</b><small>La versión conjugada de Mandelbrot, afilada y sorprendentemente distinta.</small></div></button>
+          <button class="choice" data-fractal="multibrot"><canvas id="multibrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Potencia 3</span><b>Multibrot</b><small>Bulbos y remolinos cúbicos para escuchar otra dinámica de crecimiento.</small></div></button>
+          <button class="choice" data-fractal="newton"><canvas id="newtonThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Raíces</span><b>Newton</b><small>Cuencas de atracción psicodélicas generadas por convergencia a raíces complejas.</small></div></button>
         </div>
         <button id="startExplore">Explorar Mandelbrot →</button>
       </div>
@@ -151,7 +168,7 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
           </div>
         </div>
         <div id="mobileGuideSheet" class="guide guideCompact sheetOpen">
-          <button id="mobileSheetToggle" class="ghost mobileOnly">Controles · desliza o toca ▾</button>
+          <button id="mobileSheetToggle" class="ghost mobileOnly">Controles · toca para ver ▾</button>
           <div><div class="author">PASO 2 · EXPLORA Y ACÉRCATE</div><h2>Arrastra una caja para acercarte, o continúa con la vista actual.</h2></div>
           <div class="field"><label>Lugar destacado</label><select id="famousSpot"></select></div>
           <div class="historyRow"><button id="historyBack" class="secondary" disabled>← Anterior</button><button id="historyForward" class="secondary" disabled>Siguiente →</button></div>
@@ -212,10 +229,13 @@ self.onmessage=e=>{
  if(m.type==='cancel'){activeJob=m.jobId;}
 };
 function hsv(h,s,v){h=((h%1)+1)%1;let i=Math.floor(h*6),f=h*6-i,p=v*(1-s),q=v*(1-f*s),t=v*(1-(1-f)*s),r,g,b;switch(i%6){case 0:r=v;g=t;b=p;break;case 1:r=q;g=v;b=p;break;case 2:r=p;g=v;b=t;break;case 3:r=p;g=q;b=v;break;case 4:r=t;g=p;b=v;break;default:r=v;g=p;b=q;}return [r*255,g*255,b*255];}
+function clampLocal(v,a,b){return Math.max(a,Math.min(b,v));}
+function complexPow3(zr,zi){return [zr*zr*zr-3*zr*zi*zi,3*zr*zr*zi-zi*zi*zi];}
+function nearestRoot(zr,zi){const roots=[[1,0],[-0.5,0.8660254037844386],[-0.5,-0.8660254037844386]];let idx=0,best=1e99;for(let i=0;i<roots.length;i++){const dr=zr-roots[i][0],di=zi-roots[i][1],d=dr*dr+di*di;if(d<best){best=d;idx=i;}}return [idx,Math.sqrt(best)];}
 async function render(p){
  const {jobId,width,height,cx,cy,scale,maxIter,fractal,juliaCr,juliaCi}=p;
  const out=new Uint8ClampedArray(width*height*4),sy=scale*height/width;
- const chunk=8;
+ const chunk=6;
  for(let y0=0;y0<height;y0+=chunk){
   if(activeJob!==jobId)return;
   const yEnd=Math.min(height,y0+chunk);
@@ -223,16 +243,50 @@ async function render(p){
    const pi=cy+(y/(height-1)-.5)*sy;
    for(let x=0;x<width;x++){
     const pr=cx+(x/(width-1)-.5)*scale;
-    let zr=fractal==='julia'?pr:0,zi=fractal==='julia'?pi:0;
-    const cr=fractal==='julia'?juliaCr:pr,ci=fractal==='julia'?juliaCi:pi;
-    let i=0,zr2=zr*zr,zi2=zi*zi;
-    while(i<maxIter && zr2+zi2<=16){zi=2*zr*zi+ci;zr=zr2-zi2+cr;zr2=zr*zr;zi2=zi*zi;i++;}
     const k=(y*width+x)*4;
+    if(fractal==='newton'){
+      let zr=pr,zi=pi,i=0,delta2=1;
+      for(i=0;i<maxIter;i++){
+        const zr2=zr*zr,zi2=zi*zi;
+        const a=3*(zr2-zi2),b=6*zr*zi,den=a*a+b*b;
+        if(den<1e-18)break;
+        const z3r=zr*zr2-3*zr*zi2, z3i=3*zr2*zi-zi*zi2;
+        const fr=z3r-1, fi=z3i;
+        const qr=(fr*a+fi*b)/den, qi=(fi*a-fr*b)/den;
+        const nzr=zr-qr,nzi=zi-qi;
+        const dr=nzr-zr,di=nzi-zi;delta2=dr*dr+di*di;zr=nzr;zi=nzi;
+        if(delta2<1e-12)break;
+      }
+      const nr=nearestRoot(zr,zi),root=nr[0],dist=nr[1];
+      const t=clampLocal(1-(i/maxIter),0,1),v=clampLocal(1-Math.log10(1+dist*15),0,1);
+      const hue=[0.04,0.59,0.78][root] + t*0.06;
+      const c=hsv(hue,.78+.18*v,.24+.76*Math.pow(.35+.65*t,.8));
+      out[k]=c[0];out[k+1]=c[1];out[k+2]=c[2];out[k+3]=255;
+      continue;
+    }
+    let zr=fractal==='julia'?pr:0, zi=fractal==='julia'?pi:0;
+    const cr=fractal==='julia'?juliaCr:pr, ci=fractal==='julia'?juliaCi:pi;
+    let i=0, zr2=zr*zr, zi2=zi*zi;
+    while(i<maxIter && zr2+zi2<=16){
+      let nzr,nzi;
+      if(fractal==='burningShip'){
+        const azr=Math.abs(zr), azi=Math.abs(zi); nzr=azr*azr-azi*azi+cr; nzi=2*azr*azi+ci;
+      }else if(fractal==='tricorn'){
+        nzr=zr*zr-zi*zi+cr; nzi=-2*zr*zi+ci;
+      }else if(fractal==='multibrot'){
+        const p3=complexPow3(zr,zi); nzr=p3[0]+cr; nzi=p3[1]+ci;
+      }else{
+        nzr=zr*zr-zi*zi+cr; nzi=2*zr*zi+ci;
+      }
+      zr=nzr; zi=nzi; zr2=zr*zr; zi2=zi*zi; i++;
+    }
     if(i===maxIter){out[k]=0;out[k+1]=0;out[k+2]=0;out[k+3]=255;}
     else{
-      const mag=Math.sqrt(zr2+zi2),mu=i+1-Math.log(Math.log(Math.max(mag,1.000001)))/Math.log(2);
-      const band=.5+.5*Math.cos(mu*.26),t=clampLocal(.58*((mu%96)/96)+.42*band,0,1);
-      const c=hsv(.59+.52*t,.94-.48*t,.16+.84*Math.pow(t,.72));
+      const mag=Math.sqrt(zr2+zi2), base=fractal==='multibrot'?3:2, mu=i+1-Math.log(Math.log(Math.max(mag,1.000001)))/Math.log(base);
+      const band=.5+.5*Math.cos(mu*.26), t=clampLocal(.58*((mu%96)/96)+.42*band,0,1);
+      const hueShift=fractal==='burningShip'?0.06:fractal==='tricorn'?-0.08:fractal==='multibrot'?0.14:0;
+      const satBoost=fractal==='burningShip'?0.08:fractal==='tricorn'?0.02:0;
+      const c=hsv(.59+hueShift+.52*t,clampLocal(.94-.48*t+satBoost,0,1),.16+.84*Math.pow(t,.72));
       out[k]=c[0];out[k+1]=c[1];out[k+2]=c[2];out[k+3]=255;
     }
    }
@@ -243,7 +297,6 @@ async function render(p){
  if(activeJob!==jobId)return;
  self.postMessage({type:'done',jobId,width,height,pixels:out.buffer},[out.buffer]);
 }
-function clampLocal(v,a,b){return Math.max(a,Math.min(b,v));}
 `;
 
 const dspWorkerSource=String.raw`
@@ -305,9 +358,59 @@ const state={
  fractalCache:null,audioCache:null,specCache:null,lastError:null,
  specView:{t0:0,t1:5,f0:300,f1:20000},activeView:'spec',fractalHandler:null,dspHandler:null,dspReject:null,history:[],historyIndex:-1,hasSelection:false,viewReady:false,softRefining:false,bandScale:'log',mobileSelectMode:false,thumbJob:0,progressiveToken:0
 };
+const FRACTAL_INFO={
+ mandelbrot:{label:'Mandelbrot',start:'Explorar Mandelbrot →'},
+ julia:{label:'Julia',start:'Explorar Julia →'},
+ burningShip:{label:'Burning Ship',start:'Explorar Burning Ship →'},
+ tricorn:{label:'Tricorn',start:'Explorar Tricorn →'},
+ multibrot:{label:'Multibrot',start:'Explorar Multibrot →'},
+ newton:{label:'Newton',start:'Explorar Newton →'}
+};
+function fractalLabel(id){return (FRACTAL_INFO[id]||{}).label||id;}
+
 const famousSets={
- mandelbrot:{full:{label:'Vista completa',cx:-.55,cy:0,scale:3.1},elephant:{label:'Valle de elefantes',cx:.285,cy:.01,scale:.18},seahorse:{label:'Valle de caballitos',cx:-.743643887037151,cy:.13182590420533,scale:.0035},doubleSpiral:{label:'Espirales dobles',cx:-.776411840992588,cy:.13664084807579,scale:.000055},mini:{label:'Minibrot profundo',cx:-1.25066,cy:.02012,scale:.00075}},
- julia:{full:{label:'Vista inicial',cx:0,cy:0,scale:3.2,juliaCr:-.8,juliaCi:.156},rabbit:{label:'Conejo de Douady',cx:0,cy:0,scale:3.15,juliaCr:-.123,juliaCi:.745},dendrite:{label:'Dendrita',cx:0,cy:0,scale:3.15,juliaCr:0,juliaCi:1},spiral:{label:'Espiral',cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301},basilica:{label:'Basílica',cx:0,cy:0,scale:3.1,juliaCr:-1,juliaCi:0}}
+ mandelbrot:{
+  full:{label:'Vista completa',cx:-.55,cy:0,scale:3.1},
+  elephant:{label:'Valle de elefantes',cx:.285,cy:.01,scale:.18},
+  seahorse:{label:'Valle de caballitos',cx:-.743643887037151,cy:.13182590420533,scale:.0035},
+  doubleSpiral:{label:'Espirales dobles',cx:-.776411840992588,cy:.13664084807579,scale:.000055},
+  mini:{label:'Minibrot profundo',cx:-1.25066,cy:.02012,scale:.00075}
+ },
+ julia:{
+  full:{label:'Vista inicial',cx:0,cy:0,scale:3.2,juliaCr:-.8,juliaCi:.156},
+  rabbit:{label:'Conejo de Douady',cx:0,cy:0,scale:3.15,juliaCr:-.123,juliaCi:.745},
+  dendrite:{label:'Dendrita',cx:0,cy:0,scale:3.15,juliaCr:0,juliaCi:1},
+  spiral:{label:'Espiral',cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301},
+  basilica:{label:'Basílica',cx:0,cy:0,scale:3.1,juliaCr:-1,juliaCi:0}
+ },
+ burningShip:{
+  full:{label:'Vista completa',cx:-.45,cy:-.5,scale:4.1},
+  cliffs:{label:'Acantilados',cx:-1.755,cy:-.03,scale:.09},
+  furnace:{label:'Horno central',cx:-1.769,cy:-.028,scale:.026},
+  plume:{label:'Pluma ascendente',cx:-1.748,cy:-.015,scale:.011},
+  filaments:{label:'Filamentos',cx:-1.774,cy:-.017,scale:.006}
+ },
+ tricorn:{
+  full:{label:'Vista completa',cx:0,cy:0,scale:4.2},
+  crown:{label:'Corona central',cx:-.02,cy:0,scale:.62},
+  horns:{label:'Cuernos',cx:-1.1,cy:0,scale:.36},
+  shard:{label:'Aguja lateral',cx:.18,cy:.51,scale:.11},
+  swirl:{label:'Remolino',cx:.32,cy:-.02,scale:.065}
+ },
+ multibrot:{
+  full:{label:'Vista completa',cx:0,cy:0,scale:3.35},
+  petals:{label:'Pétalos',cx:.05,cy:0,scale:.95},
+  cusp:{label:'Cúspide',cx:.51,cy:0,scale:.18},
+  knot:{label:'Nudo',cx:-.08,cy:.72,scale:.15},
+  spiral:{label:'Espiral cúbica',cx:-.29,cy:.49,scale:.08}
+ },
+ newton:{
+  full:{label:'Vista completa',cx:0,cy:0,scale:4.0},
+  roots:{label:'Raíces principales',cx:0,cy:0,scale:1.85},
+  basin:{label:'Cuencas',cx:.15,cy:.02,scale:.72},
+  web:{label:'Red caótica',cx:-.38,cy:.14,scale:.35},
+  filigree:{label:'Filigrana',cx:-.57,cy:-.33,scale:.18}
+ }
 };
 function currentFamous(){return famousSets[state.fractal];}
 function populateFamousSpot(){const sel=$('famousSpot'),set=currentFamous();sel.innerHTML='';Object.entries(set).forEach(([key,p])=>{const o=document.createElement('option');o.value=key;o.textContent=p.label;sel.appendChild(o);});sel.value='full';}
@@ -358,7 +461,7 @@ async function renderProgressive({blank=false,markReady=true,label='Calculando v
 
 /* Wizard paso 1 */
 document.querySelectorAll('.choice[data-fractal]').forEach(btn=>btn.addEventListener('click',()=>{
- state.fractal=btn.dataset.fractal;document.querySelectorAll('.choice[data-fractal]').forEach(x=>x.classList.toggle('selected',x===btn));$('startExplore').textContent='Explorar '+(state.fractal==='julia'?'Julia':'Mandelbrot')+' →';$('fractalBadge').textContent=state.fractal==='julia'?'Julia':'Mandelbrot';populateFamousSpot();
+ state.fractal=btn.dataset.fractal;document.querySelectorAll('.choice[data-fractal]').forEach(x=>x.classList.toggle('selected',x===btn));$('startExplore').textContent=FRACTAL_INFO[state.fractal].start;$('fractalBadge').textContent=fractalLabel(state.fractal);populateFamousSpot();btn.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
 }));
 $('startExplore').addEventListener('click',async()=>{setWizardStep(2);const p=currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale};state.juliaCr=p.juliaCr??state.juliaCr;state.juliaCi=p.juliaCi??state.juliaCi;state.baseScale=state.view.scale;state.regionReady=false;state.viewReady=false;state.hasSelection=false;populateFamousSpot();$('mobileGuideSheet').classList.add('sheetOpen');await nextFrame();await renderFractal({quality:'preview',blank:true,markReady:true,label:'Calculando la vista general…'});resetHistory();updateUseRegion();renderFractal({quality:'final',markReady:true,label:'Refinando la vista general…',soft:true}).catch(()=>{});});
 $('backToChoice').addEventListener('click',()=>{if(!state.busyFractal)setWizardStep(1);});
@@ -397,7 +500,7 @@ document.querySelectorAll('#scaleSwitch button').forEach(btn=>btn.addEventListen
 const bandPresets={voice:[80,5000],birds:[500,12000],insects:[2500,22000],bats:[18000,90000],full:[20,20000]};document.querySelectorAll('[data-band]').forEach(btn=>btn.addEventListener('click',()=>{const [lo,hi]=bandPresets[btn.dataset.band];$('bandLowInput').value=lo;$('bandHighInput').value=hi;syncBand();}));
 function autoSampleRate(fmax){const needed=fmax*2.05,choices=[44100,48000,96000,192000];$('sampleRate').value=choices.find(x=>x>=needed)||192000;}
 function estimateGeneration(){const q=+$('audioQuality').value,dur=+$('duration').value,sr=+$('sampleRate').value,cores=navigator.hardwareConcurrency||4,base=[2.5,4,8,16,32][q]*dur/5*(sr/48000)*(4/Math.min(8,cores));const lo=Math.max(2,Math.round(base*.7)),hi=Math.max(lo+2,Math.round(base*1.6));return {text:'~'+lo+'–'+hi+' s',long:hi>35};}
-function updateSoundSummary(){const est=estimateGeneration(),lo=+$('bandLowInput').value,hi=+$('bandHighInput').value;$('summaryFractal').textContent=state.fractal==='julia'?'Julia':'Mandelbrot';$('summaryRegion').textContent=state.hasSelection?'Región seleccionada':'Vista actual';$('summaryBand').textContent=Math.round(lo).toLocaleString('es-EC')+'–'+Math.round(hi).toLocaleString('es-EC')+' Hz · '+state.bandScale;$('summaryEstimate').textContent=est.text;$('audioEstimate').textContent=(est.long?'Puede tardar en equipos modestos · ':'Tiempo estimado · ')+est.text;}
+function updateSoundSummary(){const est=estimateGeneration(),lo=+$('bandLowInput').value,hi=+$('bandHighInput').value;$('summaryFractal').textContent=fractalLabel(state.fractal);$('summaryRegion').textContent=state.hasSelection?'Región seleccionada':'Vista actual';$('summaryBand').textContent=Math.round(lo).toLocaleString('es-EC')+'–'+Math.round(hi).toLocaleString('es-EC')+' Hz · '+state.bandScale;$('summaryEstimate').textContent=est.text;$('audioEstimate').textContent=(est.long?'Puede tardar en equipos modestos · ':'Tiempo estimado · ')+est.text;}
 function setAudioQuality(index){const i=+index,q=audioProfiles[i];$('audioQuality').value=i;$('audioQualityRead').textContent=q.name;$('nfft').value=q.nfft;$('hop').value=q.hop;document.querySelectorAll('#qualitySwitch [data-quality]').forEach(b=>b.classList.toggle('active',+b.dataset.quality===i));$('finalSpecQuality').value=String(i);updateResolutionHint();updateSoundSummary();}
 $('audioQuality').addEventListener('input',()=>setAudioQuality($('audioQuality').value));document.querySelectorAll('#qualitySwitch [data-quality]').forEach(b=>b.addEventListener('click',()=>setAudioQuality(b.dataset.quality)));
 function syncEnergy(source='floor'){let lo=+$('simpleFloor').value,hi=+$('simplePeak').value;if(lo>hi-6){if(source==='floor')lo=hi-6;else hi=lo+6;}lo=clamp(lo,-120,-7);hi=clamp(hi,lo+6,-1);$('simpleFloor').value=lo;$('simplePeak').value=hi;$('floorDb').value=lo;$('peakDb').value=hi;$('energyRead').textContent='Fondo '+lo+' dB · Picos '+hi+' dB';document.documentElement.style.setProperty('--energyLowPct',((lo+120)/119*100)+'%');document.documentElement.style.setProperty('--energyHighPct',((hi+120)/119*100)+'%');}
@@ -473,7 +576,14 @@ window.addEventListener('resize',()=>{clearTimeout(window.__resizeTimer);window.
 
 function renderChoiceThumb(canvas,fractal,params){return new Promise(resolve=>{const jobId=++state.thumbJob;const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='done'){thumbWorker.removeEventListener('message',handler);const px=new Uint8ClampedArray(m.pixels),img=new ImageData(px,m.width,m.height),off=document.createElement('canvas');off.width=m.width;off.height=m.height;off.getContext('2d').putImageData(img,0,0);const ctx=canvas.getContext('2d');ctx.drawImage(off,0,0,canvas.width,canvas.height);resolve();}};thumbWorker.addEventListener('message',handler);thumbWorker.postMessage({type:'render',jobId,width:420,height:178,cx:params.cx,cy:params.cy,scale:params.scale,maxIter:150,fractal,juliaCr:params.juliaCr||-.8,juliaCi:params.juliaCi||.156});});}
 /* Inicialización */
-populateFamousSpot();syncBand();updateResolutionHint();updateVizReadouts();$('fractalDetailRead').textContent='Balanceada · 1.150 px y 700 iteraciones base.';setAudioQuality(2);syncEnergy();audio.volume=.8;updateSoundSummary();updateContextTools();renderChoiceThumb($('mandelbrotThumb'),'mandelbrot',{cx:-.62,cy:.01,scale:2.6}).then(()=>renderChoiceThumb($('juliaThumb'),'julia',{cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301}));
+populateFamousSpot();syncBand();updateResolutionHint();updateVizReadouts();$('fractalDetailRead').textContent='Balanceada · 1.150 px y 700 iteraciones base.';setAudioQuality(2);syncEnergy();audio.volume=.8;updateSoundSummary();updateContextTools();Promise.all([
+ renderChoiceThumb($('mandelbrotThumb'),'mandelbrot',{cx:-.62,cy:.01,scale:2.6}),
+ renderChoiceThumb($('juliaThumb'),'julia',{cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301}),
+ renderChoiceThumb($('burningShipThumb'),'burningShip',{cx:-1.758,cy:-.028,scale:.08}),
+ renderChoiceThumb($('tricornThumb'),'tricorn',{cx:.1,cy:0,scale:2.7}),
+ renderChoiceThumb($('multibrotThumb'),'multibrot',{cx:0,cy:0,scale:2.7}),
+ renderChoiceThumb($('newtonThumb'),'newton',{cx:0,cy:0,scale:3.1})
+]);
 </script>
 </body>
 </html>
