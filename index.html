@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sonidero Fractal · Pedro K. Galindo Vera · v27</title>
+<title>Sonidero Fractal · Pedro K. Galindo Vera · v28</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -162,6 +162,16 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
  .mathName::-webkit-scrollbar{display:none}
  .mathName math{font-size:clamp(1.05rem,4.4vw,1.45rem)!important;min-width:max-content}
 }
+
+
+/* v28 · UX espacial premium */
+:root{--phi:1.61803398875}
+.wizard.worldMode{padding:0;background:#02070c}.wizard.worldMode .wizardCard{width:100%;height:100dvh;max-height:none;border:0;border-radius:0;background:#02070c;box-shadow:none}.wizard.worldMode .wizardTop{display:none}.wizard.worldMode .wizardStep[data-step="2"]{padding:0;overflow:hidden}.wizard.worldMode .immersiveExploreGrid,.wizard.worldMode .exploreStage{height:100%;min-height:0}.wizard.worldMode .exploreStage{display:flex;flex-direction:column;gap:0}.wizard.worldMode .immersiveExplorer{flex:1 1 auto;min-height:0;border:0;border-radius:0;background:#02070c}.wizard.worldMode .explorerDock{flex:0 0 auto;border-radius:0;border-left:0;border-right:0;border-bottom:0;margin:0}.wizard.worldMode .explorerCompute{position:absolute;left:50%;bottom:108px;transform:translateX(-50%);z-index:8;width:min(560px,calc(100% - 24px));border-radius:16px;pointer-events:none}
+.premiumWorldSheet{display:flex;flex-direction:column;gap:0;padding:0!important;background:#091826f7;border-top:1px solid #294c68;box-shadow:0 -10px 32px #0007}.premiumSheetChrome{padding:9px 12px calc(9px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}.premiumTitleRow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:34px}.premiumTextNav,.premiumCompass{border:0!important;background:transparent!important;box-shadow:none!important;padding:5px 2px!important;min-height:0!important;color:#a9c4d8!important;font-size:.78rem!important}.premiumTextNav{text-align:left}.premiumCompass{text-align:right;white-space:nowrap}.premiumCompass.active{color:#72e4ff!important}.premiumWorldTitle{min-width:0;display:flex;align-items:baseline;justify-content:center;gap:8px;white-space:nowrap;overflow:hidden}.premiumWorldTitle b{font-family:"Space Grotesk",Inter,sans-serif;font-size:1rem}.premiumWorldTitle span{color:#76dcf7;font-size:.72rem;overflow:hidden;text-overflow:ellipsis}.premiumPrimaryActions{display:grid;grid-template-columns:1fr 1.18fr 1fr;gap:8px}.premiumAction{min-height:46px;padding:8px 10px!important;border-radius:14px!important;display:flex;justify-content:center;align-items:center;gap:7px;font-size:.76rem!important}.premiumAction span:first-child{font-size:1.05rem}.premiumActionMain{background:linear-gradient(135deg,#62ddff,#508bff)!important;color:#04111b!important;border:0!important;font-weight:800}.premiumLegacyControls{display:none!important}.premiumConfigHost{display:none;max-height:0;overflow:hidden;background:#091522;border-top:1px solid #24445f;transition:max-height .32s ease}.premiumWorldSheet.configOpen .premiumConfigHost{display:block;max-height:min(68dvh,720px);overflow:auto;overscroll-behavior:contain}.premiumWorldSheet.configOpen .premiumSheetChrome{padding-bottom:8px}.premiumConfigHost .step3Wrap{width:100%;margin:0;padding:8px 14px calc(18px + env(safe-area-inset-bottom,0px));gap:10px}.premiumConfigHost .step3Intro{display:none}.premiumConfigHost .step3Section{border:0!important;border-top:1px solid #203b52!important;border-radius:0!important;background:transparent!important;padding:12px 0!important}.premiumConfigHost .step3Section:first-of-type{border-top:0!important}.premiumConfigHost .stickyActions{padding-top:8px;background:#091522}.premiumConfigHost .stepActions{margin-top:0}.premiumConfigHost #backToFractal{display:none}
+/* Carrusel: imagen primero, texto mínimo y proporciones áureas/peek */
+.wizardStep[data-step="1"]{padding:0 0 14px}.wizardStep[data-step="1"] .hero{width:100%;max-width:none;margin:auto;gap:0;overflow:hidden}.wizardStep[data-step="1"] .hero>h1,.wizardStep[data-step="1"] .hero>p,.wizardStep[data-step="1"] .railHint{display:none}.wizardStep[data-step="1"] .authorFormula{transition:opacity .6s ease,transform .6s ease,max-height .6s ease,margin .6s ease;padding .6s ease;max-height:140px;margin:10px 0 2px;padding:0 12px;overflow:hidden}.wizardStep[data-step="1"] .hero.introFaded .authorFormula{opacity:0;transform:translateY(-10px);max-height:0;margin:0;padding:0;pointer-events:none}.choices{width:100%;margin:0;gap:clamp(10px,2vw,22px);padding:10px 19.1vw 18px;scroll-padding-inline:19.1vw;align-items:center}.choice{flex:0 0 61.8vw;max-width:760px;min-height:0;aspect-ratio:1.61803398875/1;border-radius:24px;padding:0!important;scroll-snap-align:center;transform:scale(.92);opacity:.72;transition:transform .28s ease,opacity .28s ease,box-shadow .28s ease}.choice.selected{transform:scale(1);opacity:1}.choiceThumb{position:absolute;inset:0;width:100%;height:100%!important;min-height:0;object-fit:cover}.choice:after{background:linear-gradient(180deg,transparent 52%,#06101ac4 100%)}.choice .choiceBody{position:absolute;left:0;right:0;bottom:0;padding:20px 22px!important;z-index:3}.choiceBody b{font-size:clamp(1.25rem,2.4vw,2rem);letter-spacing:.01em}.choice .choiceBody:after,.choiceTag,.choiceBody small{display:none!important}
+@media(max-width:820px){.wizard:not(.worldMode){padding:0}.wizard:not(.worldMode) .wizardCard{height:100dvh;border-radius:0;border-left:0;border-right:0}.wizardStep[data-step="1"]{padding-top:4px}.wizardStep[data-step="1"] .authorFormula{margin-top:4px}.choices{padding-left:11.8vw;padding-right:11.8vw;scroll-padding-inline:11.8vw;gap:4vw}.choice{flex-basis:76.4vw;max-width:none;aspect-ratio:1/1.18;border-radius:22px}.choiceBody b{font-size:1.38rem}.premiumSheetChrome{padding-left:10px;padding-right:10px}.premiumPrimaryActions{gap:7px}.premiumAction{min-height:48px;font-size:.72rem!important}.premiumWorldTitle b{font-size:.94rem}.premiumWorldTitle span{display:none}.premiumWorldSheet.configOpen .premiumConfigHost{max-height:62dvh}.premiumConfigHost .step3Wrap{padding-left:12px;padding-right:12px}.wizard.worldMode .explorerCompute{bottom:104px}}
+@media(min-width:821px){.wizard.worldMode .premiumWorldSheet{width:100%}.premiumSheetChrome{display:grid;grid-template-columns:minmax(320px,1fr) minmax(420px,600px);align-items:center;gap:16px;padding:9px 18px}.premiumTitleRow{justify-self:start;width:min(560px,100%)}.premiumPrimaryActions{width:100%}.premiumWorldSheet.configOpen .premiumConfigHost{max-height:55dvh}.premiumConfigHost .step3Wrap{max-width:1080px;margin:auto}.choices{padding-left:19.1vw;padding-right:19.1vw}}
 
 </style>
 
@@ -484,8 +494,8 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
 </style>
 
 
-<style id="v27-polish-patch">
-/* v27 · continuidad visual, presets completos y densidad de información refinada. */
+<style id="v28-polish-patch">
+/* v28 · continuidad visual, presets completos y densidad de información refinada. */
 :root{--durationPct:15.25%;--griffinPct:66.67%}
 /* El selector de frecuencia siempre es logarítmico: sin conmutador visual. */
 .bandScaleRow,#scaleSwitch{display:none!important}
@@ -519,6 +529,91 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
  .mathTransform{width:100%!important}
  .bandSection .bandTrack{margin-top:4px!important}
 }
+</style>
+
+
+<style id="v30-top-premium">
+/* v30 · Sonidero como instrumento espacial, no wizard. */
+:root{--sheet-compact:132px;--sheet-medium:52dvh;--sheet-expanded:91dvh}
+body{background:#02070c}
+/* Portada efímera 1.5 s */
+.premiumIntro{position:absolute;inset:0;z-index:30;display:grid;place-items:center;pointer-events:none;background:radial-gradient(circle at 50% 48%,#183b5d 0,#081725 48%,#02070c 82%);animation:introGone 1.5s ease-in-out forwards}
+.premiumIntroInner{display:flex;flex-direction:column;align-items:center;gap:9px;filter:blur(13px);opacity:0;transform:scale(.87);animation:introBloom 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+.premiumIntroInner b{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(2.35rem,8vw,6.5rem);letter-spacing:-.035em}.premiumIntroInner span{font-size:clamp(.95rem,2vw,1.4rem);color:#9beaff;letter-spacing:.03em}
+@keyframes introBloom{0%{opacity:0;filter:blur(15px);transform:scale(.84)}35%{opacity:1;filter:blur(0);transform:scale(1)}68%{opacity:1;filter:blur(0);transform:scale(1.035)}100%{opacity:0;filter:blur(18px);transform:scale(1.1)}}
+@keyframes introGone{0%,82%{visibility:visible}100%{visibility:hidden}}
+/* Home: solo instrucción y mundos tras la intro */
+.wizard:not(.worldMode) .wizardTop{display:none!important}.wizardStep[data-step="1"]{position:relative;padding:0!important;background:#06121d}.wizardStep[data-step="1"] .authorFormula{display:none!important}.worldInstruction{flex:0 0 auto;text-align:center;font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(1.25rem,4vw,2.1rem);font-weight:750;padding:clamp(18px,5dvh,52px) 12px 10px;color:#eef9ff;letter-spacing:-.015em}
+.wizardStep[data-step="1"] .hero{height:100%;display:flex!important;justify-content:flex-start!important}.choices{flex:1;min-height:0;align-items:center;padding-top:4px!important;padding-bottom:clamp(24px,8dvh,72px)!important}.choice{flex-basis:min(72vw,850px)!important;aspect-ratio:1.45/1!important;border-radius:28px!important;transform:scale(.91);opacity:.6}.choice.selected{transform:scale(1);opacity:1}.choiceThumb{object-fit:cover!important}.choiceBody{background:linear-gradient(180deg,transparent,#02070caa)!important}.choiceBody b{font-size:clamp(1.4rem,4vw,2.25rem)!important}.choice:after{background:linear-gradient(180deg,transparent 62%,#02070cbd 100%)!important}
+@media(max-width:820px){.worldInstruction{padding-top:clamp(18px,4dvh,34px)}.choices{padding-inline:8.5vw!important;scroll-padding-inline:8.5vw!important;gap:4.5vw!important}.choice{flex-basis:83vw!important;aspect-ratio:.93/1!important;border-radius:25px!important}}
+/* Mundo: canvas verdaderamente full-bleed y sheet superpuesto */
+.wizard.worldMode .exploreStage{position:relative;height:100dvh!important}.wizard.worldMode .immersiveExplorer{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}.wizard.worldMode .premiumWorldSheet{position:absolute!important;left:0;right:0;bottom:0;z-index:20;width:100%!important;height:var(--sheet-compact);border-radius:28px 28px 0 0!important;border:1px solid #36546c;border-bottom:0;overflow:hidden;transition:height .34s cubic-bezier(.22,.75,.18,1),transform .18s ease;box-shadow:0 -12px 48px #0009;background:#f8fbfd;color:#12212c}.wizard.worldMode .premiumWorldSheet[data-snap="medium"]{height:var(--sheet-medium)}.wizard.worldMode .premiumWorldSheet[data-snap="expanded"]{height:var(--sheet-expanded)}
+.sheetHandleZone{height:26px;display:grid;place-items:center;touch-action:none;cursor:ns-resize}.sheetHandle{width:44px;height:5px;border-radius:999px;background:#9ea6ac;display:block}.premiumBottomSheet .premiumSheetChrome{padding:0 16px 13px!important;gap:10px;background:transparent}.premiumBottomSheet .premiumTitleRow{grid-template-columns:minmax(0,1fr) auto!important;gap:12px}.premiumBottomSheet .premiumWorldTitle{justify-content:flex-start;color:#152732}.premiumBottomSheet .premiumWorldTitle b{font-size:1.08rem}.premiumBottomSheet .premiumWorldTitle span{color:#66808f}.premiumBottomSheet .premiumCompass,.finalSheetTime{color:#536875!important;background:transparent!important;border:0!important;padding:4px 0!important;font-weight:800}.premiumBottomSheet .premiumPrimaryActions{grid-template-columns:repeat(3,1fr);gap:6px}.premiumBottomSheet .premiumAction{background:transparent!important;border:0!important;color:#4c606d!important;border-radius:13px!important;min-height:48px!important;display:flex;flex-direction:column;gap:2px;padding:5px 4px!important;font-size:.68rem!important;font-weight:750}.premiumBottomSheet .premiumAction span:first-child{font-size:1.3rem}.premiumBottomSheet .premiumActionMain{color:#0a6f88!important}.premiumBottomSheet .premiumActionMain span:first-child{color:#0c98b9}.premiumBottomSheet .premiumAction:active{background:#dceff4!important}.premiumBottomSheet .premiumConfigHost,.premiumBottomSheet .premiumAdvancedHost,.finalMediumHost{background:#f8fbfd;color:#172630;border-top:1px solid #d8e1e6}
+.premiumBottomSheet .premiumConfigHost{display:block!important;max-height:none!important;overflow:auto}.premiumBottomSheet[data-snap="compact"] .premiumConfigHost,.premiumBottomSheet[data-snap="compact"] .premiumAdvancedHost{display:none!important}.premiumBottomSheet[data-snap="medium"] .premiumAdvancedHost{display:none!important}.premiumBottomSheet[data-snap="expanded"] .premiumAdvancedHost{display:block!important}.premiumConfigHost .step3Wrap{color:#172630;background:#f8fbfd;padding:8px 16px 28px!important}.premiumConfigHost .step3Section,.premiumConfigHost .rangeControlCard{border-color:#d6e0e6!important;background:transparent!important}.premiumConfigHost label,.premiumConfigHost .hint,.premiumConfigHost .sectionHead span,.premiumConfigHost .controlHead span{color:#617682!important}.premiumConfigHost input,.premiumConfigHost select{color:#172630;background:#fff;border-color:#bdced8}.premiumConfigHost .presetChips button{background:#edf5f8!important;color:#243944!important;border-color:#bdd4df!important}.premiumConfigHost .presetChips button.active{background:#bcecf5!important;color:#073f4c!important}.premiumConfigHost .compactSummary{background:#edf5f8!important;border-color:#cbdde5!important;color:#304853!important}.premiumConfigHost .stepActions{display:none!important}.premiumConfigHost .bandSection:before{content:"Vista completa";display:block;font-weight:800;margin:0 0 10px;color:#21404e}.premiumConfigHost .bandSection:after{content:"Toca ‘Escuchar’ cuando quieras generar con estos ajustes.";display:block;margin-top:10px;color:#6c7f89;font-size:.75rem}
+.premiumAdvancedHost{overflow:auto;padding:12px 16px 40px}.premiumAdvancedHost section{padding:10px 0;border-bottom:1px solid #d7e0e5}.premiumAdvancedHost h2,.premiumAdvancedHost b{color:#172630}.premiumAdvancedHost .hint,.premiumAdvancedHost span,.premiumAdvancedHost label{color:#617682}.premiumAdvancedHost input,.premiumAdvancedHost select{background:#fff;color:#172630;border-color:#bdced8}.premiumAdvancedHost button{background:#eaf3f7;color:#1d3540;border:1px solid #c4d7e0}
+/* Generación: sin pasos ni encabezados enormes; la comparación manda */
+.wizardStep[data-step="4"]{padding:10px 12px!important}.mathTransform>.author,.mathTransform>h1{display:none!important}.mathTransform{height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1050px!important}.mathTransform .convergenceCompare{flex:1;min-height:0;align-items:stretch}.mathTransform .convergenceCompare figure{display:flex;flex-direction:column;min-height:0}.mathTransform .convergenceCompare canvas{flex:1;height:auto!important;min-height:170px!important;max-height:38dvh!important}.mathTransform .mathWait{flex:0 0 auto}.mathTransform #cancelDspWizard{align-self:center}
+/* Final: igual que el mundo; todo el viewport para el contenido */
+body.finalPremium .topbar,body.finalPremium .viewHead,body.finalPremium .player,body.finalPremium .statusBar{display:none!important}body.finalPremium .appShell{height:100dvh!important;padding:0!important}body.finalPremium .workspace{border:0!important;border-radius:0!important;background:#02070c!important}body.finalPremium .visualStack{height:100%;position:relative}body.finalPremium .canvasWrap{position:absolute;inset:0;background:#02070c}body.finalPremium .finalPremiumSheet{display:block}
+.finalPremiumSheet{display:none;position:fixed;left:0;right:0;bottom:0;z-index:55;height:var(--sheet-compact);border-radius:28px 28px 0 0;border:1px solid #36546c;border-bottom:0;background:#f8fbfd;color:#172630;overflow:hidden;box-shadow:0 -12px 48px #0009;transition:height .34s cubic-bezier(.22,.75,.18,1)}.finalPremiumSheet[data-snap="medium"]{height:var(--sheet-medium)}.finalPremiumSheet[data-snap="expanded"]{height:var(--sheet-expanded)}.finalMediumHost{display:none;padding:12px 16px 24px;overflow:auto;max-height:calc(var(--sheet-medium) - 105px)}.finalPremiumSheet[data-snap="medium"] .finalMediumHost,.finalPremiumSheet[data-snap="expanded"] .finalMediumHost{display:block}.finalPremiumSheet[data-snap="expanded"] .finalMediumHost{max-height:none}.finalPremiumSheet[data-snap="compact"] .premiumAdvancedHost,.finalPremiumSheet[data-snap="medium"] .premiumAdvancedHost{display:none}.finalPremiumSheet[data-snap="expanded"] .premiumAdvancedHost{display:block;max-height:calc(var(--sheet-expanded) - 300px)}.finalPlaybackRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.finalSeekWrap{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}.finalSeekWrap input{width:100%}.sheetDownload{display:inline-flex;text-decoration:none;padding:9px 12px;border-radius:12px;background:#dceef4;color:#183943;font-weight:800}.sheetInlineAction{width:100%;margin-top:10px;background:#edf4f7!important;color:#213945!important;border:1px solid #c9d9e0!important}.sheetStatus{font-size:.72rem;color:#6a7d86;padding:8px 16px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Espectrograma full bleed; ejes internos superpuestos */
+body.finalPremium .canvasWrap canvas{width:100%;height:100%}.specRefineOverlay{top:10px!important;right:10px!important;left:auto!important;max-width:min(360px,70vw)!important}.badge{display:none!important}
+/* Oculta drawer tradicional: su contenido se porta al sheet expandido. */
+body.premiumSheets #drawerBackdrop,body.premiumSheets #drawer{display:none!important}
+@media(max-width:820px){:root{--sheet-compact:132px;--sheet-medium:56dvh;--sheet-expanded:92dvh}.premiumBottomSheet .premiumSheetChrome{padding-inline:12px!important}.premiumBottomSheet .premiumAction{min-height:46px!important}.premiumConfigHost .step3Wrap{padding-inline:12px!important}.mathTransform .convergenceCompare{gap:8px!important}.mathTransform .convergenceCompare canvas{min-height:140px!important;max-height:28dvh!important}.convergenceCompare figcaption{font-size:.67rem}.finalPlaybackRow{grid-template-columns:1fr}.sheetDownload{justify-content:center}.finalMediumHost{max-height:calc(var(--sheet-medium) - 112px)}}
+</style>
+
+
+<style id="v30-sheet-sizing-fix">
+.premiumBottomSheet[data-snap="medium"] .premiumConfigHost{height:calc(100% - 126px);overflow:auto!important}.premiumBottomSheet[data-snap="expanded"] .premiumConfigHost{height:38%;overflow:auto!important}.premiumBottomSheet[data-snap="expanded"] .premiumAdvancedHost{height:calc(62% - 126px);overflow:auto!important}.finalPremiumSheet[data-snap="medium"] .finalMediumHost{height:calc(100% - 126px);overflow:auto}.finalPremiumSheet[data-snap="expanded"] .finalMediumHost{height:34%;overflow:auto}.finalPremiumSheet[data-snap="expanded"] .premiumAdvancedHost{height:calc(66% - 126px)!important;max-height:none!important;overflow:auto!important}.wizard.worldMode #explorerCanvas,.wizard.worldMode #explorerBackdropCanvas{border:0!important;border-radius:0!important}.wizard.worldMode .immersiveExplorer{background:#02070c!important}
+</style>
+
+<style id="v30-premium-polish">
+/* v30 · una sola estética clara, más contenido, menos chrome */
+:root{--sheet-bg:#f7fafc;--sheet-text:#142833;--sheet-muted:#687f8a;--sheet-line:#d5e0e6;--track-bg:rgba(52,89,111,.16);--track-active1:#58c8ff;--track-active2:#7be8da;--track-active3:#f4da67}
+/* Intro: el doble de duración. La portada desaparece antes de mostrar el carrusel. */
+.premiumIntro{animation-duration:3s!important}.premiumIntroInner{animation-duration:3s!important}
+/* El selector queda limpio: sin instrucción fija; vecinos visibles en ambos lados. */
+.worldInstruction{display:none!important}
+.wizardStep[data-step="1"] .hero{justify-content:center!important}
+@media(max-width:820px){.choices{padding-inline:16vw!important;scroll-padding-inline:16vw!important;gap:4vw!important}.choice{flex-basis:68vw!important;aspect-ratio:.88/1!important}.choiceBody{padding:15px 16px!important}.choiceBody b{font-size:1.35rem!important}}
+@media(min-width:821px){.choices{padding-inline:18vw!important;scroll-padding-inline:18vw!important;gap:3vw!important}.choice{flex-basis:min(58vw,720px)!important}}
+.choiceThumb{image-rendering:auto!important}.choice{overflow:hidden}
+/* Compass proper */
+.compassGlyph{font-size:1rem;filter:saturate(.8)}
+/* Bottom sheets: one light surface everywhere. */
+.premiumBottomSheet,.premiumWorldSheet,.finalPremiumSheet,.premiumConfigHost,.premiumAdvancedHost,.finalMediumHost,.premiumConfigHost .step3Wrap{background:var(--sheet-bg)!important;color:var(--sheet-text)!important}
+.premiumBottomSheet .premiumConfigHost,.premiumBottomSheet .premiumAdvancedHost,.finalMediumHost{border-color:var(--sheet-line)!important}
+.premiumConfigHost .step3Intro,.finalConfigHost .step3Intro{display:none!important}
+#sheetFullViewAction{display:none!important}.premiumConfigHost .bandSection:before,.premiumConfigHost .bandSection:after{display:none!important;content:none!important}
+/* Sections form one continuous sheet, not dark cards. */
+.premiumConfigHost .step3Section,.premiumConfigHost .rangeControlCard,.premiumAdvancedHost section,.premiumAdvancedHost .labControlBlock{background:transparent!important;border:0!important;border-bottom:1px solid var(--sheet-line)!important;border-radius:0!important;box-shadow:none!important;padding:14px 4px!important;margin:0!important}
+.premiumConfigHost .step3Section:first-child{padding-top:6px!important}
+.premiumConfigHost .sectionHead b,.premiumConfigHost .controlHead b,.premiumAdvancedHost h2,.premiumAdvancedHost b,.premiumAdvancedHost .labHead span{color:var(--sheet-text)!important}
+.premiumConfigHost .sectionHead span,.premiumConfigHost .controlHead span,.premiumAdvancedHost .hint,.premiumAdvancedHost label,.premiumAdvancedHost span{color:var(--sheet-muted)!important}
+.engineDiagGrid{gap:8px!important}.engineDiagGrid>div{background:#eef4f7!important;border:1px solid #d6e2e8!important;color:var(--sheet-text)!important;border-radius:12px!important;box-shadow:none!important}.engineDiagGrid>div span{color:#6c818b!important}.engineDiagGrid>div b{color:#1b3440!important}
+/* Presets like Maps categories: one scrollable row. */
+.presetChips{display:flex!important;grid-template-columns:none!important;gap:8px!important;overflow-x:auto!important;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 1px 7px!important;scrollbar-width:none}.presetChips::-webkit-scrollbar{display:none}.presetChips button,.presetChips button:last-child{flex:0 0 auto!important;grid-column:auto!important;white-space:nowrap;min-height:38px!important;padding:8px 14px!important;border-radius:999px!important;scroll-snap-align:start;background:#edf4f7!important;color:#263f4b!important;border:1px solid #c9d9e1!important}.presetChips button.active{background:#c8eef5!important;color:#064c5d!important;border-color:#79ccdc!important}
+/* Dual sliders: same language for frequency and energy. */
+.bandTrack,.labEnergyTrack,.labMirrorEnergy{height:42px!important;position:relative!important;margin:6px 0 0!important}
+.bandTrack:before,.labEnergyTrack:before,.labMirrorEnergy:before{content:"";position:absolute!important;left:0!important;right:0!important;top:18px!important;height:5px!important;border-radius:999px!important;background:#8aa4b544!important;opacity:1!important;filter:none!important}
+.bandTrack:after,.labEnergyTrack:after,.labMirrorEnergy:after{top:14px!important;height:13px!important;border-radius:999px!important;box-shadow:none!important;background:linear-gradient(90deg,var(--track-active1),var(--track-active2),var(--track-active3))!important}
+.bandTrack input,.labEnergyTrack input,.labMirrorEnergy input{position:absolute!important;inset:0!important;width:100%!important;height:42px!important;background:transparent!important;appearance:none!important;pointer-events:none!important;border:0!important;padding:0!important;margin:0!important}
+.bandTrack input::-webkit-slider-thumb,.labEnergyTrack input::-webkit-slider-thumb,.labMirrorEnergy input::-webkit-slider-thumb{appearance:none!important;width:23px!important;height:23px!important;border-radius:50%!important;background:#fff!important;border:4px solid #234455!important;box-shadow:0 1px 5px #0003!important;pointer-events:auto!important}
+.bandTrack input::-moz-range-thumb,.labEnergyTrack input::-moz-range-thumb,.labMirrorEnergy input::-moz-range-thumb{width:15px!important;height:15px!important;border-radius:50%!important;background:#fff!important;border:4px solid #234455!important;box-shadow:0 1px 5px #0003!important;pointer-events:auto!important}
+#lowRange,#simpleFloor,#labFloor{z-index:4!important}#highRange,#simplePeak,#labPeak{z-index:3!important}
+.frequencyInputs,.v30EnergyInputs{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;margin-top:2px!important}.numberUnit{background:#fff!important;border-color:#bdd0da!important}.numberUnit input{background:#fff!important;color:#172a35!important}.numberUnit span{background:#edf3f6!important;color:#617985!important;align-self:stretch;display:grid;place-items:center}
+/* Compact copy: remove numbered verbose headings. */
+.premiumConfigHost .sectionHead span,.premiumConfigHost .controlHead span{font-size:.7rem!important}.premiumConfigHost .bandRead{font-size:.7rem;color:#718692!important}.premiumConfigHost .energyEnds{display:none!important}.compactSummary{display:none!important}
+/* Advanced: every control touchable and visually consistent. */
+.v30TechPanel{padding:14px 4px 28px;border-bottom:1px solid var(--sheet-line)}.v30TechPanel h2{margin:.2rem 0 .8rem}.v30ToggleRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.v30TechGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.v30TechGrid label{display:flex;flex-direction:column;gap:5px;color:#5f7681!important;font-size:.72rem}.v30TechGrid select,.v30TechGrid input{width:100%;min-height:42px;border:1px solid #bdd0da!important;border-radius:10px!important;background:#fff!important;color:#152b36!important;padding:8px 9px!important;font-size:.86rem}.v30TechGrid .full{grid-column:1/-1}.v30ToggleRow input{width:22px;height:22px}.premiumAdvancedHost button{border-radius:10px!important}
+/* Griffin screen: compact, balanced, no silly arrow. */
+.wizardStep[data-step="4"]{padding:12px 14px!important}.mathTransform{justify-content:space-between!important;gap:10px!important}.mathTransform .progressTrack{margin-top:2px}.mathTransform #dspPct{font-size:.78rem;color:#8ca4b5}.mathTransform .mathWait{padding:8px 10px!important;min-height:0!important}.mathTransform .mathWait p{margin:4px 0!important;font-size:.74rem!important}.convergenceCompare{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;align-items:stretch!important;margin:2px 0!important}.convergenceArrow{display:none!important}.convergenceCompare figure{min-width:0}.convergenceCompare canvas{width:100%!important;min-height:190px!important;max-height:42dvh!important;border-radius:15px!important}.convergenceCompare figcaption{text-align:center;font-size:.7rem!important}.convergenceMeta{margin-top:auto!important;gap:8px!important}.convergenceMeta span{padding:8px!important;border-radius:11px!important}.mathTransform #cancelDspWizard{margin-top:2px!important;min-height:42px!important}
+@media(max-width:520px){.convergenceCompare canvas{min-height:210px!important;max-height:34dvh!important}.mathTransform .mathWait math{font-size:.9rem!important}}
+/* Final sheet is a single continuum: playback, everyday config, then advanced. */
+.finalPremiumSheet .finalMediumHost{background:var(--sheet-bg)!important}.finalPremiumSheet .finalConfigHost{margin-top:10px}.finalPremiumSheet .finalConfigHost .step3Wrap{padding:0!important;background:transparent!important}.finalPremiumSheet .sheetInlineAction{display:none!important}.finalPlaybackRow{padding-bottom:10px;border-bottom:1px solid var(--sheet-line)}
+/* Spectrogram: axes inside the image. Time axis is at TOP. */
+body.finalPremium .canvasWrap{background:#06101a!important}.specRefineOverlay{display:none!important}
 </style>
 
 </head>
@@ -556,6 +651,31 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
       <div class="statusBar"><span id="finalStatus">Preparando experiencia…</span><div class="meter"><div id="finalProgress"></div></div></div>
     </div>
   </div>
+</div>
+
+<div id="finalPremiumSheet" class="premiumBottomSheet finalPremiumSheet" data-snap="compact">
+  <div class="sheetHandleZone" aria-label="Arrastra para abrir o cerrar los controles"><span class="sheetHandle"></span></div>
+  <div class="premiumSheetChrome">
+    <div class="premiumTitleRow">
+      <div class="premiumWorldTitle"><b>Sonidero Fractal</b><span id="finalWorldName">Mandelbrot</span></div>
+      <div id="finalSheetTime" class="finalSheetTime">0:00 / 0:00</div>
+    </div>
+    <div class="premiumPrimaryActions">
+      <button id="finalWorldsBtn" type="button" class="premiumAction secondary"><span aria-hidden="true">▦</span><span>Mundos</span></button>
+      <button id="finalModeToggle" type="button" class="premiumAction secondary"><span aria-hidden="true">◫</span><span>Espectrograma</span></button>
+      <button id="finalListenBtn" type="button" class="premiumAction premiumActionMain"><span aria-hidden="true">♪</span><span>Escuchar</span></button>
+    </div>
+  </div>
+  <div id="finalMediumHost" class="finalMediumHost">
+    <div class="finalPlaybackRow">
+      <div class="seekWrap finalSeekWrap"><span id="finalSheetCurrent">0:00</span><input id="finalSheetSeek" type="range" min="0" max="5" step="0.001" value="0"><span id="finalSheetTotal">0:05</span></div>
+      <a id="finalSheetDownload" class="sheetDownload" download="sonidero-fractal-pedro-k-galindo-vera.wav">Descargar WAV</a>
+    </div>
+    <button id="finalFullView" type="button" class="sheetInlineAction secondary">Vista completa</button>
+    <div id="finalConfigHost" class="finalConfigHost"></div>
+  </div>
+  <div id="finalAdvancedHost" class="premiumAdvancedHost"></div>
+  <div id="finalSheetStatus" class="sheetStatus">Audio listo.</div>
 </div>
 
 <audio id="audio" preload="auto" playsinline></audio>
@@ -624,6 +744,7 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
     </div>
 
     <div class="wizardStep active" data-step="1">
+      <div id="premiumIntro" class="premiumIntro" aria-hidden="true"><div class="premiumIntroInner"><b>Sonidero Fractal</b><span>por Pedro K. Galindo Vera</span></div></div>
       <div class="hero">
         <div class="author authorFormula"><span>UNA EXPERIENCIA DE</span>
           <div class="mathName mathNameExact" role="img" aria-label="Pedro K. Galindo Vera en notación matemática">⟨𝐏, ε, ∂, r, Ω⟩ ⊗ ⟨Γ, α, ℒ, ι, ℕ, ∂, ∘⟩ ⊗ ⟨𝒱, ε, ℝ, 𝒜⟩</div>
@@ -631,13 +752,14 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
         <h1>Escucha las matemáticas.</h1>
         <p>Elige un universo, explora sus fronteras y escucha su geometría.</p>
         <div class="railHint">Desliza o usa la rueda para descubrir más fractales del plano complejo.</div>
+        <div class="worldInstruction">Elige un mundo fractal</div>
         <div class="choices" id="fractalRail">
-          <button class="choice selected" data-fractal="mandelbrot"><canvas id="mandelbrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Clásico</span><b>Mandelbrot</b><small>El universo fractal clásico, infinito en detalle.</small></div></button>
-          <button class="choice" data-fractal="julia"><canvas id="juliaThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Familia</span><b>Julia</b><small>Variaciones complejas, orgánicas y filamentosas.</small></div></button>
-          <button class="choice" data-fractal="burningShip"><canvas id="burningShipThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Dramático</span><b>Burning Ship</b><small>Estructuras como llamas y acantilados, con gran riqueza vertical.</small></div></button>
-          <button class="choice" data-fractal="tricorn"><canvas id="tricornThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Simetría</span><b>Tricorn</b><small>La versión conjugada de Mandelbrot, afilada y sorprendentemente distinta.</small></div></button>
-          <button class="choice" data-fractal="multibrot"><canvas id="multibrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Potencia n</span><b>Multibrot</b><small>Bulbos y remolinos cúbicos para escuchar otra dinámica de crecimiento.</small></div></button>
-          <button class="choice" data-fractal="newton"><canvas id="newtonThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><span class="choiceTag">Raíces</span><b>Newton</b><small>Cuencas de atracción psicodélicas generadas por convergencia a raíces complejas.</small></div></button>
+          <button class="choice selected" data-fractal="mandelbrot"><canvas id="mandelbrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Mandelbrot</b></div></button>
+          <button class="choice" data-fractal="julia"><canvas id="juliaThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Julia</b></div></button>
+          <button class="choice" data-fractal="burningShip"><canvas id="burningShipThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Burning Ship</b></div></button>
+          <button class="choice" data-fractal="tricorn"><canvas id="tricornThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Tricorn</b></div></button>
+          <button class="choice" data-fractal="multibrot"><canvas id="multibrotThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Multibrot</b></div></button>
+          <button class="choice" data-fractal="newton"><canvas id="newtonThumb" class="choiceThumb" width="520" height="220"></canvas><div class="choiceBody"><b>Newton</b></div></button>
         </div>
       </div>
     </div>
@@ -657,7 +779,22 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
             <div id="fractalMath" class="mathWait"></div>
           </div>
 
-          <div id="mobileGuideSheet" class="explorerDock">
+          <div id="mobileGuideSheet" class="explorerDock premiumWorldSheet premiumBottomSheet" data-snap="compact">
+            <div class="sheetHandleZone" aria-label="Arrastra para abrir o cerrar los controles"><span class="sheetHandle"></span></div>
+            <div class="premiumSheetChrome">
+              <div class="premiumTitleRow">
+                <div class="premiumWorldTitle"><b>Sonidero Fractal</b><span id="premiumWorldName">Mandelbrot</span></div>
+                <button id="compassBtn" type="button" class="premiumCompass" aria-label="Reorientar el fractal"><span aria-hidden="true" class="compassGlyph">🧭</span> <span id="premiumCompassDeg">0°</span></button>
+              </div>
+              <div class="premiumPrimaryActions">
+                <button id="worldsBtn" type="button" class="premiumAction secondary" aria-label="Volver al selector de mundos"><span aria-hidden="true">▦</span><span>Mundos</span></button>
+                <button id="premiumModeToggle" type="button" class="premiumAction secondary" aria-label="Cambiar entre fractal y espectrograma"><span aria-hidden="true">◫</span><span>Fractal</span></button>
+                <button id="premiumListen" type="button" class="premiumAction premiumActionMain" aria-label="Escuchar esta vista"><span aria-hidden="true">♪</span><span>Escuchar</span></button>
+              </div>
+            </div>
+            <div id="premiumConfigHost" class="premiumConfigHost" aria-hidden="true"></div>
+            <div id="premiumAdvancedHost" class="premiumAdvancedHost" aria-hidden="true"></div>
+            <div class="premiumLegacyControls">
             <div class="explorerMetaRow">
               <div><span class="author">PASO 2 · EXPLORA</span><b id="fractalBadge">Mandelbrot</b></div>
               <span id="zoomBadge" class="dockBadge">Zoom 1×</span>
@@ -681,6 +818,7 @@ button,input,select{font:inherit}button{border:0;border-radius:12px;padding:11px
 
             <button id="mobileSheetToggle" class="hidden" aria-hidden="true"></button>
             <button id="mobileSelectRegion" class="hidden" aria-hidden="true"></button>
+            </div>
           </div>
         </div>
       </div>
@@ -824,7 +962,7 @@ let activeJob=0;
 self.onmessage=e=>{const m=e.data;if(m.type==='generate'){activeJob=m.jobId;generate(m);}if(m.type==='refineSpec'){activeJob=m.jobId;refineSpec(m);}if(m.type==='cancel'){activeJob=m.jobId;}};
 function post(jobId,p,stage,extra,transfer){self.postMessage(Object.assign({type:'progress',jobId,progress:p,stage},extra||{}),transfer||[]);}
 function fft(re,im,inverse){const n=re.length;for(let i=1,j=0;i<n;i++){let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t;}}for(let len=2;len<=n;len<<=1){const ang=2*Math.PI/len*(inverse?1:-1),wr0=Math.cos(ang),wi0=Math.sin(ang);for(let i=0;i<n;i+=len){let wr=1,wi=0;for(let j=0;j<len/2;j++){const uR=re[i+j],uI=im[i+j],vR=re[i+j+len/2]*wr-im[i+j+len/2]*wi,vI=re[i+j+len/2]*wi+im[i+j+len/2]*wr;re[i+j]=uR+vR;im[i+j]=uI+vI;re[i+j+len/2]=uR-vR;im[i+j+len/2]=uI-vI;const nw=wr*wr0-wi*wi0;wi=wr*wi0+wi*wr0;wr=nw;}}}if(inverse)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n;}}
-function hann(n){const w=new Float64Array(n);for(let i=0;i<n;i++)w[i]=.5-.5*Math.cos(2*Math.PI*i/(n-1));return w;}
+function makeWindow(n,type='hann'){const w=new Float64Array(n),d=Math.max(1,n-1);for(let i=0;i<n;i++){const a=2*Math.PI*i/d;if(type==='hamming')w[i]=.54-.46*Math.cos(a);else if(type==='blackman')w[i]=.42-.5*Math.cos(a)+.08*Math.cos(2*a);else if(type==='rect')w[i]=1;else w[i]=.5-.5*Math.cos(a);}return w;}
 function rng(seed){return()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};}
 function lum(px,i){return (.2126*px[i]+.7152*px[i+1]+.0722*px[i+2])/255;}
 function sample(px,w,h,x,y,mode){const ix=Math.max(0,Math.min(w-1,Math.round(x*(w-1)))),iy=Math.max(0,Math.min(h-1,Math.round(y*(h-1)))),i=(iy*w+ix)*4,l=lum(px,i);if(mode==='luma')return l;let e=0;const n=[[1,0],[-1,0],[0,1],[0,-1]];for(let q=0;q<4;q++){const xx=Math.max(0,Math.min(w-1,ix+n[q][0])),yy=Math.max(0,Math.min(h-1,iy+n[q][1])),j=(yy*w+xx)*4;e=Math.max(e,Math.abs(l-lum(px,j)));}e=Math.min(1,e*4.8);return mode==='edges'?e:Math.min(1,.62*l+.78*e);}
@@ -873,8 +1011,8 @@ function analyzeAndUpdate(audio,mag,phase,frames,bins,nfft,hop,win,k0,k1,makePre
  const error=Math.sqrt(num/Math.max(den,1e-30));return{error,preview:obs?makePreview(obs,frames,bins,k0,k1):null};
 }
 async function generate(p){
- const {jobId,pixelsBuffer,srcW,srcH,sr,duration,nfft,hop,fmin,fmax,floorDb,peakDb,audioGamma,powerMode,freqScale='linear',griffinMax=20,griffinMin=7,griffinTol=.0015}=p;
- const pixels=new Uint8ClampedArray(pixelsBuffer),length=Math.round(sr*duration),frames=Math.max(1,Math.ceil(Math.max(0,length-nfft)/hop)+1),bins=nfft/2+1,win=hann(nfft),mag=new Float32Array(frames*bins),phase=new Float32Array(frames*bins);
+ const {jobId,pixelsBuffer,srcW,srcH,sr,duration,nfft,hop,fmin,fmax,floorDb,peakDb,audioGamma,powerMode,freqScale='linear',griffinMax=20,griffinMin=7,griffinTol=.0015,griffinPatience=10,griffinWindowImprove=.005,windowType='hann'}=p;
+ const pixels=new Uint8ClampedArray(pixelsBuffer),length=Math.round(sr*duration),frames=Math.max(1,Math.ceil(Math.max(0,length-nfft)/hop)+1),bins=nfft/2+1,win=makeWindow(nfft,windowType),mag=new Float32Array(frames*bins),phase=new Float32Array(frames*bins);
  const k0=Math.max(0,Math.floor(fmin*nfft/sr)),k1=Math.min(bins-1,Math.ceil(fmax*nfft/sr));
  for(let t=0;t<frames;t++){
   if(activeJob!==jobId)return;const x=frames>1?t/(frames-1):0;
@@ -886,17 +1024,17 @@ async function generate(p){
   if(t%12===0){post(jobId,.16*t/frames,'Recorriendo la ecuación compleja del fractal…');await new Promise(r=>setTimeout(r,0));}
  }
  const targetPreview=makePreview(mag,frames,bins,k0,k1);post(jobId,.17,'Campo complejo inicial: magnitud visual + fase fractal.',{targetPreview:targetPreview.buffer,targetPreviewW:120,targetPreviewH:64},[targetPreview.buffer]);await new Promise(r=>setTimeout(r,0));
- let bestError=Infinity,firstError=null,lastError=Infinity,stable=0,usedIterations=0,audio=null;
+ let bestError=Infinity,firstError=null,lastError=Infinity,stable=0,usedIterations=0,audio=null,errorHistory=[];
  for(let iter=1;iter<=griffinMax;iter++){
   if(activeJob!==jobId)return;
   audio=synthesize(mag,phase,frames,bins,nfft,hop,win,length);
   const wantPreview=(iter===1||iter===griffinMax||iter%2===0),stats=analyzeAndUpdate(audio,mag,phase,frames,bins,nfft,hop,win,k0,k1,wantPreview),err=stats.error;
   if(firstError===null)firstError=err;if(err<bestError)bestError=err;
-  const rel=Number.isFinite(lastError)?Math.abs(lastError-err)/Math.max(lastError,1e-12):1;if(iter>=griffinMin&&rel<griffinTol)stable++;else stable=0;lastError=err;usedIterations=iter;
+  const rel=Number.isFinite(lastError)?Math.abs(lastError-err)/Math.max(lastError,1e-12):1;errorHistory.push(err);if(errorHistory.length>griffinPatience+1)errorHistory.shift();let windowGain=1;if(errorHistory.length>=griffinPatience+1){const oldErr=errorHistory[0];windowGain=(oldErr-err)/Math.max(oldErr,1e-12);}if(iter>=griffinMin&&errorHistory.length>=griffinPatience+1&&windowGain<griffinWindowImprove)stable=griffinPatience;else if(iter>=griffinMin&&rel<griffinTol)stable++;else stable=0;lastError=err;usedIterations=iter;
   const progress=.18+.62*(iter/griffinMax),improvement=firstError>0?Math.max(0,1-err/firstError):0,stage='Griffin–Lim · iteración '+iter+'/'+griffinMax+' · error '+err.toFixed(4);
   const extra={iteration:iter,maxIterations:griffinMax,error:err,bestError,improvement};
   if(stats.preview){extra.preview=stats.preview.buffer;extra.previewW=120;extra.previewH=64;post(jobId,progress,stage,extra,[stats.preview.buffer]);}else post(jobId,progress,stage,extra);
-  await new Promise(r=>setTimeout(r,0));if(stable>=3)break;
+  await new Promise(r=>setTimeout(r,0));if(stable>=Math.max(3,griffinPatience))break;
  }
  if(activeJob!==jobId)return;
  audio=synthesize(mag,phase,frames,bins,nfft,hop,win,length);
@@ -921,8 +1059,8 @@ async function generate(p){
 }
 
 async function refineSpec(p){
- const {jobId,audioBuffer,sr,nfft,hop,t0,t1,f0,f1}=p;
- const audio=new Float32Array(audioBuffer),win=hann(nfft),pad=nfft;
+ const {jobId,audioBuffer,sr,nfft,hop,t0,t1,f0,f1,windowType='hann'}=p;
+ const audio=new Float32Array(audioBuffer),win=makeWindow(nfft,windowType),pad=nfft;
  const start=Math.max(0,Math.floor(t0*sr)-pad),end=Math.min(audio.length,Math.ceil(t1*sr)+pad),segment=Math.max(nfft,end-start);
  const frames=Math.max(1,Math.floor((segment-nfft)/hop)+1),bins=nfft/2+1;
  const k0=Math.max(0,Math.floor(f0*nfft/sr)),k1=Math.min(bins-1,Math.ceil(f1*nfft/sr)),used=Math.max(1,k1-k0+1);
@@ -1051,13 +1189,13 @@ const audioProfiles=[
  {name:'Vista rápida',nfft:1024,hop:512},{name:'Ágil',nfft:2048,hop:512},{name:'Balanceado',nfft:2048,hop:256},{name:'Alta definición',nfft:4096,hop:256},{name:'Máximo detalle',nfft:8192,hop:128}
 ];
 
-function setWizardStep(n){state.step=n;document.querySelectorAll('.wizardStep').forEach(el=>el.classList.toggle('active',+el.dataset.step===n));document.querySelectorAll('.stepDot').forEach(el=>el.classList.toggle('active',+el.dataset.step<=n));if(n===3)updateSoundSummary();}
+function setWizardStep(n){state.step=n;$('wizard').classList.toggle('worldMode',n===2);document.querySelectorAll('.wizardStep').forEach(el=>el.classList.toggle('active',+el.dataset.step===n));document.querySelectorAll('.stepDot').forEach(el=>el.classList.toggle('active',+el.dataset.step<=n));if(n===3)updateSoundSummary();}
 function snapshotView(){return {view:{...state.view},juliaCr:state.juliaCr,juliaCi:state.juliaCi,multibrotPower:state.multibrotPower,hasSelection:state.hasSelection,cache:state.fractalCache,detail:+$('fractalDetail').value};}
 function sameView(a,b){return a&&b&&Math.abs(a.view.cx-b.view.cx)<1e-15&&Math.abs(a.view.cy-b.view.cy)<1e-15&&Math.abs(a.view.scale-b.view.scale)<1e-15&&Math.abs((a.view.rotation||0)-(b.view.rotation||0))<1e-12&&a.juliaCr===b.juliaCr&&a.juliaCi===b.juliaCi&&a.multibrotPower===b.multibrotPower;}
 function resetHistory(){state.history=[snapshotView()];state.historyIndex=0;updateHistoryButtons();}
 function pushHistory(){const snap=snapshotView(),current=state.history[state.historyIndex];if(sameView(snap,current))return;state.history=state.history.slice(0,state.historyIndex+1);state.history.push({...snap,cache:null});if(state.history.length>14)state.history.shift();state.historyIndex=state.history.length-1;updateHistoryButtons();}
 function cacheCurrentHistory(cache){const h=state.history[state.historyIndex];if(h&&sameView(h,snapshotView())){h.cache=cache;h.detail=+$('fractalDetail').value;}}
-function updateHistoryButtons(){$('historyBack').disabled=state.busyFractal||state.historyIndex<=0;$('historyForward').disabled=state.busyFractal||state.historyIndex>=state.history.length-1;}
+function updateHistoryButtons(){($('historyBack')||{}).disabled=state.busyFractal||state.historyIndex<=0;($('historyForward')||{}).disabled=state.busyFractal||state.historyIndex>=state.history.length-1;}
 async function navigateHistory(delta){const next=state.historyIndex+delta;if(next<0||next>=state.history.length||state.busyFractal)return;state.historyIndex=next;const s=state.history[next];state.view={...s.view};state.juliaCr=s.juliaCr;state.juliaCi=s.juliaCi;state.multibrotPower=s.multibrotPower??state.multibrotPower;$('multibrotPower').value=state.multibrotPower;state.hasSelection=s.hasSelection;state.viewReady=!!s.cache;state.regionReady=true;updateMultibrotPowerUI();updateMiniMapRectFromView();if(s.cache){state.fractalCache=s.cache;drawPixelsToCanvas(s.cache,$('explorerCanvas'));drawPixelsToCanvas(s.cache,$('fractalCanvas'));updateZoomBadge(s.cache.maxIter);setExplorerBusy(false,'Vista recuperada instantáneamente desde el historial.');updateUseRegion();updateHistoryButtons();if(s.detail!==+$('fractalDetail').value)await renderFractal({quality:'final',markReady:true,label:'Actualizando la resolución…',soft:true});return;}updateHistoryButtons();await renderFractal({quality:'preview',markReady:true,label:'Recuperando vista…'});}
 function updateUseRegion(){const btn=$('useRegion');btn.disabled=state.busyFractal||!state.viewReady;btn.textContent=state.hasSelection?'Usar esta región →':'Usar vista actual →';}
 function updateContextTools(){const spectral=state.activeView==='spec',mobile=matchMedia('(max-width:820px)').matches;$('specModeTools').classList.toggle('hidden',!spectral);$('fractalModeTools').classList.toggle('hidden',spectral);document.querySelector('.contextHint').textContent=spectral?(mobile?'Un dedo: mover · pellizcar: zoom · doble toque: acercar':'Arrastra una caja: ampliar · Espacio+arrastrar: mover · rueda: tiempo · Shift+rueda: frecuencia'):'Resolución real del fractal; usa Refinar para aumentarla.';if(spectral){$('finalBadge').classList.add('hidden');if(!state.busyDsp)$('finalStatus').textContent=(mobile?'Mueve con un dedo · pellizca para ampliar':'Arrastra un recuadro para ampliar · Espacio + arrastrar para mover')+' · escala '+specScaleLabel()+'.';}else{$('finalBadge').classList.add('hidden');}}
@@ -1067,9 +1205,9 @@ function showExplorerLoading(show,title,blank=false,soft=false){const o=$('explo
 function explorerSize(maxW){const target=$('wizard').classList.contains('hidden')?$('canvasWrap'):$('explorer'),r=target.getBoundingClientRect(),aspect=Math.max(.38,r.height/Math.max(1,r.width)),w=Math.max(480,Math.min(maxW,Math.round(r.width))),h=Math.max(260,Math.round(w*aspect));return {w,h};}
 function iterationForView(base){const depth=Math.max(0,Math.log10(state.baseScale/Math.max(state.view.scale,1e-300)));return Math.min(6500,Math.round(base+depth*150));}
 function drawPixelsToCanvas(cache,canvas){if(!cache)return;const r=canvas.getBoundingClientRect();canvas.width=Math.max(2,Math.round(r.width));canvas.height=Math.max(2,Math.round(r.height));const off=document.createElement('canvas');off.width=cache.width;off.height=cache.height;off.getContext('2d').putImageData(new ImageData(cache.pixels,cache.width,cache.height),0,0);const ctx=canvas.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';const q=Math.max(canvas.width/cache.width,canvas.height/cache.height),dw=cache.width*q,dh=cache.height*q,dx=(canvas.width-dw)/2,dy=(canvas.height-dh)/2;ctx.drawImage(off,dx,dy,dw,dh);}
-function updateRotationUI(){const deg=((state.view.rotation||0)*180/Math.PI),shown=Math.abs(deg)>0.35;$('reorientFractal').classList.toggle('hidden',!shown);$('rotationRead').textContent=(deg>=0?'+':'')+deg.toFixed(Math.abs(deg)<10?1:0)+'°';}
+function updateRotationUI(){const deg=((state.view.rotation||0)*180/Math.PI),shown=Math.abs(deg)>0.35;$('reorientFractal').classList.toggle('hidden',!shown);$('rotationRead').textContent=(deg>=0?'+':'')+deg.toFixed(Math.abs(deg)<10?1:0)+'°';const pc=$('premiumCompassDeg'),pb=$('compassBtn');if(pc)pc.textContent=(deg>=0&&shown?'+':'')+deg.toFixed(Math.abs(deg)<10?1:0)+'°';if(pb)pb.classList.toggle('active',shown);}
 function updateZoomBadge(iter=0){const z=Math.max(1,state.baseScale/Math.max(state.view.scale,1e-300)),deg=(state.view.rotation||0)*180/Math.PI;$('zoomBadge').textContent='Zoom '+(z<1000?z.toFixed(z<10?1:0):z.toExponential(2))+'×'+(Math.abs(deg)>.35?' · '+(deg>=0?'+':'')+deg.toFixed(1)+'°':'')+(iter?' · '+iter+' iter.':'');updateRotationUI();}
-function setExplorerBusy(flag,msg,{soft=false}={}){state.busyFractal=flag&&!soft;state.softRefining=soft;$('backToChoice').disabled=state.busyFractal;$('famousSpot').disabled=state.busyFractal;$('zoomIn').disabled=state.busyFractal;$('zoomOut').disabled=state.busyFractal;$('resetFractal').disabled=state.busyFractal;$('reorientFractal').disabled=state.busyFractal;$('fractalDetail').disabled=state.busyFractal;$('mobileSelectRegion').disabled=state.busyFractal;const status=$('explorerStatus'),actionable=!!msg&&/(error|pequeña|arrastra|cancel|no se pudo|intenta)/i.test(msg);status.className='contextStatus dockStatus '+((flag||soft)?'busy':'')+((flag||soft||actionable)?'':' hidden');if(msg)status.textContent=msg;updateHistoryButtons();updateUseRegion();}
+function setExplorerBusy(flag,msg,{soft=false}={}){state.busyFractal=flag&&!soft;state.softRefining=soft;($('backToChoice')||{}).disabled=state.busyFractal;($('famousSpot')||{}).disabled=state.busyFractal;($('zoomIn')||{}).disabled=state.busyFractal;($('zoomOut')||{}).disabled=state.busyFractal;($('resetFractal')||{}).disabled=state.busyFractal;($('reorientFractal')||{}).disabled=state.busyFractal;($('fractalDetail')||{}).disabled=state.busyFractal;($('mobileSelectRegion')||{}).disabled=state.busyFractal;const status=$('explorerStatus'),actionable=!!msg&&/(error|pequeña|arrastra|cancel|no se pudo|intenta)/i.test(msg);status.className='contextStatus dockStatus '+((flag||soft)?'busy':'')+((flag||soft||actionable)?'':' hidden');if(msg)status.textContent=msg;updateHistoryButtons();updateUseRegion();}
 
 function renderFractal({quality='preview',blank=false,markReady=false,label='Calculando fractal…',soft=false,keepSelection=false}={}){
  return new Promise((resolve,reject)=>{
@@ -1091,7 +1229,7 @@ let openingFractal=false;
 async function openSelectedFractal(){
  if(openingFractal)return;openingFractal=true;
  try{
-  setWizardStep(2);const p=currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale,rotation:0};state.juliaCr=p.juliaCr??state.juliaCr;state.juliaCi=p.juliaCi??state.juliaCi;state.baseScale=state.view.scale;state.regionReady=false;state.viewReady=false;state.hasSelection=false;populateFamousSpot();$('fractalBadge').textContent=fractalLabel(state.fractal);$('mobileGuideSheet').classList.add('sheetOpen');clearMiniMap();updateMultibrotPowerUI();await nextFrame();updateFractalMath();renderMiniMapOverview().catch(()=>{});await renderFractal({quality:'preview',blank:true,markReady:true,label:'Calculando la vista general…'});resetHistory();updateUseRegion();renderFractal({quality:'final',markReady:true,label:'Refinando la vista general…',soft:true}).catch(()=>{});
+  setWizardStep(2);const p=currentFamous().full;state.view={cx:p.cx,cy:p.cy,scale:p.scale,rotation:0};state.juliaCr=p.juliaCr??state.juliaCr;state.juliaCi=p.juliaCi??state.juliaCi;state.baseScale=state.view.scale;state.regionReady=false;state.viewReady=false;state.hasSelection=false;populateFamousSpot();$('fractalBadge').textContent=fractalLabel(state.fractal);if($('premiumWorldName'))$('premiumWorldName').textContent=fractalLabel(state.fractal);$('mobileGuideSheet').classList.remove('configOpen');clearMiniMap();updateMultibrotPowerUI();await nextFrame();updateFractalMath();renderMiniMapOverview().catch(()=>{});await renderFractal({quality:'preview',blank:true,markReady:true,label:'Calculando la vista general…'});resetHistory();updateUseRegion();renderFractal({quality:'final',markReady:true,label:'Refinando la vista general…',soft:true}).catch(()=>{});
  }finally{openingFractal=false;}
 }
 document.querySelectorAll('.choice[data-fractal]').forEach(btn=>btn.addEventListener('click',async()=>{
@@ -1131,7 +1269,7 @@ function drawMiniMapBase(cache){if(!cache)return;state.miniMapBase=cache;drawCac
 function updateMiniMapRectFromView(){updateRotationUI();if(state.miniMapBase)drawCacheRelative(state.miniMapBase,$('explorerBackdropCanvas'),state.view,true);}
 function scheduleExplorerPreview(){if(state.explorerPreviewPending)return;state.explorerPreviewPending=true;requestAnimationFrame(()=>{state.explorerPreviewPending=false;if(state.miniMapBase)drawCacheRelative(state.miniMapBase,$('explorerBackdropCanvas'),state.view,true);if(state.fractalCache)drawCacheRelative(state.fractalCache,$('explorerCanvas'),state.view,false);updateZoomBadge(state.fractalCache?.maxIter||0);});}
 function renderMiniMapOverview(){return new Promise(resolve=>{
- const jobId=++state.miniMapJob,r=$('explorer').getBoundingClientRect(),aspect=Math.max(.35,r.height/Math.max(1,r.width)),base={cx:state.view.cx,cy:state.view.cy,scale:state.view.scale*2.0,rotation:state.view.rotation||0,juliaCr:state.juliaCr,juliaCi:state.juliaCi,multibrotPower:state.multibrotPower};
+ const jobId=++state.miniMapJob,r=$('explorer').getBoundingClientRect(),aspect=Math.max(.35,r.height/Math.max(1,r.width)),base={cx:state.view.cx,cy:state.view.cy,scale:state.view.scale*2.5,rotation:state.view.rotation||0,juliaCr:state.juliaCr,juliaCi:state.juliaCi,multibrotPower:state.multibrotPower};
  if(state.miniMapHandler)miniWorker.removeEventListener('message',state.miniMapHandler);
  const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='done'){miniWorker.removeEventListener('message',handler);state.miniMapHandler=null;const cache={pixels:new Uint8ClampedArray(m.pixels),width:m.width,height:m.height,view:{cx:base.cx,cy:base.cy,scale:base.scale,rotation:base.rotation},fractal:state.fractal,maxIter:155};drawMiniMapBase(cache);resolve(cache);}};
  state.miniMapHandler=handler;miniWorker.addEventListener('message',handler);const w=Math.max(520,Math.min(980,Math.round(r.width)||720)),h=Math.max(300,Math.round(w*aspect));miniWorker.postMessage({type:'render',jobId,width:w,height:h,cx:base.cx,cy:base.cy,scale:base.scale,rotation:base.rotation,maxIter:155,fractal:state.fractal,juliaCr:base.juliaCr,juliaCi:base.juliaCi,multibrotPower:base.multibrotPower});
@@ -1167,7 +1305,7 @@ $('explorer').addEventListener('pointerup',async e=>{
 });
 $('explorer').addEventListener('pointercancel',e=>{activePointers.delete(e.pointerId);drag=null;pan=null;pinchStart=null;scheduleExplorerPreview();$('selectionBox').classList.add('hidden');});
 $('explorer').addEventListener('wheel',e=>{if(state.busyFractal)return;e.preventDefault();const p=pointInExplorer(e),old={...state.view};if(e.altKey){state.view.rotation=normalizeAngle((old.rotation||0)+e.deltaY*.0025);}else{const factor=e.deltaY<0?.82:1.22,next=clamp(old.scale*factor,1e-14,state.baseScale*1.6),anchor=worldAtExplorerPoint(p.x,p.y,p.w,p.h,old),c=centerForAnchor(anchor,p.x,p.y,p.w,p.h,next,old.rotation||0);state.view.cx=c.cx;state.view.cy=c.cy;state.view.scale=next;}state.hasSelection=true;state.viewReady=false;scheduleExplorerPreview();clearTimeout(wheelTimer);wheelTimer=setTimeout(async()=>{pushHistory();await renderFractal({quality:'preview',markReady:true,label:e.altKey?'Recalculando la orientación…':'Ajustando el zoom…'});renderMiniMapOverview().catch(()=>{});},180);},{passive:false});
-$('useRegion').addEventListener('click',()=>{if(state.viewReady&&!state.busyFractal)setWizardStep(3);});
+$('useRegion').addEventListener('click',()=>{if(state.viewReady&&!state.busyFractal)openSoundSheet();});
 /* Paso 3 */
 const lowRange=$('lowRange'),highRange=$('highRange'),BAND_MAX=96000,HZ_WARP=20;
 function describeHz(v){if(v<80)return'retumbo muy grave';if(v<300)return'bajo / elefante';if(v<1200)return'voz grave';if(v<4000)return'voz y música';if(v<10000)return'aves y brillo';if(v<20000)return'silbido muy agudo';return'ultrasonido / murciélagos';}
@@ -1222,7 +1360,7 @@ $('labGriffin').addEventListener('input',()=>{syncMainFromLab();$('labGriffinRea
 $('labFmin').addEventListener('input',syncMainFromLab);$('labFmax').addEventListener('input',syncMainFromLab);
 document.querySelectorAll('#labScaleSwitch [data-lab-scale]').forEach(btn=>btn.addEventListener('click',()=>{state.specScale=btn.dataset.labScale;document.querySelectorAll('#labScaleSwitch [data-lab-scale]').forEach(x=>x.classList.toggle('active',x.dataset.labScale===state.specScale));drawActiveSpectralView();updateContextTools();$('finalStatus').textContent='Escala visual del espectrograma: '+specScaleLabel()+'.';}));
 
-$('backToFractal').addEventListener('click',()=>setWizardStep(2));
+$('backToFractal').addEventListener('click',()=>closeSoundSheet());
 /* DSP */
 function updateResolutionHint(){if(state.lastEngine)updateEngineReadouts(state.lastEngine);}
 function renderPreviewTo(canvasId,buffer,w,h){if(!buffer)return;const vals=new Uint8Array(buffer),c=$(canvasId),ctx=c.getContext('2d');c.width=w;c.height=h;const img=ctx.createImageData(w,h);for(let i=0;i<vals.length;i++){const col=colorize(vals[i]/255),j=i*4;img.data[j]=col[0];img.data[j+1]=col[1];img.data[j+2]=col[2];img.data[j+3]=255;}ctx.putImageData(img,0,0);}
@@ -1235,16 +1373,16 @@ function validateAudioSamples(samples){let sum=0,peak=0,finite=true,nonzero=0;fo
 function encodeWav(samples,sr){const buf=new ArrayBuffer(44+samples.length*2),v=new DataView(buf);const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};str(0,'RIFF');v.setUint32(4,36+samples.length*2,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,samples.length*2,true);for(let i=0;i<samples.length;i++){const x=clamp(samples[i],-1,1);v.setInt16(44+i*2,x<0?x*32768:x*32767,true);}return new Blob([buf],{type:'audio/wav'});}
 function generateAudio(){return new Promise((resolve,reject)=>{
  if(!state.fractalCache){reject(new Error('No existe una región fractal lista.'));return;}const cfg=chooseAutoEngine(),{sr,duration,nfft,hop,fmin,fmax}=cfg;if(fmax<=fmin||fmax>sr/2){reject(new Error('La banda elegida no cabe en la frecuencia de muestreo.'));return;}
- const jobId=++state.dspJob;state.busyDsp=true;state.dspReject=reject;if(state.dspHandler)dspWorker.removeEventListener('message',state.dspHandler);$('makeSound').disabled=true;$('regenerateBtn').disabled=true;$('cancelDspBtn').disabled=false;$('cancelDspWizard').disabled=false;resetConvergenceUI();setDspProgress(0,'Leyendo la dinámica compleja del fractal…');
+ const jobId=++state.dspJob;state.busyDsp=true;state.dspReject=reject;if(state.dspHandler)dspWorker.removeEventListener('message',state.dspHandler);($('makeSound')||{}).disabled=true;($('regenerateBtn')||{}).disabled=true;($('cancelDspBtn')||{}).disabled=false;($('cancelDspWizard')||{}).disabled=false;resetConvergenceUI();setDspProgress(0,'Leyendo la dinámica compleja del fractal…');
  const pixelsCopy=state.fractalCache.pixels.slice(),v=state.fractalCache.view||state.view;
- const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='progress'){setDspProgress(m.progress,m.stage);updateConvergence(m);return;}if(m.type==='error'){dspWorker.removeEventListener('message',handler);state.dspHandler=null;state.dspReject=null;state.busyDsp=false;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;reject(new Error(m.message||'El motor acústico no produjo audio válido.'));return;}if(m.type==='done'){dspWorker.removeEventListener('message',handler);state.dspHandler=null;state.dspReject=null;const audio=new Float32Array(m.audio),spec=new Float32Array(m.spec);const health=validateAudioSamples(audio);if(!health.ok){state.busyDsp=false;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;reject(new Error('Control de audio: '+health.reason));return;}state.audioCache={audio,sr:m.sr,duration:m.duration,nfft:m.nfft,hop:m.hop,fmin:m.fmin,fmax:m.fmax,error:m.error,iterations:m.iterations,freqScale:cfg.freqScale};state.specCache={db:spec,frames:m.specFrames,bins:m.specBins,fmin:m.fmin,fmax:m.fmax,duration:m.duration,t0:0,t1:m.duration,nfft:m.nfft,hop:m.hop};state.refinedSpec=null;state.specRefineCache.clear();state.specView={t0:0,t1:m.duration,f0:m.fmin,f1:m.fmax};const blob=encodeWav(audio,m.sr);if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);state.audioUrl=URL.createObjectURL(blob);resetPlaybackForNewAudio();$('seek').value=0;$('currentTime').textContent='0:00.00';$('download').href=state.audioUrl;$('download').style.display='inline-block';$('seek').max=m.duration;$('totalTime').textContent=formatTime(m.duration);state.busyDsp=false;state.forceFast=false;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;$('autoIterationsRead').textContent=m.iterations+' iteraciones';$('autoErrorRead').textContent=Number(m.error).toFixed(4);$('convergenceRead').textContent='Convergencia final · '+m.iterations+' iteraciones · error '+Number(m.error).toFixed(4);setDspProgress(1,'Reconstrucción terminada · error espectral '+Number(m.error).toFixed(4));resolve();}};
- state.dspHandler=handler;dspWorker.addEventListener('message',handler);dspWorker.postMessage({type:'generate',jobId,pixelsBuffer:pixelsCopy.buffer,srcW:state.fractalCache.width,srcH:state.fractalCache.height,sr,duration,nfft,hop,fmin,fmax,floorDb:cfg.floorDb,peakDb:cfg.peakDb,audioGamma:cfg.audioGamma,powerMode:cfg.powerMode,freqScale:cfg.freqScale,griffinMax:cfg.griffinMax,griffinMin:cfg.griffinMin,griffinTol:cfg.griffinTol,fractal:state.fractal,juliaCr:state.juliaCr,juliaCi:state.juliaCi,multibrotPower:state.multibrotPower,viewCx:v.cx,viewCy:v.cy,viewScale:v.scale,viewRotation:v.rotation||0},[pixelsCopy.buffer]);
+ const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='progress'){setDspProgress(m.progress,m.stage);updateConvergence(m);return;}if(m.type==='error'){dspWorker.removeEventListener('message',handler);state.dspHandler=null;state.dspReject=null;state.busyDsp=false;($('makeSound')||{}).disabled=false;($('regenerateBtn')||{}).disabled=false;($('cancelDspBtn')||{}).disabled=true;($('cancelDspWizard')||{}).disabled=true;reject(new Error(m.message||'El motor acústico no produjo audio válido.'));return;}if(m.type==='done'){dspWorker.removeEventListener('message',handler);state.dspHandler=null;state.dspReject=null;const audio=new Float32Array(m.audio),spec=new Float32Array(m.spec);const health=validateAudioSamples(audio);if(!health.ok){state.busyDsp=false;($('makeSound')||{}).disabled=false;($('regenerateBtn')||{}).disabled=false;($('cancelDspBtn')||{}).disabled=true;($('cancelDspWizard')||{}).disabled=true;reject(new Error('Control de audio: '+health.reason));return;}state.audioCache={audio,sr:m.sr,duration:m.duration,nfft:m.nfft,hop:m.hop,fmin:m.fmin,fmax:m.fmax,error:m.error,iterations:m.iterations,freqScale:cfg.freqScale};state.specCache={db:spec,frames:m.specFrames,bins:m.specBins,fmin:m.fmin,fmax:m.fmax,duration:m.duration,t0:0,t1:m.duration,nfft:m.nfft,hop:m.hop};state.refinedSpec=null;state.specRefineCache.clear();state.specView={t0:0,t1:m.duration,f0:m.fmin,f1:m.fmax};const blob=encodeWav(audio,m.sr);if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);state.audioUrl=URL.createObjectURL(blob);resetPlaybackForNewAudio();$('seek').value=0;$('currentTime').textContent='0:00.00';$('download').href=state.audioUrl;$('download').style.display='inline-block';$('seek').max=m.duration;$('totalTime').textContent=formatTime(m.duration);state.busyDsp=false;state.forceFast=false;($('makeSound')||{}).disabled=false;($('regenerateBtn')||{}).disabled=false;($('cancelDspBtn')||{}).disabled=true;($('cancelDspWizard')||{}).disabled=true;$('autoIterationsRead').textContent=m.iterations+' iteraciones';$('autoErrorRead').textContent=Number(m.error).toFixed(4);$('convergenceRead').textContent='Convergencia final · '+m.iterations+' iteraciones · error '+Number(m.error).toFixed(4);setDspProgress(1,'Reconstrucción terminada · error espectral '+Number(m.error).toFixed(4));resolve();}};
+ state.dspHandler=handler;dspWorker.addEventListener('message',handler);dspWorker.postMessage({type:'generate',jobId,pixelsBuffer:pixelsCopy.buffer,srcW:state.fractalCache.width,srcH:state.fractalCache.height,sr,duration,nfft,hop,fmin,fmax,floorDb:cfg.floorDb,peakDb:cfg.peakDb,audioGamma:cfg.audioGamma,powerMode:cfg.powerMode,freqScale:cfg.freqScale,griffinMax:cfg.griffinMax,griffinMin:cfg.griffinMin,griffinTol:cfg.griffinTol,griffinPatience:cfg.griffinPatience||10,griffinWindowImprove:cfg.griffinWindowImprove||.005,windowType:cfg.windowType||'hann',fractal:state.fractal,juliaCr:state.juliaCr,juliaCi:state.juliaCi,multibrotPower:state.multibrotPower,viewCx:v.cx,viewCy:v.cy,viewScale:v.scale,viewRotation:v.rotation||0},[pixelsCopy.buffer]);
  setTimeout(()=>{if(state.dspJob===jobId&&state.busyDsp){reject(new Error('La generación acústica tardó demasiado.'));}},600000);
  });}
 dspWorker.onerror=e=>{state.busyDsp=false;state.lastError=e;setDspProgress(0,'Error del motor acústico.');};
-function cancelDsp(){if(!state.busyDsp)return;const id=++state.dspJob;dspWorker.postMessage({type:'cancel',jobId:id});if(state.dspHandler){dspWorker.removeEventListener('message',state.dspHandler);state.dspHandler=null;}const reject=state.dspReject;state.dspReject=null;state.busyDsp=false;$('cancelDspBtn').disabled=true;$('cancelDspWizard').disabled=true;$('makeSound').disabled=false;$('regenerateBtn').disabled=false;setDspProgress(0,'Generación cancelada.');setWizardStep(3);if(reject)reject(new Error('Generación cancelada.'));}
+function cancelDsp(){if(!state.busyDsp)return;const id=++state.dspJob;dspWorker.postMessage({type:'cancel',jobId:id});if(state.dspHandler){dspWorker.removeEventListener('message',state.dspHandler);state.dspHandler=null;}const reject=state.dspReject;state.dspReject=null;state.busyDsp=false;($('cancelDspBtn')||{}).disabled=true;($('cancelDspWizard')||{}).disabled=true;($('makeSound')||{}).disabled=false;($('regenerateBtn')||{}).disabled=false;setDspProgress(0,'Generación cancelada.');openSoundSheet();if(reject)reject(new Error('Generación cancelada.'));}
 $('cancelDspBtn').addEventListener('click',cancelDsp);$('cancelDspWizard').addEventListener('click',cancelDsp);
-async function runGeneration(){setWizardStep(4);$('generationError').classList.remove('show');try{await generateAudio();await enterFinalExperience();}catch(err){state.lastError=err;setDspProgress(0,'No se pudo completar la generación.');$('generationErrorText').textContent=err.message;$('generationError').classList.add('show');}}$('makeSound').addEventListener('click',runGeneration);$('retryGeneration').addEventListener('click',runGeneration);$('useFastMode').addEventListener('click',()=>{state.forceFast=true;runGeneration();});$('backFromError').addEventListener('click',()=>{setWizardStep(3);$('generationError').classList.remove('show');});
+async function runGeneration(){setWizardStep(4);$('generationError').classList.remove('show');try{await generateAudio();await enterFinalExperience();}catch(err){state.lastError=err;setDspProgress(0,'No se pudo completar la generación.');$('generationErrorText').textContent=err.message;$('generationError').classList.add('show');}}$('makeSound').addEventListener('click',runGeneration);$('retryGeneration').addEventListener('click',runGeneration);$('useFastMode').addEventListener('click',()=>{state.forceFast=true;runGeneration();});$('backFromError').addEventListener('click',()=>{openSoundSheet();$('generationError').classList.remove('show');});
 $('regenerateBtn').addEventListener('click',async()=>{try{setWizardStep(4);$('wizard').classList.remove('hidden');await generateAudio();await enterFinalExperience();}catch(err){setDspProgress(0,err.message);}});
 
 /* Espectrograma desde caché */
@@ -1309,7 +1447,7 @@ function refineVisibleSpectrogram(){
  $('finalStatus').textContent='Recalculando detalle espectral de la ventana visible…';setProgress($('finalProgress'),0);showSpecRefine('Recalculando la ventana visible…',0,'Zoom real: se aumenta la resolución temporal y/o frecuencial.');
  const handler=e=>{const m=e.data;if(m.jobId!==jobId)return;if(m.type==='progress'){setProgress($('finalProgress'),m.progress);$('finalStatus').textContent=m.stage||'Recalculando detalle espectral…';showSpecRefine(m.stage||'Recalculando detalle espectral…',m.progress,'La vista base sigue visible mientras se calcula más detalle.');return;}if(m.type==='refined'){specRefineWorker.removeEventListener('message',handler);state.specRefineHandler=null;const refined={db:new Float32Array(m.spec),frames:m.specFrames,bins:m.specBins,t0:m.t0,t1:m.t1,fmin:m.fmin,fmax:m.fmax,duration:m.t1-m.t0,nfft:m.nfft,hop:m.hop};state.refinedSpec=refined;state.specRefineCache.set(key,refined);while(state.specRefineCache.size>8)state.specRefineCache.delete(state.specRefineCache.keys().next().value);drawSpectrogram();const detail='Δt '+(1000*m.hop/m.sr).toFixed(2)+' ms · Δf '+(m.sr/m.nfft).toFixed(2)+' Hz';$('finalStatus').textContent='Detalle adaptativo: '+detail;showSpecRefine('Ventana refinada',1,detail);hideSpecRefine(950);setTimeout(()=>setProgress($('finalProgress'),0),350);}};
  state.specRefineHandler=handler;specRefineWorker.addEventListener('message',handler);
- specRefineWorker.postMessage({type:'refineSpec',jobId,audioBuffer:audioCopy.buffer,sr:state.audioCache.sr,nfft:cfg.nfft,hop:cfg.hop,t0:v.t0,t1:v.t1,f0:v.f0,f1:v.f1},[audioCopy.buffer]);
+ specRefineWorker.postMessage({type:'refineSpec',jobId,audioBuffer:audioCopy.buffer,sr:state.audioCache.sr,nfft:cfg.nfft,hop:cfg.hop,t0:v.t0,t1:v.t1,f0:v.f0,f1:v.f1,windowType:cfg.windowType||'hann'},[audioCopy.buffer]);
 }
 specRefineWorker.onerror=()=>{$('finalStatus').textContent='No se pudo refinar esta ventana; se conserva la matriz base.';setProgress($('finalProgress'),0);hideSpecRefine();};
 
@@ -1357,11 +1495,11 @@ document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>
 }));
 document.querySelectorAll('[data-specband]').forEach(btn=>btn.addEventListener('click',()=>{if(!state.specCache)return;const bands={full:[state.specCache.fmin,state.specCache.fmax],voice:[80,5000],birds:[500,12000]},b=bands[btn.dataset.specband];state.specView.f0=clamp(b[0],state.specCache.fmin,state.specCache.fmax-1);state.specView.f1=clamp(b[1],state.specView.f0+1,state.specCache.fmax);drawActiveSpectralView();scheduleSpecRefinement(120);}));
 $('gearBtn').addEventListener('click',()=>{syncLabFromMain();$('drawer').classList.add('open');$('drawerBackdrop').classList.add('show');});$('closeDrawer').addEventListener('click',closeDrawer);$('drawerBackdrop').addEventListener('click',closeDrawer);function closeDrawer(){$('drawer').classList.remove('open');$('drawerBackdrop').classList.remove('show');}
-function reopenWizard(step){closeDrawer();$('wizard').classList.remove('hidden');setWizardStep(step);if(step===2){drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));updateUseRegion();}if(step===3)updateSoundSummary();}
+function reopenWizard(step){closeDrawer();$('wizard').classList.remove('hidden');if(step===3){openSoundSheet();return;}setWizardStep(step);if(step===2){drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));updateUseRegion();}}
 $('editSoundFinal').addEventListener('click',()=>reopenWizard(3));$('editFractalFinal').addEventListener('click',()=>reopenWizard(2));
 $('finalFractalQuality').addEventListener('change',()=>{$('fractalDetail').value=$('finalFractalQuality').value;const p=detailProfiles[+$('fractalDetail').value];$('fractalDetailRead').textContent=p.name+' · '+p.w.toLocaleString('es-EC')+' px y '+p.it.toLocaleString('es-EC')+' iteraciones base.';});
-$('refineFinalFractal').addEventListener('click',async()=>{if(state.busyFractal)return;$('finalStatus').textContent='Refinando el fractal a mayor resolución…';$('refineFinalFractal').disabled=true;await renderFractal({quality:'final',markReady:true,label:'Refinando el fractal…',soft:true});drawFractalFinal();$('finalStatus').textContent='Fractal refinado y guardado en caché.';$('refineFinalFractal').disabled=false;setProgress($('finalProgress'),0);});
-let autoSpecTimer=null;$('finalSpecQuality').addEventListener('change',()=>{setAudioQuality($('finalSpecQuality').value);clearTimeout(autoSpecTimer);autoSpecTimer=setTimeout(async()=>{if(state.busyDsp)return;const oldView={...state.specView};$('finalSpecQuality').disabled=true;$('finalStatus').textContent='Actualizando automáticamente la resolución espectral…';try{await generateAudio();const s=state.specCache,tSpan=Math.min(oldView.t1-oldView.t0,s.duration),fSpan=Math.min(oldView.f1-oldView.f0,s.fmax-s.fmin),tc=clamp((oldView.t0+oldView.t1)/2,tSpan/2,s.duration-tSpan/2),fc=clamp((oldView.f0+oldView.f1)/2,s.fmin+fSpan/2,s.fmax-fSpan/2);state.specView={t0:tc-tSpan/2,t1:tc+tSpan/2,f0:fc-fSpan/2,f1:fc+fSpan/2};drawActiveSpectralView();$('finalStatus').textContent='Resolución espectral base actualizada.';scheduleSpecRefinement(140);}catch(err){$('finalStatus').textContent='No se pudo actualizar: '+err.message;}finally{$('finalSpecQuality').disabled=false;setTimeout(()=>setProgress($('finalProgress'),0),450);}},220);});
+$('refineFinalFractal').addEventListener('click',async()=>{if(state.busyFractal)return;$('finalStatus').textContent='Refinando el fractal a mayor resolución…';($('refineFinalFractal')||{}).disabled=true;await renderFractal({quality:'final',markReady:true,label:'Refinando el fractal…',soft:true});drawFractalFinal();$('finalStatus').textContent='Fractal refinado y guardado en caché.';($('refineFinalFractal')||{}).disabled=false;setProgress($('finalProgress'),0);});
+let autoSpecTimer=null;$('finalSpecQuality').addEventListener('change',()=>{setAudioQuality($('finalSpecQuality').value);clearTimeout(autoSpecTimer);autoSpecTimer=setTimeout(async()=>{if(state.busyDsp)return;const oldView={...state.specView};($('finalSpecQuality')||{}).disabled=true;$('finalStatus').textContent='Actualizando automáticamente la resolución espectral…';try{await generateAudio();const s=state.specCache,tSpan=Math.min(oldView.t1-oldView.t0,s.duration),fSpan=Math.min(oldView.f1-oldView.f0,s.fmax-s.fmin),tc=clamp((oldView.t0+oldView.t1)/2,tSpan/2,s.duration-tSpan/2),fc=clamp((oldView.f0+oldView.f1)/2,s.fmin+fSpan/2,s.fmax-fSpan/2);state.specView={t0:tc-tSpan/2,t1:tc+tSpan/2,f0:fc-fSpan/2,f1:fc+fSpan/2};drawActiveSpectralView();$('finalStatus').textContent='Resolución espectral base actualizada.';scheduleSpecRefinement(140);}catch(err){$('finalStatus').textContent='No se pudo actualizar: '+err.message;}finally{($('finalSpecQuality')||{}).disabled=false;setTimeout(()=>setProgress($('finalProgress'),0),450);}},220);});
 
 async function enterFinalExperience(){setDspProgress(1,'Preparando la vista final…');await nextFrame();$('wizard').classList.add('hidden');drawFractalFinal();state.activeView='spec';document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view==='spec'));$('fractalCanvas').style.display='none';$('specCanvas').style.display='block';$('cursorCanvas').style.display='block';updateContextTools();drawActiveSpectralView();$('finalStatus').textContent=state.audioCache?'Listo · Griffin–Lim '+state.audioCache.iterations+' iter. · error espectral '+Number(state.audioCache.error).toFixed(4)+' · zoom espectral listo.':'Listo.';setProgress($('finalProgress'),0);}
 
@@ -1374,18 +1512,850 @@ function renderChoiceThumb(canvas,fractal,params){return new Promise(resolve=>{
  worker.addEventListener('error',()=>{clearTimeout(timer);worker.terminate();resolve(false);});
  worker.postMessage({type:'render',jobId,width:420,height:178,cx:params.cx,cy:params.cy,scale:params.scale,maxIter:105,fractal,juliaCr:params.juliaCr??-.8,juliaCi:params.juliaCi??.156,multibrotPower:params.multibrotPower??3});
 });}
+
+/* v28 · una sola escena espacial + bottom sheet */
+function installPremiumWorldUX(){
+ const step3=document.querySelector('.wizardStep[data-step="3"] .step3Wrap'),host=$('premiumConfigHost');
+ if(step3&&host&&!host.contains(step3)){host.appendChild(step3);host.setAttribute('aria-hidden','true');}
+ const hero=document.querySelector('.wizardStep[data-step="1"] .hero'),rail=$('fractalRail');
+ const fadeIntro=()=>hero&&hero.classList.add('introFaded');
+ if(rail){['pointerdown','wheel','touchstart'].forEach(ev=>rail.addEventListener(ev,fadeIntro,{passive:true}));rail.addEventListener('scroll',fadeIntro,{passive:true});}
+ setTimeout(fadeIntro,3200);
+ const syncSelectedCard=()=>{document.querySelectorAll('.choice[data-fractal]').forEach(x=>x.classList.toggle('selected',x.dataset.fractal===state.fractal));};
+ if(rail){const io=new IntersectionObserver(entries=>{let best=null;for(const e of entries){if(!best||e.intersectionRatio>best.intersectionRatio)best=e;}if(best&&best.intersectionRatio>.55){const b=best.target;if(b?.dataset?.fractal){state.fractal=b.dataset.fractal;syncSelectedCard();}}},{root:rail,threshold:[.55,.7,.85]});document.querySelectorAll('.choice[data-fractal]').forEach(x=>io.observe(x));}
+ $('worldsBtn')?.addEventListener('click',()=>{closeSoundSheet();setWizardStep(1);requestAnimationFrame(()=>document.querySelector('.choice.selected')?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}));});
+ $('premiumFullView')?.addEventListener('click',()=>$('resetFractal').click());
+ $('premiumListen')?.addEventListener('click',()=>{if(state.viewReady&&!state.busyFractal)openSoundSheet();});
+ $('premiumSettings')?.addEventListener('click',()=>openSoundSheet(true));
+ $('compassBtn')?.addEventListener('click',()=>{if(Math.abs(state.view.rotation||0)>.006)$('reorientFractal').click();});
+}
+function openSoundSheet(advanced=false){
+ $('wizard').classList.remove('hidden');if(state.step!==2)setWizardStep(2);updateSoundSummary();const sheet=$('mobileGuideSheet'),host=$('premiumConfigHost');sheet.classList.add('configOpen');if(host)host.setAttribute('aria-hidden','false');requestAnimationFrame(()=>{drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));if(state.miniMapBase)drawMiniMapBase(state.miniMapBase);});
+ if(advanced){setTimeout(()=>document.querySelector('#premiumConfigHost .step3Wrap')?.scrollTo?.({top:0,behavior:'smooth'}),50);}
+}
+function closeSoundSheet(){const sheet=$('mobileGuideSheet'),host=$('premiumConfigHost');sheet?.classList.remove('configOpen');host?.setAttribute('aria-hidden','true');requestAnimationFrame(()=>{if(state.step===2){drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));if(state.miniMapBase)drawMiniMapBase(state.miniMapBase);}});}
+
 /* Inicialización */
-populateFamousSpot();updateMultibrotPowerUI();updateFractalMath();updateDspMath('Preparando');setAudioQuality();syncEnergy();syncBand();updateSliderVisuals();updateSoundSummary();updateVizReadouts();$('fractalDetailRead').textContent='Balanceado';syncLabFromMain();updateSoundSummary();updateContextTools();(async()=>{
+installPremiumWorldUX();populateFamousSpot();updateMultibrotPowerUI();updateFractalMath();updateDspMath('Preparando');setAudioQuality();syncEnergy();syncBand();updateSliderVisuals();updateSoundSummary();updateVizReadouts();$('fractalDetailRead').textContent='Balanceado';syncLabFromMain();updateSoundSummary();updateContextTools();(async()=>{
  const thumbs=[
-  ['mandelbrotThumb','mandelbrot',{cx:-.62,cy:.01,scale:2.6}],
-  ['juliaThumb','julia',{cx:0,cy:0,scale:3.0,juliaCr:-.74543,juliaCi:.11301}],
-  ['burningShipThumb','burningShip',{cx:-1.758,cy:-.028,scale:.08}],
-  ['tricornThumb','tricorn',{cx:.1,cy:0,scale:2.7}],
-  ['multibrotThumb','multibrot',{cx:0,cy:0,scale:2.7,multibrotPower:3}],
-  ['newtonThumb','newton',{cx:0,cy:0,scale:3.1}]
+  ['mandelbrotThumb','mandelbrot',{cx:-.55,cy:0,scale:7.6}],
+  ['juliaThumb','julia',{cx:0,cy:0,scale:7.2,juliaCr:-.8,juliaCi:.156}],
+  ['burningShipThumb','burningShip',{cx:-.45,cy:-.5,scale:8.6}],
+  ['tricornThumb','tricorn',{cx:0,cy:0,scale:8.1}],
+  ['multibrotThumb','multibrot',{cx:0,cy:0,scale:7.5,multibrotPower:3}],
+  ['newtonThumb','newton',{cx:0,cy:0,scale:7.4}]
  ];
  for(const [id,type,params] of thumbs)await renderChoiceThumb($(id),type,params);
 })();
+
+
+/* v30 · UX top premium */
+(function installV29PremiumUX(){
+ document.body.classList.add('premiumSheets');
+ const worldSheet=$('mobileGuideSheet'),finalSheet=$('finalPremiumSheet');
+ const step3=document.querySelector('#premiumConfigHost .step3Wrap')||document.querySelector('.wizardStep[data-step="3"] .step3Wrap');
+ const worldHost=$('premiumConfigHost'),worldAdvanced=$('premiumAdvancedHost'),finalConfig=$('finalConfigHost'),finalAdvanced=$('finalAdvancedHost');
+ const drawer=$('drawer');
+ const advancedSections=drawer?Array.from(drawer.querySelectorAll(':scope > section')):[];
+ function mountAdvanced(host){if(!host)return;for(const s of advancedSections)host.appendChild(s);}
+ function mountConfig(host){if(step3&&host&&!host.contains(step3))host.appendChild(step3);}
+ mountConfig(worldHost);mountAdvanced(worldAdvanced);
+ // Add a real "Vista completa" action to medium configuration without occupying compact chrome.
+ if(worldHost&&!$('sheetFullViewAction')){const b=document.createElement('button');b.id='sheetFullViewAction';b.type='button';b.className='sheetInlineAction secondary';b.textContent='Vista completa';b.addEventListener('click',()=> $('resetFractal')?.click());worldHost.prepend(b);}
+ function heightFor(sheet,snap){const vh=innerHeight;return snap==='compact'?132:snap==='medium'?vh*(matchMedia('(max-width:820px)').matches?.56:.52):vh*(matchMedia('(max-width:820px)').matches?.92:.91);}
+ function setSnap(sheet,snap){if(!sheet)return;sheet.dataset.snap=snap;sheet.style.height='';if(sheet===worldSheet){const host=$('premiumConfigHost'),adv=$('premiumAdvancedHost');host?.setAttribute('aria-hidden',snap==='compact'?'true':'false');adv?.setAttribute('aria-hidden',snap==='expanded'?'false':'true');if(snap!=='compact')mountConfig(host);if(snap==='expanded')mountAdvanced(adv);}else{if(snap!=='compact')mountConfig(finalConfig);if(snap==='expanded')mountAdvanced(finalAdvanced);}requestAnimationFrame(()=>{if(state.step===2&&!$('wizard').classList.contains('hidden'))drawPixelsToCanvas(state.fractalCache,$('explorerCanvas'));else if(document.body.classList.contains('finalPremium'))drawActiveSpectralView();});}
+ function makeDraggable(sheet){if(!sheet)return;const handle=sheet.querySelector('.sheetHandleZone');if(!handle)return;let drag=null;handle.addEventListener('pointerdown',e=>{drag={id:e.pointerId,y:e.clientY,h:sheet.getBoundingClientRect().height};handle.setPointerCapture(e.pointerId);sheet.style.transition='none';});handle.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;const h=clamp(drag.h+(drag.y-e.clientY),heightFor(sheet,'compact'),heightFor(sheet,'expanded'));sheet.style.height=h+'px';});const end=e=>{if(!drag||drag.id!==e.pointerId)return;const h=sheet.getBoundingClientRect().height,vals=['compact','medium','expanded'].map(s=>[s,heightFor(sheet,s)]);vals.sort((a,b)=>Math.abs(a[1]-h)-Math.abs(b[1]-h));drag=null;sheet.style.transition='';setSnap(sheet,vals[0][0]);};handle.addEventListener('pointerup',end);handle.addEventListener('pointercancel',end);handle.addEventListener('dblclick',()=>setSnap(sheet,sheet.dataset.snap==='compact'?'medium':'compact'));}
+ makeDraggable(worldSheet);makeDraggable(finalSheet);setSnap(worldSheet,'compact');setSnap(finalSheet,'compact');
+ $('worldsBtn')?.addEventListener('click',()=>setSnap(worldSheet,'compact'));document.querySelectorAll('.choice[data-fractal]').forEach(c=>c.addEventListener('click',()=>setTimeout(()=>setSnap(worldSheet,'compact'),0)));
+ // Listening is always the action: generation from world; playback from final.
+ const oldListen=$('premiumListen');if(oldListen){const fresh=oldListen.cloneNode(true);oldListen.replaceWith(fresh);fresh.addEventListener('click',()=>{if(state.viewReady&&!state.busyFractal&&!state.busyDsp)runGeneration();});}
+ $('premiumModeToggle')?.addEventListener('click',()=>{if(state.audioCache){enterFinalExperience();}else setSnap(worldSheet,'medium');});
+ // Open configuration by physically lifting the sheet (no settings button needed).
+ worldSheet?.querySelector('.premiumTitleRow')?.addEventListener('dblclick',()=>setSnap(worldSheet,'medium'));
+ // Selector intro lasts 1.5s; instruction remains.
+ setTimeout(()=>document.querySelector('.premiumIntro')?.remove(),3100);
+ // Final sheet controls.
+ $('finalWorldsBtn')?.addEventListener('click',()=>{pausePlayback();document.body.classList.remove('finalPremium');$('wizard').classList.remove('hidden');setWizardStep(1);requestAnimationFrame(()=>document.querySelector('.choice.selected')?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}));});
+ $('finalModeToggle')?.addEventListener('click',()=>{const next=state.activeView==='spec'?'fractal':'spec';state.activeView=next;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===next));$('fractalCanvas').style.display=next==='fractal'?'block':'none';$('specCanvas').style.display=next==='spec'?'block':'none';$('cursorCanvas').style.display=next==='spec'?'block':'none';$('finalModeToggle').querySelector('span:last-child').textContent=next==='spec'?'Espectrograma':'Fractal';if(next==='spec')drawActiveSpectralView();else drawFractalFinal();});
+ $('finalListenBtn')?.addEventListener('click',async()=>{try{if(isPlaying)pausePlayback();else await startPlayback();}catch(err){$('finalSheetStatus').textContent='No se pudo reproducir: '+err.message;}});
+ $('finalFullView')?.addEventListener('click',()=>{if(state.activeView==='spec')resetSpecView();else drawFractalFinal();});
+ // Mirror seek/download without duplicating audio state.
+ $('finalSheetSeek')?.addEventListener('input',()=>{$('seek').value=$('finalSheetSeek').value;$('seek').dispatchEvent(new Event('input',{bubbles:true}));});
+ const origSeek=$('seek');origSeek?.addEventListener('input',()=>{if($('finalSheetSeek'))$('finalSheetSeek').value=origSeek.value;});
+ // Move config/advanced to whichever active sheet is expanded.
+ finalSheet?.querySelector('.sheetHandleZone')?.addEventListener('pointerup',()=>{setTimeout(()=>{if(finalSheet.dataset.snap!=='compact')mountConfig(finalConfig);if(finalSheet.dataset.snap==='expanded')mountAdvanced(finalAdvanced);},20);});
+ worldSheet?.querySelector('.sheetHandleZone')?.addEventListener('pointerup',()=>{setTimeout(()=>{if(worldSheet.dataset.snap!=='compact')mountConfig(worldHost);if(worldSheet.dataset.snap==='expanded')mountAdvanced(worldAdvanced);},20);});
+ // Legacy settings access lifts active sheet instead of drawer.
+ $('gearBtn')?.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();setSnap(finalSheet,'expanded');},true);
+ // Update final sheet labels from playback clock.
+ const syncFinalSheet=()=>{if(document.body.classList.contains('finalPremium')){const cur=+$('seek').value||0,tot=+$('seek').max||state.audioCache?.duration||0;const fmt=t=>{t=Math.max(0,t||0);const m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+String(s).padStart(2,'0');};$('finalSheetCurrent').textContent=fmt(cur);$('finalSheetTotal').textContent=fmt(tot);$('finalSheetTime').textContent=fmt(cur)+' / '+fmt(tot);$('finalSheetSeek').max=tot||1;$('finalSheetSeek').value=cur;$('finalListenBtn').querySelector('span:last-child').textContent=isPlaying?'Pausa':'Escuchar';$('finalListenBtn').querySelector('span:first-child').textContent=isPlaying?'❚❚':'♪';if($('download')?.href){$('finalSheetDownload').href=$('download').href;}}requestAnimationFrame(syncFinalSheet);};requestAnimationFrame(syncFinalSheet);
+ // Expose snap helpers for existing functions.
+ window.__premiumSetSnap=setSnap;window.__premiumMountConfig=mountConfig;window.__premiumMountAdvanced=mountAdvanced;
+})();
+
+/* Premium final overrides after the engine's functions already exist. */
+Object.assign(PLOT,{left:0,right:0,top:0,bottom:0});
+drawAxes=function(ctx,W,H){const v=state.specView;ctx.save();ctx.strokeStyle='rgba(255,255,255,.58)';ctx.fillStyle='rgba(255,255,255,.96)';ctx.shadowColor='rgba(0,0,0,.75)';ctx.shadowBlur=3;ctx.lineWidth=1;ctx.font='11px Inter,system-ui';ctx.textBaseline='middle';ctx.textAlign='right';const ft=frequencyTicks(v.f0,v.f1,state.specScale);for(const f of ft){const y=H-freqToDisplayPos(f,v.f0,v.f1,state.specScale)*H;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(7,y);ctx.stroke();const val=f>=1000?(f/1000).toFixed(f%1000?1:0):Math.round(f).toString();ctx.fillText(val,29,clamp(y,18,H-18));}ctx.textAlign='left';ctx.textBaseline='top';ctx.font='800 11px Inter,system-ui';ctx.fillText(v.f1>=1000?'kHz':'Hz',7,7);ctx.font='11px Inter,system-ui';ctx.textAlign='center';ctx.textBaseline='bottom';const tt=niceTicks(v.t0,v.t1,6);for(const t of tt){const x=(t-v.t0)/(v.t1-v.t0)*W;ctx.beginPath();ctx.moveTo(x,H-7);ctx.lineTo(x,H);ctx.stroke();ctx.fillText(t.toFixed(v.t1-v.t0<=6?1:0),clamp(x,10,W-18),H-7);}ctx.textAlign='right';ctx.font='800 11px Inter,system-ui';ctx.fillText('s',W-6,H-7);ctx.restore();};
+
+// Wrap final entry to activate full-screen premium shell.
+const __enterFinalExperienceV28=enterFinalExperience;
+enterFinalExperience=async function(){await __enterFinalExperienceV28();document.body.classList.add('finalPremium');$('finalWorldName').textContent=fractalLabel(state.fractal);$('finalModeToggle').querySelector('span:last-child').textContent='Espectrograma';if(window.__premiumSetSnap)window.__premiumSetSnap($('finalPremiumSheet'),'compact');requestAnimationFrame(()=>{drawActiveSpectralView();});};
+
 </script>
+
+<script id="v30-premium-behavior">
+(function(){
+  const $v=id=>document.getElementById(id);
+  /* Intro lasts 3 s; no instruction remains after it. */
+  setTimeout(()=>document.querySelector('.premiumIntro')?.remove(),3100);
+
+  /* Circular-looking carousel: clone the end cards only after thumbnails are rendered,
+     so Mandelbrot begins with a visible neighbor on both sides. */
+  setTimeout(()=>{
+    const rail=$v('fractalRail'); if(!rail || rail.dataset.v30Loop) return; rail.dataset.v30Loop='1';
+    const originals=[...rail.querySelectorAll('.choice[data-fractal]')]; if(originals.length<2) return;
+    const makeClone=(source,where)=>{
+      const clone=source.cloneNode(true); clone.classList.add('v30CarouselClone'); clone.classList.remove('selected');
+      clone.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+      const sc=source.querySelector('canvas'), cc=clone.querySelector('canvas');
+      if(sc&&cc){cc.width=sc.width;cc.height=sc.height;try{cc.getContext('2d').drawImage(sc,0,0);}catch(_){}}
+      clone.addEventListener('click',()=>{const target=[...rail.querySelectorAll('.choice:not(.v30CarouselClone)')].find(x=>x.dataset.fractal===clone.dataset.fractal);target?.click();target?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});});
+      where==='start'?rail.prepend(clone):rail.append(clone); return clone;
+    };
+    makeClone(originals[originals.length-1],'start'); makeClone(originals[0],'end');
+    requestAnimationFrame(()=>originals[0].scrollIntoView({behavior:'auto',inline:'center',block:'nearest'}));
+  },2600);
+
+  /* Make both handles easy to grab even when ranges become narrow. */
+  [['lowRange','highRange'],['simpleFloor','simplePeak'],['labFloor','labPeak']].forEach(([a,b])=>{
+    [a,b].forEach(id=>$v(id)?.addEventListener('pointerdown',()=>{const x=$v(a),y=$v(b);if(x&&y){x.style.zIndex=id===a?'6':'4';y.style.zIndex=id===b?'6':'4';}}));
+  });
+
+  /* Energy gets the same exact numeric affordance as frequency. */
+  const energySection=document.querySelector('.energySection');
+  if(energySection&&!$v('v30EnergyFloor')){
+    const row=document.createElement('div'); row.className='v30EnergyInputs';
+    row.innerHTML='<div class="field"><label>Fondo</label><div class="numberUnit"><input id="v30EnergyFloor" type="number" min="-140" max="-2" step="1"><span>dB</span></div></div><div class="field"><label>Picos</label><div class="numberUnit"><input id="v30EnergyPeak" type="number" min="-139" max="-1" step="1"><span>dB</span></div></div>';
+    energySection.appendChild(row);
+    const f=$v('v30EnergyFloor'),p=$v('v30EnergyPeak');
+    const pull=()=>{f.value=$v('simpleFloor').value;p.value=$v('simplePeak').value;};pull();
+    ['input','change'].forEach(ev=>{f.addEventListener(ev,()=>{$v('simpleFloor').value=f.value;$v('simpleFloor').dispatchEvent(new Event('input',{bubbles:true}));});p.addEventListener(ev,()=>{$v('simplePeak').value=p.value;$v('simplePeak').dispatchEvent(new Event('input',{bubbles:true}));});$v('simpleFloor').addEventListener(ev,pull);$v('simplePeak').addEventListener(ev,pull);});
+  }
+
+  /* Expanded sheet: expose every technical knob that was formerly hidden. */
+  const adv=$v('premiumAdvancedHost');
+  const techHidden=$v('sampleRate')?.parentElement;
+  if(adv && !$v('v30TechPanel')){
+    const panel=document.createElement('section');panel.id='v30TechPanel';panel.className='v30TechPanel';
+    panel.innerHTML='<h2>Parámetros técnicos</h2><div class="v30ToggleRow"><label for="v30ManualEngine"><b>Motor manual</b><br><span class="hint">Desactívalo para que Sonidero optimice FFT, hop y muestreo.</span></label><input id="v30ManualEngine" type="checkbox"></div><div id="v30TechGrid" class="v30TechGrid"></div>';
+    adv.prepend(panel);
+    const grid=$v('v30TechGrid');
+    const move=(id,label,full=false)=>{const el=$v(id);if(!el)return;const w=document.createElement('label');if(full)w.className='full';w.append(document.createTextNode(label));w.appendChild(el);grid.appendChild(w);};
+    if(techHidden){techHidden.classList.remove('hidden');techHidden.removeAttribute('aria-hidden');}
+    move('sampleRate','Muestreo (Hz)');move('nfft','FFT');move('hop','Hop');move('audioGamma','Gamma de magnitud');move('powerMode','Imagen → magnitud');move('synthMode','Fase inicial');
+    const patience=document.createElement('label');patience.innerHTML='Paciencia de convergencia<input id="v30Patience" type="number" min="3" max="50" step="1" value="10">';grid.appendChild(patience);
+    const improve=document.createElement('label');improve.innerHTML='Mejora mínima en ventana (%)<input id="v30MinImprove" type="number" min="0.01" max="10" step="0.05" value="0.5">';grid.appendChild(improve);
+    const tol=document.createElement('label');tol.innerHTML='Tolerancia por iteración (%)<input id="v30Tol" type="number" min="0.001" max="5" step="0.01" value="0.15">';grid.appendChild(tol);
+    const note=document.createElement('div');note.className='hint full';note.textContent='Por defecto, si el error no mejora al menos el porcentaje indicado durante 10 iteraciones, Griffin–Lim termina antes del máximo.';grid.appendChild(note);
+    // Energy advanced gets exact numeric values too.
+    const labEnergy=$v('labEnergyRead')?.closest('.labControlBlock');
+    if(labEnergy&&!$v('v30LabFloorNum')){const r=document.createElement('div');r.className='v30EnergyInputs';r.innerHTML='<div class="field"><label>Fondo</label><div class="numberUnit"><input id="v30LabFloorNum" type="number" min="-140" max="-2" step="1"><span>dB</span></div></div><div class="field"><label>Picos</label><div class="numberUnit"><input id="v30LabPeakNum" type="number" min="-139" max="-1" step="1"><span>dB</span></div></div>';labEnergy.appendChild(r);const lf=$v('v30LabFloorNum'),lp=$v('v30LabPeakNum');const pull=()=>{lf.value=$v('labFloor').value;lp.value=$v('labPeak').value};pull();lf.addEventListener('input',()=>{$v('labFloor').value=lf.value;$v('labFloor').dispatchEvent(new Event('input',{bubbles:true}))});lp.addEventListener('input',()=>{$v('labPeak').value=lp.value;$v('labPeak').dispatchEvent(new Event('input',{bubbles:true}))});$v('labFloor').addEventListener('input',pull);$v('labPeak').addEventListener('input',pull);}
+  }
+
+  /* Engine config: automatic by default, manual when requested; early stopping is configurable. */
+  const oldChoose=chooseAutoEngine;
+  chooseAutoEngine=function(){
+    const manualOn=!!$v('v30ManualEngine')?.checked;
+    const manualVals=manualOn?{sr:+$v('sampleRate').value,nfft:+$v('nfft').value,hop:+$v('hop').value,gamma:+$v('audioGamma').value,power:$v('powerMode').value}:null;
+    const cfg=oldChoose();
+    cfg.griffinPatience=Math.max(3,Math.round(+$v('v30Patience')?.value||10));
+    cfg.griffinWindowImprove=Math.max(.000001,(+$v('v30MinImprove')?.value||.5)/100);
+    cfg.griffinTol=Math.max(.000001,(+$v('v30Tol')?.value||.15)/100);
+    if(manualOn){
+      cfg.sr=manualVals.sr||cfg.sr; cfg.nfft=manualVals.nfft||cfg.nfft; cfg.hop=manualVals.hop||Math.round(cfg.nfft/2);
+      cfg.hop=Math.min(cfg.hop,cfg.nfft); cfg.frames=Math.max(1,Math.ceil(Math.max(0,cfg.sr*cfg.duration-cfg.nfft)/cfg.hop)+1); cfg.cells=cfg.frames*(cfg.nfft/2+1);
+      cfg.audioGamma=manualVals.gamma||cfg.audioGamma; cfg.powerMode=manualVals.power||cfg.powerMode;
+      if(cfg.fmax>cfg.sr/2){cfg.sr=[44100,48000,96000,192000].find(x=>x>=cfg.fmax*2.05)||192000;$v('sampleRate').value=String(cfg.sr);}
+      state.lastEngine=cfg;updateEngineReadouts(cfg);
+    }
+    return cfg;
+  };
+
+  /* Preserve a signature of the exact world + sonification settings that produced the WAV. */
+  function currentSignature(){const v=state.view||{};return JSON.stringify({f:state.fractal,cx:+v.cx?.toPrecision?.(12)||v.cx,cy:+v.cy?.toPrecision?.(12)||v.cy,s:+v.scale?.toPrecision?.(12)||v.scale,r:+(v.rotation||0).toPrecision(10),lo:$v('bandLowInput')?.value,hi:$v('bandHighInput')?.value,floor:$v('simpleFloor')?.value,peak:$v('simplePeak')?.value,d:$v('duration')?.value,g:$v('griffinIterations')?.value,q:$v('audioQuality')?.value,manual:$v('v30ManualEngine')?.checked,sr:$v('sampleRate')?.value,n:$v('nfft')?.value,h:$v('hop')?.value,gamma:$v('audioGamma')?.value,pm:$v('powerMode')?.value,pat:$v('v30Patience')?.value,imp:$v('v30MinImprove')?.value,tol:$v('v30Tol')?.value});}
+  const oldRun=runGeneration;
+  runGeneration=async function(){await oldRun();if(state.audioCache)state.v30AudioSignature=currentSignature();};
+
+  /* Replace mode buttons so Fractal really returns to the navigable world and cached audio is reused. */
+  const worldToggle=$v('premiumModeToggle');
+  if(worldToggle){const fresh=worldToggle.cloneNode(true);worldToggle.replaceWith(fresh);fresh.addEventListener('click',async()=>{if(state.audioCache&&state.v30AudioSignature===currentSignature())await enterFinalExperience();else if(state.audioCache)await runGeneration();else window.__premiumSetSnap?.($v('mobileGuideSheet'),'medium');});}
+  const finalToggle=$v('finalModeToggle');
+  if(finalToggle){const fresh=finalToggle.cloneNode(true);finalToggle.replaceWith(fresh);fresh.addEventListener('click',()=>{pausePlayback();document.body.classList.remove('finalPremium');$v('wizard').classList.remove('hidden');setWizardStep(2);state.activeView='fractal';window.__premiumSetSnap?.($v('mobileGuideSheet'),'compact');requestAnimationFrame(()=>drawPixelsToCanvas(state.fractalCache,$v('explorerCanvas')));});}
+
+  /* In final mode the musical note becomes a real play/pause icon. */
+  const finalListen=$v('finalListenBtn');
+  if(finalListen){const fresh=finalListen.cloneNode(true);finalListen.replaceWith(fresh);fresh.addEventListener('click',async()=>{if(isPlaying)pausePlayback();else await startPlayback();});}
+
+  /* Keep final compact icon/readout synchronized. */
+  function syncV30(){if(document.body.classList.contains('finalPremium')){const b=$v('finalListenBtn');if(b){b.querySelector('span:first-child').textContent=isPlaying?'❚❚':'▶';b.querySelector('span:last-child').textContent=isPlaying?'Pausa':'Reproducir';}}requestAnimationFrame(syncV30)}requestAnimationFrame(syncV30);
+})();
+
+/* Overlay axes: frequency left, time TOP, units attached to the final label. */
+drawAxes=function(ctx,W,H){
+ const v=state.specView;ctx.save();ctx.strokeStyle='rgba(255,255,255,.62)';ctx.fillStyle='rgba(255,255,255,.97)';ctx.shadowColor='rgba(0,0,0,.78)';ctx.shadowBlur=3;ctx.lineWidth=1;ctx.font='11px Inter,system-ui';
+ const ft=frequencyTicks(v.f0,v.f1,state.specScale);ctx.textAlign='left';ctx.textBaseline='middle';
+ ft.forEach((f,i)=>{const y=H-freqToDisplayPos(f,v.f0,v.f1,state.specScale)*H;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(7,y);ctx.stroke();let val;if(f>=1000)val=(f/1000).toFixed(f%1000?1:0);else val=Math.round(f).toString();if(i===ft.length-1)val+=' '+(f>=1000?'kHz':'Hz');ctx.fillText(val,10,clamp(y,12,H-12));});
+ const tt=niceTicks(v.t0,v.t1,7);ctx.textAlign='center';ctx.textBaseline='top';
+ tt.forEach((t,i)=>{const x=(t-v.t0)/(v.t1-v.t0)*W;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,7);ctx.stroke();let label=t.toFixed(v.t1-v.t0<=6?1:0);if(i===tt.length-1)label+=' s';ctx.fillText(label,clamp(x,12,W-22),9);});ctx.restore();
+};
+/* Cursor label slightly below the top time scale. */
+const __v30DrawCursorBase=drawCursor;
+drawCursor=function(){__v30DrawCursorBase();const c=document.getElementById('cursorCanvas');if(!c||!state.audioCache||state.activeView==='fractal')return;const t=currentPlaybackTime(),v=state.specView;if(t<v.t0||t>v.t1)return;const ctx=c.getContext('2d'),W=c.width,x=(t-v.t0)/(v.t1-v.t0)*W,label=t.toFixed(2)+' s',ww=76,hh=28,lx=clamp(x-ww/2,2,W-ww-2);ctx.clearRect(0,0,W,48);ctx.strokeStyle='#ffdf5d';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,c.height);ctx.stroke();ctx.fillStyle='#07111eee';ctx.strokeStyle='#ffdf5d';ctx.beginPath();ctx.roundRect(lx,28,ww,hh,8);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4b6';ctx.font='bold 13px Inter';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,lx+ww/2,28+hh/2);};
+</script>
+
+
+
+<!-- v31 · continuidad espacial, carrusel infinito y bottom sheets robustos -->
+<style id="v31-premium-polish">
+/* El contenido visible termina exactamente en el borde superior del sheet compacto.
+   Al abrir el sheet, este se superpone: el mundo NO se reencuadra. */
+.wizard.worldMode .immersiveExplorer{
+  inset:0 0 var(--sheet-compact) 0!important;
+  height:auto!important;
+}
+body.finalPremium .canvasWrap{
+  inset:0 0 var(--sheet-compact) 0!important;
+  height:auto!important;
+}
+/* Nada de barras/rectángulos de progreso heredados encima del mundo. */
+.wizard.worldMode .explorerCompute,
+.wizard.worldMode .loadingOverlay.soft{display:none!important}
+
+/* Sheet: mismo margen en todos los snaps; el handle tiene un hit-area mayor sin ocupar más layout. */
+.sheetHandleZone{position:relative!important;height:28px!important;min-height:28px!important;margin:0!important;padding:0!important;display:grid!important;place-items:center!important;touch-action:none!important;user-select:none!important}
+.sheetHandleZone::before{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-10px;z-index:0}
+.sheetHandle{position:relative;z-index:1;width:48px!important;height:5px!important;background:#9aa5ab!important}
+.premiumBottomSheet .premiumSheetChrome{padding-top:0!important;margin-top:0!important}
+
+/* Presets: una sola fila, todos exactamente del mismo ancho, deslizable como Maps. */
+.presetChips{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;gap:8px!important;padding:3px 1px 8px!important;scroll-snap-type:x proximity;scrollbar-width:none!important;-webkit-overflow-scrolling:touch}
+.presetChips::-webkit-scrollbar{display:none!important}
+.presetChips button,.presetChips button:last-child{flex:0 0 126px!important;width:126px!important;max-width:126px!important;min-width:126px!important;justify-content:center!important;text-align:center!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap!important}
+
+/* Una única superficie continua. Evita paneles visuales duplicados en configuración completa. */
+.premiumBottomSheet .premiumConfigHost,.premiumBottomSheet .premiumAdvancedHost,.finalMediumHost{box-shadow:none!important}
+.premiumAdvancedHost .engineDiagGrid{display:none!important}
+.premiumAdvancedHost .engineNote{margin-top:4px!important}
+.finalPremiumSheet[data-snap="expanded"] .finalMediumHost{
+  height:calc(100% - 118px)!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding-bottom:30px!important;
+}
+.finalPremiumSheet .finalMediumHost>.premiumAdvancedHost{
+  display:block!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:8px 0 24px!important;border-top:1px solid var(--sheet-line)!important
+}
+.finalPremiumSheet[data-snap="compact"] .finalMediumHost{display:none!important}
+.finalPremiumSheet[data-snap="medium"] .finalMediumHost{display:block!important}
+.finalPremiumSheet[data-snap="medium"] .finalMediumHost>.premiumAdvancedHost{display:none!important}
+.finalPremiumSheet[data-snap="expanded"] .finalMediumHost>.premiumAdvancedHost{display:block!important}
+
+/* Etiquetas internas del espectrograma: legibles sin robar área útil. */
+body.finalPremium .canvasWrap{overflow:hidden!important}
+
+/* Carrusel: los vecinos siempre asoman y no hay sensación de final. */
+.choices{scrollbar-width:none!important;overscroll-behavior-x:contain!important;-webkit-overflow-scrolling:touch!important}
+.choices::-webkit-scrollbar{display:none!important}
+.v31LoopClone{pointer-events:auto}
+
+@media(max-width:820px){
+  .presetChips button,.presetChips button:last-child{flex-basis:118px!important;width:118px!important;min-width:118px!important;max-width:118px!important}
+}
+</style>
+<script id="v31-premium-behavior">
+(function(){
+ const $v=id=>document.getElementById(id);
+
+ /* Carrusel circular real: un ciclo completo a cada lado y teletransporte imperceptible
+    al ciclo equivalente. Funciona hacia izquierda y derecha indefinidamente. */
+ function installInfiniteWorldRail(){
+   const rail=$v('fractalRail'); if(!rail||rail.dataset.v31Infinite)return;
+   rail.dataset.v31Infinite='1';
+   rail.querySelectorAll('.v30CarouselClone,.v31LoopClone').forEach(n=>n.remove());
+   const originals=[...rail.querySelectorAll('.choice[data-fractal]')]; if(originals.length<2)return;
+   const cloneCard=(src,side)=>{
+     const c=src.cloneNode(true); c.classList.add('v31LoopClone'); c.classList.remove('selected'); c.dataset.loopSide=side;
+     c.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+     const sc=src.querySelector('canvas'),cc=c.querySelector('canvas');
+     if(sc&&cc){cc.width=sc.width;cc.height=sc.height;try{cc.getContext('2d').drawImage(sc,0,0);}catch(_){}}
+     c.addEventListener('click',()=>{
+       const real=originals.find(x=>x.dataset.fractal===c.dataset.fractal); if(real){real.click();}
+     });
+     return c;
+   };
+   const left=originals.map(x=>cloneCard(x,'left'));
+   const right=originals.map(x=>cloneCard(x,'right'));
+   left.reverse().forEach(c=>rail.prepend(c));
+   right.forEach(c=>rail.append(c));
+
+   let cycle=0,base=0,locking=false;
+   const measure=()=>{
+     const first=originals[0],rightFirst=right[0]; if(!first||!rightFirst)return;
+     cycle=rightFirst.offsetLeft-first.offsetLeft;
+     base=first.offsetLeft-(rail.clientWidth-first.offsetWidth)/2;
+     if(cycle>0){locking=true;rail.scrollLeft=base;requestAnimationFrame(()=>locking=false);}
+   };
+   const nearestOriginal=()=>{
+     const rc=rail.getBoundingClientRect(),cx=rc.left+rc.width/2;
+     let best=null,dist=Infinity;
+     rail.querySelectorAll('.choice[data-fractal]').forEach(card=>{
+       const r=card.getBoundingClientRect(),d=Math.abs((r.left+r.right)/2-cx);if(d<dist){dist=d;best=card;}
+     });
+     if(best){state.fractal=best.dataset.fractal;originals.forEach(x=>x.classList.toggle('selected',x.dataset.fractal===state.fractal));}
+   };
+   const recenter=()=>{
+     if(locking||!cycle)return;
+     let x=rail.scrollLeft;
+     if(x<base-cycle*.58){locking=true;rail.scrollLeft=x+cycle;requestAnimationFrame(()=>locking=false);}
+     else if(x>base+cycle*.58){locking=true;rail.scrollLeft=x-cycle;requestAnimationFrame(()=>locking=false);}
+     nearestOriginal();
+   };
+   rail.addEventListener('scroll',recenter,{passive:true});
+   new ResizeObserver(()=>requestAnimationFrame(measure)).observe(rail);
+   setTimeout(measure,80);
+ }
+ setTimeout(installInfiniteWorldRail,3350);
+
+ /* El panel avanzado es uno solo y viaja al sheet activo. En el final vive dentro
+    del mismo scroller para que no existan dos paneles superpuestos. */
+ const worldSheet=$v('mobileGuideSheet'), finalSheet=$v('finalPremiumSheet');
+ const worldAdv=$v('premiumAdvancedHost'), finalAdv=$v('finalAdvancedHost'), finalMedium=$v('finalMediumHost');
+ if(finalAdv&&finalMedium&&!finalMedium.contains(finalAdv))finalMedium.appendChild(finalAdv);
+ function syncSharedTechnicalPanel(){
+   const panel=$v('v30TechPanel'); if(!panel)return;
+   if(document.body.classList.contains('finalPremium')&&finalSheet?.dataset.snap==='expanded'){
+     if(finalAdv&&!finalAdv.contains(panel))finalAdv.prepend(panel);
+   }else if(worldSheet?.dataset.snap==='expanded'){
+     if(worldAdv&&!worldAdv.contains(panel))worldAdv.prepend(panel);
+   }
+ }
+ [worldSheet,finalSheet].filter(Boolean).forEach(sheet=>new MutationObserver(syncSharedTechnicalPanel).observe(sheet,{attributes:true,attributeFilter:['data-snap']}));
+ new MutationObserver(syncSharedTechnicalPanel).observe(document.body,{attributes:true,attributeFilter:['class']});
+ setTimeout(syncSharedTechnicalPanel,100);
+
+ /* Mejor agarre: toda la pequeña franja superior responde al gesto; no cambia
+    ninguna dimensión del contenido mientras se arrastra el sheet. */
+ document.querySelectorAll('.sheetHandleZone').forEach(zone=>{
+   zone.addEventListener('pointerdown',()=>zone.classList.add('isGrabbing'),{passive:true});
+   ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>zone.addEventListener(ev,()=>zone.classList.remove('isGrabbing'),{passive:true}));
+ });
+})();
+
+/* Ejes internos v31: tiempo arriba; frecuencia a la izquierda. La etiqueta de
+   frecuencia más alta solo se dibuja si cabe completamente bajo el eje temporal. */
+drawAxes=function(ctx,W,H){
+ const v=state.specView;ctx.save();
+ ctx.strokeStyle='rgba(255,255,255,.72)';ctx.fillStyle='rgba(255,255,255,.98)';ctx.shadowColor='rgba(0,0,0,.88)';ctx.shadowBlur=4;ctx.lineWidth=1.35;
+ const fontPx=Math.max(14,Math.min(17,Math.round(Math.min(W,H)/38)));ctx.font=`600 ${fontPx}px Inter,system-ui`;
+ const topAxisBottom=fontPx+20;
+ const ft=frequencyTicks(v.f0,v.f1,state.specScale)
+   .map(f=>({f,y:H-freqToDisplayPos(f,v.f0,v.f1,state.specScale)*H}))
+   .filter(o=>o.y>=topAxisBottom+7&&o.y<=H-fontPx*.7);
+ ctx.textAlign='left';ctx.textBaseline='middle';
+ ft.forEach((o,i)=>{
+   ctx.beginPath();ctx.moveTo(0,o.y);ctx.lineTo(9,o.y);ctx.stroke();
+   let val=o.f>=1000?(o.f/1000).toFixed(o.f%1000?1:0):Math.round(o.f).toString();
+   if(i===ft.length-1)val+=' '+(o.f>=1000?'kHz':'Hz');
+   ctx.fillText(val,12,o.y);
+ });
+ const tt=niceTicks(v.t0,v.t1,7);ctx.textAlign='center';ctx.textBaseline='top';
+ tt.forEach((t,i)=>{
+   const x=(t-v.t0)/(v.t1-v.t0)*W;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,9);ctx.stroke();
+   let label=t.toFixed(v.t1-v.t0<=6?1:0);if(i===tt.length-1)label+=' s';
+   const safeX=clamp(x,fontPx*1.4,W-fontPx*2.0);ctx.fillText(label,safeX,8);
+ });
+ ctx.restore();
+};
+
+/* Cajón de tiempo ligeramente más abajo para despejar las etiquetas superiores. */
+const __v31CursorBase=drawCursor;
+drawCursor=function(){
+ __v31CursorBase();const c=$v('cursorCanvas');if(!c||!state.audioCache||state.activeView==='fractal')return;
+ const t=currentPlaybackTime(),v=state.specView;if(t<v.t0||t>v.t1)return;
+ const ctx=c.getContext('2d'),W=c.width,x=(t-v.t0)/(v.t1-v.t0)*W,label=t.toFixed(2)+' s',ww=82,hh=30,lx=clamp(x-ww/2,2,W-ww-2),ly=38;
+ ctx.clearRect(0,0,W,ly+hh+5);ctx.strokeStyle='#ffdf5d';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,c.height);ctx.stroke();
+ ctx.fillStyle='#07111eee';ctx.strokeStyle='#ffdf5d';ctx.beginPath();ctx.roundRect(lx,ly,ww,hh,9);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4b6';ctx.font='bold 14px Inter';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,lx+ww/2,ly+hh/2);
+};
+</script>
+
+
+<!-- v32 · recuperación de la gramática premium: mundo y espectrograma comparten exactamente el mismo paradigma -->
+<style id="v32-premium-recovery">
+:root{
+  --sheet-radius:28px;
+  --sheet-corner-overlap:30px;
+  --sheet-hit:52px;
+}
+/* El contenido continúa SOLO lo necesario detrás de las esquinas redondeadas del sheet compacto. */
+.wizard.worldMode .immersiveExplorer{
+  inset:0 0 calc(var(--sheet-compact) - var(--sheet-corner-overlap)) 0!important;
+  height:auto!important;
+}
+body.finalPremium .canvasWrap{
+  inset:0 0 calc(var(--sheet-compact) - var(--sheet-corner-overlap)) 0!important;
+  height:auto!important;
+}
+/* Al elevar el sheet, el mundo de fondo no cambia de cámara ni de viewport. */
+.premiumBottomSheet{border-radius:var(--sheet-radius) var(--sheet-radius) 0 0!important}
+
+/* Nada heredado de carga encima del mundo. */
+#explorerLoading,.wizard.worldMode .explorerCompute,.wizard.worldMode .loadingOverlay.soft{display:none!important}
+
+/* Home: solo mundos tras la intro. Más vecinos visibles; imágenes más completas. */
+.worldInstruction,.railHint{display:none!important}
+@media(max-width:820px){
+  .choices{padding-inline:18vw!important;scroll-padding-inline:18vw!important;gap:3.8vw!important}
+  .choice{flex-basis:64vw!important;aspect-ratio:.90/1!important;transform:scale(.93)!important;opacity:.62!important}
+  .choice.selected{transform:scale(1)!important;opacity:1!important}
+}
+@media(min-width:821px){
+  .choices{padding-inline:22vw!important;scroll-padding-inline:22vw!important;gap:2.6vw!important}
+  .choice{flex-basis:min(52vw,680px)!important}
+}
+
+/* Handle visual pequeño, hit-area grande y estable. */
+.sheetHandleZone{
+  height:22px!important;min-height:22px!important;margin:0!important;padding:0!important;
+  position:relative!important;display:grid!important;place-items:center!important;touch-action:none!important;cursor:ns-resize!important
+}
+.sheetHandleZone::before{content:"";position:absolute;left:0;right:0;top:-12px;height:var(--sheet-hit);z-index:0}
+.sheetHandle{position:relative;z-index:1;width:48px!important;height:5px!important;border-radius:999px!important;background:#a5adb2!important}
+.sheetHandleZone.isGrabbing .sheetHandle{background:#71818a!important}
+.premiumBottomSheet .premiumSheetChrome{padding-top:0!important;margin-top:0!important}
+
+/* Presets: carrusel simple, una fila, tamaños idénticos. */
+.presetChips{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;gap:8px!important;padding:2px 0 9px!important;scroll-snap-type:x proximity!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important}
+.presetChips::-webkit-scrollbar{display:none!important}
+.presetChips button,.presetChips button:last-child{flex:0 0 112px!important;width:112px!important;min-width:112px!important;max-width:112px!important;min-height:38px!important;padding:8px 10px!important;border-radius:999px!important;scroll-snap-align:start!important;text-align:center!important;white-space:nowrap!important}
+
+/* Una sola superficie continua: sin híbrido de reproductor viejo + controles nuevos. */
+body.finalPremium .topbar,body.finalPremium .viewHead,body.finalPremium .player,body.finalPremium .statusBar{display:none!important}
+.finalPremiumSheet .finalMediumHost{
+  display:none!important;background:var(--sheet-bg)!important;color:var(--sheet-text)!important;
+  height:calc(100% - 112px)!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;
+  padding:8px 14px 28px!important;overscroll-behavior:contain!important
+}
+.finalPremiumSheet[data-snap="medium"] .finalMediumHost,.finalPremiumSheet[data-snap="expanded"] .finalMediumHost{display:block!important}
+.finalPremiumSheet .finalConfigHost{margin:0!important;padding:0!important}
+.finalPremiumSheet .finalConfigHost .step3Wrap{padding:0!important;background:transparent!important}
+.finalPremiumSheet .finalMediumHost>.premiumAdvancedHost{display:none!important;position:static!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:8px 0 24px!important;border-top:1px solid var(--sheet-line)!important}
+.finalPremiumSheet[data-snap="expanded"] .finalMediumHost>.premiumAdvancedHost{display:block!important}
+.finalPremiumSheet .sheetInlineAction{display:none!important}
+.finalPlaybackRow{padding:5px 0 12px!important;margin-bottom:4px!important;border-bottom:1px solid var(--sheet-line)!important}
+/* Elimina diagnóstico/repeticiones; la configuración cotidiana ya está arriba. */
+.premiumAdvancedHost .engineDiagGrid,.premiumAdvancedHost .engineNote{display:none!important}
+.v32DuplicateAdvanced,.premiumAdvancedHost .grid2:has(#regenerateBtn){display:none!important}
+
+/* El sheet medio/expandido conserva una sola estética clara. */
+.premiumConfigHost .step3Section,.premiumConfigHost .rangeControlCard,.premiumAdvancedHost section,.premiumAdvancedHost .labControlBlock{
+  background:transparent!important;border:0!important;border-bottom:1px solid var(--sheet-line)!important;border-radius:0!important;box-shadow:none!important;padding:13px 2px!important;margin:0!important
+}
+.premiumConfigHost .step3ControlGrid{gap:0!important}
+.premiumConfigHost .step3ControlGrid .rangeControlCard+ .rangeControlCard{border-top:0!important}
+
+/* Espectrograma ocupa TODO el canvas; los ejes viven encima del raster. */
+body.finalPremium .canvasWrap{background:#06101a!important;overflow:hidden!important}
+#finalBadge,.specRefineOverlay{display:none!important}
+
+/* Acción compacta: modo final usa play/pausa; mundo conserva Escuchar. */
+.finalPremiumSheet .premiumActionMain span:first-child{font-size:1.35rem!important}
+
+@media(max-width:820px){
+  .presetChips button,.presetChips button:last-child{flex-basis:106px!important;width:106px!important;min-width:106px!important;max-width:106px!important}
+}
+</style>
+<script id="v32-premium-recovery-behavior">
+(function(){
+ const $v=id=>document.getElementById(id);
+ const rail=$v('fractalRail');
+ /* Impide que los instaladores heredados de loops vuelvan a intervenir. */
+ if(rail){rail.dataset.v30Loop='1';rail.dataset.v31Infinite='1';}
+
+ /* Carrusel circular robusto: cinco ciclos, momentum libre y recentrado invisible SOLO al asentarse. */
+ function installV32InfiniteRail(){
+   if(!rail||rail.dataset.v32Infinite)return;rail.dataset.v32Infinite='1';
+   rail.querySelectorAll('.v30CarouselClone,.v31LoopClone,.v32LoopClone').forEach(n=>n.remove());
+   const originals=[...rail.querySelectorAll('.choice[data-fractal]')];if(originals.length<2)return;
+   const mk=(src,cycle)=>{
+     const c=src.cloneNode(true);c.classList.add('v32LoopClone');c.classList.remove('selected');c.dataset.cycle=String(cycle);
+     c.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+     const sc=src.querySelector('canvas'),cc=c.querySelector('canvas');if(sc&&cc){cc.width=sc.width;cc.height=sc.height;try{cc.getContext('2d').drawImage(sc,0,0)}catch(_){}}
+     c.addEventListener('click',()=>{const real=originals.find(x=>x.dataset.fractal===c.dataset.fractal);real?.click();});return c;
+   };
+   const frag=document.createDocumentFragment();
+   [-2,-1,0,1,2].forEach(cycle=>originals.forEach(src=>frag.appendChild(cycle===0?src:mk(src,cycle))));
+   rail.replaceChildren(frag);
+   let cycleWidth=0,centerStart=0,settleTimer=0,internal=false;
+   function measure(){
+     const cards=[...rail.querySelectorAll('.choice[data-fractal]')],mid=cards.find(x=>x.dataset.cycle==='0')||originals[0],next=cards.find(x=>x.dataset.cycle==='1');
+     if(!mid||!next)return;cycleWidth=next.offsetLeft-mid.offsetLeft;centerStart=mid.offsetLeft-(rail.clientWidth-mid.offsetWidth)/2;
+     internal=true;rail.scrollLeft=centerStart;requestAnimationFrame(()=>internal=false);
+   }
+   function nearest(){const rr=rail.getBoundingClientRect(),cx=rr.left+rr.width/2;let best=null,d=Infinity;rail.querySelectorAll('.choice[data-fractal]').forEach(card=>{const r=card.getBoundingClientRect(),q=Math.abs((r.left+r.right)/2-cx);if(q<d){d=q;best=card}});return best;}
+   function settle(){
+     if(internal||!cycleWidth)return;const best=nearest();if(!best)return;
+     state.fractal=best.dataset.fractal;originals.forEach(x=>x.classList.toggle('selected',x.dataset.fractal===state.fractal));
+     const cycle=+(best.dataset.cycle||0);if(cycle!==0){
+       internal=true;const target=rail.scrollLeft-cycle*cycleWidth;rail.style.scrollSnapType='none';rail.scrollLeft=target;requestAnimationFrame(()=>{rail.style.scrollSnapType='x mandatory';internal=false;});
+     }
+   }
+   rail.addEventListener('scroll',()=>{if(internal)return;clearTimeout(settleTimer);settleTimer=setTimeout(settle,320)},{passive:true});
+   if('onscrollend' in rail)rail.addEventListener('scrollend',settle,{passive:true});
+   new ResizeObserver(()=>requestAnimationFrame(measure)).observe(rail);setTimeout(measure,80);
+ }
+ setTimeout(installV32InfiniteRail,3250);
+
+ /* Drag robusto de ambos bottom sheets: reemplaza las zonas para eliminar listeners heredados. */
+ function snapHeight(sheet,snap){const vh=innerHeight;return snap==='compact'?132:snap==='medium'?vh*(matchMedia('(max-width:820px)').matches?.56:.52):vh*(matchMedia('(max-width:820px)').matches?.92:.91)}
+ function installSheetDrag(sheet){
+   if(!sheet)return;const old=sheet.querySelector('.sheetHandleZone');if(!old)return;const zone=old.cloneNode(true);old.replaceWith(zone);
+   let drag=null,lastY=0,lastT=0,velocity=0;
+   zone.addEventListener('pointerdown',e=>{drag={id:e.pointerId,y:e.clientY,h:sheet.getBoundingClientRect().height};lastY=e.clientY;lastT=performance.now();velocity=0;zone.setPointerCapture(e.pointerId);zone.classList.add('isGrabbing');sheet.style.transition='none';e.preventDefault();});
+   zone.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const now=performance.now(),dt=Math.max(1,now-lastT);velocity=(lastY-e.clientY)/dt;lastY=e.clientY;lastT=now;const h=clamp(drag.h+(drag.y-e.clientY),snapHeight(sheet,'compact'),snapHeight(sheet,'expanded'));sheet.style.height=h+'px';e.preventDefault();});
+   const end=e=>{if(!drag||e.pointerId!==drag.id)return;const h=sheet.getBoundingClientRect().height;zone.classList.remove('isGrabbing');sheet.style.transition='';const snaps=['compact','medium','expanded'];let target;
+     if(Math.abs(velocity)>.45){const current=snaps.map(s=>[s,snapHeight(sheet,s)]).sort((a,b)=>Math.abs(a[1]-h)-Math.abs(b[1]-h))[0][0],i=snaps.indexOf(current);target=snaps[clamp(i+(velocity>0?1:-1),0,2)];}
+     else target=snaps.map(s=>[s,snapHeight(sheet,s)]).sort((a,b)=>Math.abs(a[1]-h)-Math.abs(b[1]-h))[0][0];
+     drag=null;window.__premiumSetSnap?.(sheet,target);sheet.style.height='';};
+   ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>zone.addEventListener(ev,end));
+   zone.addEventListener('dblclick',()=>window.__premiumSetSnap?.(sheet,sheet.dataset.snap==='compact'?'medium':'compact'));
+ }
+ installSheetDrag($v('mobileGuideSheet'));installSheetDrag($v('finalPremiumSheet'));
+
+ /* En el modo final hay un solo flujo: reproducción + ajuste cotidiano + avanzado. */
+ const finalMedium=$v('finalMediumHost'),finalAdv=$v('finalAdvancedHost');if(finalMedium&&finalAdv&&!finalMedium.contains(finalAdv))finalMedium.appendChild(finalAdv);
+ [$v('labDuration')?.closest('.labControlBlock'),$v('labEnergyRead')?.closest('.labControlBlock')].filter(Boolean).forEach(x=>x.classList.add('v32DuplicateAdvanced'));
+
+ /* El botón central alterna sin recalcular si nada cambió; regresar al espectrograma usa la caché. */
+ const finalToggle=$v('finalModeToggle');if(finalToggle){const fresh=finalToggle.cloneNode(true);finalToggle.replaceWith(fresh);fresh.addEventListener('click',()=>{pausePlayback();document.body.classList.remove('finalPremium');$v('wizard').classList.remove('hidden');setWizardStep(2);state.activeView='fractal';window.__premiumSetSnap?.($v('mobileGuideSheet'),'compact');requestAnimationFrame(()=>drawPixelsToCanvas(state.fractalCache,$v('explorerCanvas')));});}
+
+ /* Acción final es play/pausa, no nota musical. */
+ const play=$v('finalListenBtn');if(play){const fresh=play.cloneNode(true);play.replaceWith(fresh);fresh.querySelector('span:first-child').textContent='▶';fresh.querySelector('span:last-child').textContent='Reproducir';fresh.addEventListener('click',async()=>{if(isPlaying)pausePlayback();else await startPlayback();});}
+ function syncPlay(){const b=$v('finalListenBtn');if(b){b.querySelector('span:first-child').textContent=isPlaying?'❚❚':'▶';b.querySelector('span:last-child').textContent=isPlaying?'Pausa':'Reproducir';}requestAnimationFrame(syncPlay)}requestAnimationFrame(syncPlay);
+
+ /* Todo el espectrograma es área de datos. Ejes y cursor son overlay. */
+ specPoint=function(e){const r=$v('specCanvas').getBoundingClientRect(),x=clamp(e.clientX-r.left,0,r.width),y=clamp(e.clientY-r.top,0,r.height);return{x,y,L:0,R:r.width,T:0,B:r.height,w:r.width,h:r.height,inPlot:e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom};};
+
+ drawSpectrogram=function(){
+   if(!state.specCache)return;const c=$v('specCanvas'),ctx=c.getContext('2d'),sz=ensureCanvasSize(c),W=sz.w,H=sz.h,img=ctx.createImageData(W,H),d=img.data,s=currentSpecSource(),v=state.specView,brightness=+$v('specBrightness').value,contrast=+$v('specContrast').value,gamma=+$v('specGamma').value,floor=+$v('visualFloor').value,st0=s.t0??0,st1=s.t1??s.duration;
+   for(let py=0;py<H;py++){const hz=displayPosToFreq(1-py/Math.max(1,H-1),v.f0,v.f1,state.specScale),bf=(hz-s.fmin)/Math.max(1e-12,s.fmax-s.fmin)*(s.bins-1),b0=clamp(Math.floor(bf),0,s.bins-1),b1=clamp(b0+1,0,s.bins-1),by=clamp(bf-b0,0,1);for(let px=0;px<W;px++){const sec=v.t0+(px/Math.max(1,W-1))*(v.t1-v.t0),tf=(sec-st0)/Math.max(1e-12,st1-st0)*(s.frames-1),t0=clamp(Math.floor(tf),0,s.frames-1),t1=clamp(t0+1,0,s.frames-1),tx=clamp(tf-t0,0,1),a=s.db[t0*s.bins+b0]*(1-by)+s.db[t0*s.bins+b1]*by,b=s.db[t1*s.bins+b0]*(1-by)+s.db[t1*s.bins+b1]*by,db=a*(1-tx)+b*tx;let q=clamp((db-floor)/(0-floor),0,1);q=clamp((q-.5)*contrast+.5+brightness,0,1);q=Math.pow(q,gamma);const col=colorize(q),i=(py*W+px)*4;d[i]=col[0];d[i+1]=col[1];d[i+2]=col[2];d[i+3]=255;}}
+   ctx.putImageData(img,0,0);drawAxes(ctx,W,H);drawCursor();
+ };
+
+ drawAxes=function(ctx,W,H){
+   const v=state.specView;ctx.save();const fontPx=Math.max(15,Math.min(19,Math.round(Math.min(W,H)/34))),topBand=fontPx+25;ctx.font=`650 ${fontPx}px Inter,system-ui`;ctx.strokeStyle='rgba(255,255,255,.76)';ctx.fillStyle='rgba(255,255,255,.98)';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=4;ctx.lineWidth=1.35;
+   /* Tiempo arriba. */
+   const tt=niceTicks(v.t0,v.t1,7);ctx.textBaseline='top';ctx.textAlign='center';tt.forEach((t,i)=>{const x=(t-v.t0)/Math.max(1e-12,v.t1-v.t0)*W;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,10);ctx.stroke();let lab=t.toFixed(v.t1-v.t0<=6?1:0);if(i===tt.length-1)lab+=' s';ctx.fillText(lab,clamp(x,fontPx*1.45,W-fontPx*2.15),8);});
+   /* Frecuencia a la izquierda. La etiqueta más alta solo aparece si cabe DEBAJO del eje temporal. */
+   const raw=frequencyTicks(v.f0,v.f1,state.specScale).map(f=>({f,y:H-freqToDisplayPos(f,v.f0,v.f1,state.specScale)*H})).filter(o=>o.y>=topBand+5&&o.y<=H-fontPx*.8).sort((a,b)=>a.y-b.y);
+   ctx.textAlign='left';ctx.textBaseline='middle';raw.forEach((o,i)=>{ctx.beginPath();ctx.moveTo(0,o.y);ctx.lineTo(10,o.y);ctx.stroke();let lab=o.f>=1000?(o.f/1000).toFixed(o.f%1000?1:0):Math.round(o.f).toString();if(i===0)lab+=' '+(o.f>=1000?'kHz':'Hz');ctx.fillText(lab,13,o.y);});ctx.restore();
+ };
+
+ drawCursor=function(){
+   const c=$v('cursorCanvas'),ctx=c.getContext('2d'),sz=ensureCanvasSize(c),W=sz.w,H=sz.h;ctx.clearRect(0,0,W,H);if(!state.audioCache||state.activeView==='fractal')return;const t=currentPlaybackTime(),v=state.specView;if(t<v.t0||t>v.t1)return;const x=(t-v.t0)/Math.max(1e-12,v.t1-v.t0)*W,label=t.toFixed(2)+' s',ww=84,hh=30,lx=clamp(x-ww/2,2,W-ww-2),ly=43;ctx.strokeStyle='#ffdf5d';ctx.lineWidth=3;ctx.shadowColor='#000';ctx.shadowBlur=5;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle='#07111eee';ctx.strokeStyle='#ffdf5d';ctx.beginPath();ctx.roundRect(lx,ly,ww,hh,9);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4b6';ctx.font='bold 14px Inter';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,lx+ww/2,ly+hh/2);
+ };
+
+ /* Ventana STFT realmente configurable, no solo documentada. */
+ const techGrid=$v('v30TechGrid');if(techGrid&&!$v('v32WindowType')){const lab=document.createElement('label');lab.innerHTML='Ventana STFT<select id="v32WindowType"><option value="hann" selected>Hann</option><option value="hamming">Hamming</option><option value="blackman">Blackman</option><option value="rect">Rectangular</option></select>';techGrid.insertBefore(lab,techGrid.children[3]||null);}
+ const __v32Choose=chooseAutoEngine;chooseAutoEngine=function(){const cfg=__v32Choose();cfg.windowType=$v('v32WindowType')?.value||'hann';return cfg;};
+ function v32Signature(){const v=state.view||{};return JSON.stringify({f:state.fractal,cx:v.cx,cy:v.cy,s:v.scale,r:v.rotation||0,lo:$v('bandLowInput')?.value,hi:$v('bandHighInput')?.value,floor:$v('simpleFloor')?.value,peak:$v('simplePeak')?.value,d:$v('duration')?.value,g:$v('griffinIterations')?.value,q:$v('audioQuality')?.value,sr:$v('sampleRate')?.value,n:$v('nfft')?.value,h:$v('hop')?.value,w:$v('v32WindowType')?.value,gamma:$v('audioGamma')?.value,pm:$v('powerMode')?.value,sm:$v('synthMode')?.value,pat:$v('v30Patience')?.value,imp:$v('v30MinImprove')?.value,tol:$v('v30Tol')?.value,scale:state.specScale});}
+ const __v32Run=runGeneration;runGeneration=async function(){await __v32Run();if(state.audioCache)state.v32AudioSignature=v32Signature();};
+ const worldToggle=$v('premiumModeToggle');if(worldToggle){const fresh=worldToggle.cloneNode(true);worldToggle.replaceWith(fresh);fresh.addEventListener('click',async()=>{if(state.audioCache&&state.v32AudioSignature===v32Signature())await enterFinalExperience();else if(state.audioCache)await runGeneration();else window.__premiumSetSnap?.($v('mobileGuideSheet'),'medium');});}
+
+ /* Cuando el final se abre, deja el sheet limpio y compacto. */
+ const oldEnter=enterFinalExperience;enterFinalExperience=async function(){await oldEnter();window.__premiumSetSnap?.($v('finalPremiumSheet'),'compact');requestAnimationFrame(()=>drawActiveSpectralView());};
+})();
+</script>
+
+
+<!-- v33 · reproductor unificado, estado Escuchar/Play/Pausa, sliders homogéneos y carrusel suave -->
+<style id="v33-polish">
+/* 1) Los botones heredados del antiguo Paso 3 no pertenecen al bottom sheet final. */
+#finalPremiumSheet #backToFractal,
+#finalPremiumSheet #makeSound,
+#finalPremiumSheet .stepActions{display:none!important}
+
+/* 2) Una sola estética clara y continua en TODO el sheet final. */
+#finalPremiumSheet,
+#finalPremiumSheet .premiumConfigHost,
+#finalPremiumSheet .premiumAdvancedHost,
+#finalPremiumSheet .step3Wrap,
+#finalPremiumSheet .step3Section,
+#finalPremiumSheet .rangeControlCard,
+#finalPremiumSheet .labControlBlock,
+#finalPremiumSheet .v30TechPanel{
+  background:var(--sheet-bg)!important;color:var(--sheet-text)!important;box-shadow:none!important
+}
+#finalPremiumSheet .step3Section,
+#finalPremiumSheet .rangeControlCard,
+#finalPremiumSheet .labControlBlock,
+#finalPremiumSheet .v30TechPanel{
+  border:0!important;border-bottom:1px solid var(--sheet-line)!important;border-radius:0!important;margin:0!important;padding:14px 2px!important
+}
+#finalPremiumSheet h1,#finalPremiumSheet h2,#finalPremiumSheet h3,
+#finalPremiumSheet b,#finalPremiumSheet strong,#finalPremiumSheet label{color:var(--sheet-text)!important}
+#finalPremiumSheet .hint,#finalPremiumSheet .controlHead span,#finalPremiumSheet .rangeLabels,
+#finalPremiumSheet .energyEnds,#finalPremiumSheet .field label{color:#70828d!important}
+
+/* 3) Inputs/selects técnicos: misma familia visual. */
+#finalPremiumSheet input[type=number],#finalPremiumSheet select,
+#mobileGuideSheet input[type=number],#mobileGuideSheet select{
+  min-height:46px;border:1px solid #bfd0d8!important;border-radius:13px!important;background:#fff!important;color:#20333e!important;padding:9px 12px!important;box-shadow:none!important
+}
+#finalPremiumSheet .numberUnit,#mobileGuideSheet .numberUnit{border:1px solid #bfd0d8!important;border-radius:13px!important;background:#fff!important;overflow:hidden!important}
+#finalPremiumSheet .numberUnit input,#mobileGuideSheet .numberUnit input{border:0!important;border-radius:0!important}
+#finalPremiumSheet .numberUnit span,#mobileGuideSheet .numberUnit span{background:#edf3f6!important;color:#657985!important}
+
+/* 4) Todos los sliders simples comparten la estética premium ya aprobada. */
+#finalPremiumSheet input[type=range]:not(.v33-dual-range),
+#mobileGuideSheet input[type=range]:not(.v33-dual-range){
+  --v33pct:50%;appearance:none!important;-webkit-appearance:none!important;width:100%!important;height:30px!important;padding:0!important;border:0!important;background:transparent!important;outline:none!important
+}
+#finalPremiumSheet input[type=range]:not(.v33-dual-range)::-webkit-slider-runnable-track,
+#mobileGuideSheet input[type=range]:not(.v33-dual-range)::-webkit-slider-runnable-track{
+  height:10px!important;border-radius:999px!important;background:linear-gradient(90deg,#58d8ef 0 var(--v33pct),#afbdc6 var(--v33pct) 100%)!important
+}
+#finalPremiumSheet input[type=range]:not(.v33-dual-range)::-moz-range-track,
+#mobileGuideSheet input[type=range]:not(.v33-dual-range)::-moz-range-track{
+  height:10px!important;border-radius:999px!important;background:linear-gradient(90deg,#58d8ef 0 var(--v33pct),#afbdc6 var(--v33pct) 100%)!important
+}
+#finalPremiumSheet input[type=range]:not(.v33-dual-range)::-webkit-slider-thumb,
+#mobileGuideSheet input[type=range]:not(.v33-dual-range)::-webkit-slider-thumb{
+  -webkit-appearance:none!important;appearance:none!important;width:28px!important;height:28px!important;border-radius:50%!important;background:#fff!important;border:5px solid #19394d!important;margin-top:-9px!important;box-shadow:0 2px 7px #0002!important
+}
+#finalPremiumSheet input[type=range]:not(.v33-dual-range)::-moz-range-thumb,
+#mobileGuideSheet input[type=range]:not(.v33-dual-range)::-moz-range-thumb{
+  width:20px!important;height:20px!important;border-radius:50%!important;background:#fff!important;border:5px solid #19394d!important;box-shadow:0 2px 7px #0002!important
+}
+/* No tocar los sliders dobles de frecuencia/energía: mantienen su gradiente especializado. */
+.bandTrack input,.labEnergyTrack input,.energyTrack input{--v33pct:initial!important}
+
+/* 5) Burbuja de duración bajo el propio thumb. */
+#duration{position:relative!important}
+.v33DurationWrap{position:relative;padding-bottom:30px!important}
+.v33DurationBubble{
+  position:absolute;top:33px;left:var(--duration-x,50%);transform:translateX(-50%);min-width:44px;height:26px;padding:0 8px;border-radius:9px;
+  display:grid;place-items:center;background:#17384c;color:#fff;font:700 13px/1 Inter,system-ui;pointer-events:none;white-space:nowrap;box-shadow:0 3px 10px #0002
+}
+.v33DurationBubble:before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:5px solid #17384c}
+
+/* 6) Carrusel: menos lucha entre scroll-snap y el dedo. */
+#fractalRail{scroll-snap-type:x proximity!important;scroll-behavior:auto!important}
+#fractalRail.v33-touching{scroll-snap-type:none!important}
+#fractalRail .choice{scroll-snap-stop:normal!important}
+
+/* 7) Estado de acción principal consistente. */
+.premiumActionMain.v33-dirty span:first-child{font-size:1.28rem!important}
+</style>
+<script id="v33-behavior">
+(function(){
+ const $=id=>document.getElementById(id);
+ const rail=$('fractalRail');
+
+ /* A. Carrusel más estable también en desplazamientos lentos. */
+ if(rail){
+   let down=false,quiet=0;
+   const touchStart=()=>{down=true;rail.classList.add('v33-touching');clearTimeout(quiet)};
+   const touchEnd=()=>{down=false;clearTimeout(quiet);quiet=setTimeout(()=>rail.classList.remove('v33-touching'),240)};
+   rail.addEventListener('pointerdown',touchStart,{passive:true});
+   rail.addEventListener('pointerup',touchEnd,{passive:true});
+   rail.addEventListener('pointercancel',touchEnd,{passive:true});
+   rail.addEventListener('touchend',touchEnd,{passive:true});
+ }
+
+ /* B. Marca los range dobles para que no hereden el estilo de slider simple. */
+ document.querySelectorAll('.bandTrack input[type=range],.labEnergyTrack input[type=range],.energyTrack input[type=range]').forEach(el=>el.classList.add('v33-dual-range'));
+
+ /* C. Fill homogéneo para todos los sliders simples, incluidos gamma y visualización. */
+ function paintRange(el){
+   if(!el||el.classList.contains('v33-dual-range'))return;
+   const min=Number(el.min||0),max=Number(el.max||100),val=Number(el.value||0),pct=max===min?0:Math.max(0,Math.min(100,(val-min)/(max-min)*100));
+   el.style.setProperty('--v33pct',pct+'%');
+ }
+ function paintAll(){document.querySelectorAll('#finalPremiumSheet input[type=range],#mobileGuideSheet input[type=range]').forEach(paintRange)}
+ document.addEventListener('input',e=>{if(e.target.matches?.('input[type=range]'))paintRange(e.target)},{passive:true});
+ setTimeout(paintAll,0);setTimeout(paintAll,900);
+
+ /* D. Duración: valor seleccionado pegado visualmente debajo del thumb. */
+ const duration=$('duration');
+ if(duration&&!duration.closest('.v33DurationWrap')){
+   const wrap=document.createElement('div');wrap.className='v33DurationWrap';duration.parentNode.insertBefore(wrap,duration);wrap.appendChild(duration);
+   const bubble=document.createElement('span');bubble.className='v33DurationBubble';wrap.appendChild(bubble);
+   const sync=()=>{const min=+duration.min,max=+duration.max,v=+duration.value,p=(v-min)/(max-min);bubble.textContent=v+' s';wrap.style.setProperty('--duration-x',(p*100)+'%');paintRange(duration)};
+   duration.addEventListener('input',sync,{passive:true});sync();
+ }
+
+ /* E. Firma completa de lo que realmente produce el audio. */
+ function signature(){
+   const v=state.view||{};
+   return JSON.stringify({
+    f:state.fractal,cx:v.cx,cy:v.cy,s:v.scale,r:v.rotation||0,
+    lo:$('bandLowInput')?.value,hi:$('bandHighInput')?.value,floor:$('simpleFloor')?.value,peak:$('simplePeak')?.value,
+    d:$('duration')?.value,g:$('griffinIterations')?.value,q:$('audioQuality')?.value,manual:$('v30ManualEngine')?.checked,
+    sr:$('sampleRate')?.value,n:$('nfft')?.value,h:$('hop')?.value,w:$('v32WindowType')?.value,gamma:$('audioGamma')?.value,
+    pm:$('powerMode')?.value,sm:$('synthMode')?.value,pat:$('v30Patience')?.value,imp:$('v30MinImprove')?.value,tol:$('v30Tol')?.value,
+    fractalDetail:$('fractalDetail')?.value,specScale:state.specScale
+   });
+ }
+ function audioFresh(){return !!state.audioCache && state.v33AudioSignature===signature()}
+
+ /* F. Tras una generación exitosa guardamos exactamente su firma. */
+ const prevRun=runGeneration;
+ runGeneration=async function(){await prevRun();if(state.audioCache){state.v33AudioSignature=signature();state.v32AudioSignature=state.v33AudioSignature}syncActions();paintAll();};
+ if(state.audioCache&&!state.v33AudioSignature)state.v33AudioSignature=state.v32AudioSignature||null;
+
+ /* G. Una sola acción contextual: Escuchar -> Reproducir -> Pausa. */
+ function setButton(btn,mode){if(!btn)return;const a=btn.querySelector('span:first-child'),b=btn.querySelector('span:last-child');btn.classList.toggle('v33-dirty',mode==='listen');if(mode==='listen'){a.textContent='♪';b.textContent='Escuchar';btn.setAttribute('aria-label','Generar y escuchar esta configuración')}else if(mode==='pause'){a.textContent='❚❚';b.textContent='Pausa';btn.setAttribute('aria-label','Pausar')}else{a.textContent='▶';b.textContent='Reproducir';btn.setAttribute('aria-label','Reproducir')}}
+ function syncActions(){const fresh=audioFresh();const mode=fresh?(isPlaying?'pause':'play'):'listen';setButton($('premiumListen'),mode);setButton($('finalListenBtn'),mode)}
+ window.__v33SyncActions=syncActions;
+
+ async function action(){
+   if(!audioFresh()){
+     pausePlayback?.();
+     await runGeneration();
+     return;
+   }
+   if(isPlaying)pausePlayback(); else await startPlayback();
+   syncActions();
+ }
+ ['premiumListen','finalListenBtn'].forEach(id=>{const old=$(id);if(!old)return;const fresh=old.cloneNode(true);old.replaceWith(fresh);fresh.addEventListener('click',action)});
+
+ /* Cambiar cualquier control que afecte síntesis invalida inmediatamente el Play. */
+ const generationIds=new Set(['bandLowInput','bandHighInput','lowRange','highRange','simpleFloor','simplePeak','v30EnergyFloor','v30EnergyPeak','duration','griffinIterations','audioQuality','sampleRate','nfft','hop','v32WindowType','audioGamma','powerMode','synthMode','v30ManualEngine','v30Patience','v30MinImprove','v30Tol','fractalDetail']);
+ document.addEventListener('input',e=>{if(generationIds.has(e.target.id)||e.target.closest?.('[data-band]')){pausePlayback?.();syncActions()}},{passive:true});
+ document.addEventListener('change',e=>{if(generationIds.has(e.target.id)){pausePlayback?.();syncActions()}},{passive:true});
+ document.querySelectorAll('[data-band]').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{pausePlayback?.();syncActions()},0),{passive:true}));
+
+ /* Mover/rotar/zoom del mundo también invalida el audio. */
+ const explorer=$('explorer');if(explorer){['pointerup','wheel'].forEach(ev=>explorer.addEventListener(ev,()=>setTimeout(syncActions,0),{passive:ev!=='wheel'}));}
+
+ /* H. El botón central final vuelve al fractal; regresar después usa caché si sigue fresca. */
+ const ft=$('finalModeToggle');if(ft){const f=ft.cloneNode(true);ft.replaceWith(f);f.querySelector('span:last-child').textContent='Fractal';f.addEventListener('click',()=>{pausePlayback?.();document.body.classList.remove('finalPremium');$('wizard').classList.remove('hidden');setWizardStep(2);state.activeView='fractal';window.__premiumSetSnap?.($('mobileGuideSheet'),'compact');requestAnimationFrame(()=>drawPixelsToCanvas(state.fractalCache,$('explorerCanvas')));syncActions();});}
+ const wt=$('premiumModeToggle');if(wt){const f=wt.cloneNode(true);wt.replaceWith(f);f.querySelector('span:last-child').textContent='Espectrograma';f.addEventListener('click',async()=>{if(audioFresh())await enterFinalExperience();else await action();syncActions();});}
+
+ /* I. No hay acciones finales duplicadas en el flujo de configuración. */
+ $('backToFractal')?.closest('.stepActions')?.remove();
+
+ /* J. Mantener estado de botones y sliders sincronizados sin rehacer layout. */
+ function ticker(){syncActions();requestAnimationFrame(ticker)}requestAnimationFrame(ticker);
+})();
+</script>
+
+
+<style id="v34-polish">
+/* v34 — escalas arriba de la barra, burbuja de duración abajo y espaciado compacto. */
+.rangeControlCard{display:flex;flex-direction:column}
+.rangeControlCard .controlHead{order:1}
+.rangeControlCard .rangeLabels,
+.rangeControlCard .griffinTicks{order:2;margin:0 0 3px!important;line-height:1.05}
+.rangeControlCard>input[type="range"],
+.rangeControlCard>.v33DurationWrap{order:3}
+.v33DurationWrap{padding-bottom:31px!important}
+.v33DurationBubble{top:31px!important}
+/* Escalas de barras simples del laboratorio: pegadas arriba del eje, no flotando lejos debajo. */
+.premiumAdvancedHost .field:has(> input[type="range"]){display:flex;flex-direction:column}
+.premiumAdvancedHost .field:has(> input[type="range"])>label{order:1}
+.premiumAdvancedHost .field:has(> input[type="range"])>.rangeLabels,
+.premiumAdvancedHost .field:has(> input[type="range"])>.griffinTicks{order:2;margin:1px 0 3px!important}
+.premiumAdvancedHost .field:has(> input[type="range"])>input[type="range"]{order:3}
+/* Evita que la burbuja tape la escala al quedar debajo del thumb. */
+#duration + .rangeLabels{margin-top:0!important}
+</style>
+<script id="v34-regression-fix">
+(function(){
+ const byId=id=>document.getElementById(id);
+ /* Reordena físicamente las etiquetas de escala antes de cada barra para navegadores sin :has. */
+ function labelsAbove(){
+   document.querySelectorAll('.rangeControlCard').forEach(card=>{
+     const range=card.querySelector(':scope > input[type="range"], :scope > .v33DurationWrap');
+     const ticks=card.querySelector(':scope > .rangeLabels, :scope > .griffinTicks');
+     if(range&&ticks&&ticks.nextElementSibling!==range) card.insertBefore(ticks,range);
+   });
+   document.querySelectorAll('.premiumAdvancedHost .field').forEach(field=>{
+     const range=field.querySelector(':scope > input[type="range"]');
+     const ticks=field.querySelector(':scope > .rangeLabels, :scope > .griffinTicks');
+     if(range&&ticks&&ticks.nextElementSibling!==range) field.insertBefore(ticks,range);
+   });
+ }
+ labelsAbove(); setTimeout(labelsAbove,250); setTimeout(labelsAbove,1200);
+
+ /* Defensa explícita: el shell premium puede retirar botones heredados; el motor no debe depender de ellos. */
+ window.v34SetDisabled=function(id,value){const el=byId(id);if(el)el.disabled=!!value;};
+
+ /* Si ocurre un error de UI no acústico, no dejar el motor atrapado en la pantalla de fallo. */
+ window.addEventListener('error',ev=>{
+   const msg=String(ev?.error?.message||ev?.message||'');
+   if(/Cannot set properties of null.*disabled/i.test(msg)){
+     ev.preventDefault();
+     ['makeSound','regenerateBtn','cancelDspBtn','cancelDspWizard'].forEach(id=>{
+       const el=byId(id); if(el) el.disabled=(id.startsWith('cancel'));
+     });
+   }
+ });
+})();
+</script>
+
+
+<style id="v35-generation-transition">
+/* v35 — cuando una configuración queda dirty, Escuchar entra de inmediato a la reconstrucción visible. */
+body.v35-generating #wizard{display:block!important}
+</style>
+<script id="v35-generation-transition-script">
+(function(){
+ const $=id=>document.getElementById(id);
+ function showGenerationStage(){
+   try{ pausePlayback?.(); }catch(_e){}
+   document.body.classList.remove('finalPremium');
+   document.body.classList.add('v35-generating');
+   const wizard=$('wizard'); if(wizard) wizard.classList.remove('hidden');
+   try{ setWizardStep(4); }catch(_e){}
+   const err=$('generationError'); if(err) err.classList.remove('show');
+   requestAnimationFrame(()=>{
+     const top=$('dspProgress')||$('generationProgress')||document.querySelector('.generationWrap,.generationStage');
+     if(top?.scrollIntoView) top.scrollIntoView({block:'start',behavior:'auto'});
+   });
+ }
+ function audioIsFresh(){
+   try{return window.__v33SyncActions && typeof state!=='undefined' && !!state.audioCache && state.v33AudioSignature===JSON.stringify({
+    f:state.fractal,cx:(state.view||{}).cx,cy:(state.view||{}).cy,s:(state.view||{}).scale,r:(state.view||{}).rotation||0,
+    lo:$('bandLowInput')?.value,hi:$('bandHighInput')?.value,floor:$('simpleFloor')?.value,peak:$('simplePeak')?.value,
+    d:$('duration')?.value,g:$('griffinIterations')?.value,q:$('audioQuality')?.value,manual:$('v30ManualEngine')?.checked,
+    sr:$('sampleRate')?.value,n:$('nfft')?.value,h:$('hop')?.value,w:$('v32WindowType')?.value,gamma:$('audioGamma')?.value,
+    pm:$('powerMode')?.value,sm:$('synthMode')?.value,pat:$('v30Patience')?.value,imp:$('v30MinImprove')?.value,tol:$('v30Tol')?.value,
+    fractalDetail:$('fractalDetail')?.value,specScale:state.specScale
+   });}catch(_e){return false}
+ }
+ async function contextualAction(){
+   const fresh=audioIsFresh();
+   if(!fresh){
+     showGenerationStage();
+     try{
+       await runGeneration();
+     }finally{
+       document.body.classList.remove('v35-generating');
+     }
+     return;
+   }
+   if(isPlaying) pausePlayback(); else await startPlayback();
+   window.__v33SyncActions?.();
+ }
+ ['premiumListen','finalListenBtn'].forEach(id=>{
+   const old=$(id); if(!old)return;
+   const fresh=old.cloneNode(true); old.replaceWith(fresh);
+   fresh.addEventListener('click',contextualAction);
+ });
+})();
+</script>
+
 </body>
 </html>
